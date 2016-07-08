@@ -1,0 +1,5 @@
+*.mswwsettings
+node_modules/
+npm-debug.log
+.vs
+dist/
