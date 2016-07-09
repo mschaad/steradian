@@ -8,7 +8,7 @@ define([], function() {
 		current: 3,
 		temperature: 4,
 		//'amount'
-		luminousIntensity: 5
+		luminousIntensity: 5,
 	};
 
 	function Unit(name, type, symbol, scale) {
@@ -16,6 +16,11 @@ define([], function() {
 		this.type = type;
 		this.symbol = symbol;
 		this.scale = scale;
+	}
+	
+	function UnitPower(unit, power) {
+		this.unit = function() { return unit; };
+		this.power = function() { return power; };
 	}
 	
 	Unit.prototype = {
@@ -28,7 +33,7 @@ define([], function() {
 			return this._dimensions;
 		},
 		getUnitPowers: function() {
-			var unitPowers = [{ unit: this, power: 1 }];
+			var unitPowers = [new UnitPower(this, 1)];
 			return unitPowers;
 		}
 	};
@@ -108,17 +113,17 @@ define([], function() {
 			
 			for(i = 0; i < newUnitPowers.length; i++) {
 				unitPower = newUnitPowers[i];
-				unit = unitPower.unit;
+				unit = unitPower.unit();
 				currentValue = delta[unit.name] || 0;
-				updatedValue = currentValue + unitPower.power;
+				updatedValue = currentValue + unitPower.power();
 				delta[unit.name] = updatedValue;
 			}
 			
 			for(i = 0; i < oldUnitPowers.length; i++) {
 				unitPower = oldUnitPowers[i];
-				unit = unitPower.unit;
+				unit = unitPower.unit();
 				currentValue = delta[unit] || 0;
-				updatedValue = currentValue - unitPower.power;
+				updatedValue = currentValue - unitPower.power();
 				delta[unit.name] = updatedValue;
 			}
 			
@@ -146,6 +151,10 @@ define([], function() {
 	};
 	
 	//var meter = new Unit('meter', 'length', 'm', 1.0);
+	
+	function toUnitPower(desc) {
+		return new UnitPower(desc.unit, desc.power);
+	}
 				
 	return {
 		defineBaseUnit: function(def) {
@@ -153,7 +162,8 @@ define([], function() {
 			unitTable[def.name] = unit;
 			return unit;
 		},
-		defineDerivedUnit: function(unitPowers) {
+		defineDerivedUnit: function(unitPowerDescriptors) {
+			var unitPowers = unitPowerDescriptors.map(toUnitPower);
 			var unit = new DerivedUnit(unitPowers);
 			return unit;
 		},
