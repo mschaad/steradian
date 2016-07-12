@@ -18,10 +18,30 @@ define([], function() {
 		this.scale = scale;
 	}
 	
-	function UnitPower(unit, power) {
+	function Term(unit, power) {
 		this.unit = function() { return unit; };
 		this.power = function() { return power; };
 	}
+	
+	function cloneArray(a) {
+		return a.slice(0);
+	}
+	
+	// function UnitExpression(unitPowers) {
+		// var _exp = cloneArray(unitPowers);
+		// this.getAt = function(index) {
+			// return _exp[index];
+		// };
+	// }
+	
+	// UnitExpression.prototype = {
+		// toBaseUnits: function() {
+			// var newExpression = _exp.reduce(function (acc, item, i) {
+				
+			// }, {});
+		// },
+		// isInBaseUnits: function() { throw 'not implemented'; }
+	// };
 	
 	Unit.prototype = {
 		getDimensions: function() {
@@ -32,9 +52,9 @@ define([], function() {
 			}
 			return this._dimensions;
 		},
-		getUnitPowers: function() {
-			var unitPowers = [new UnitPower(this, 1)];
-			return unitPowers;
+		getTerms: function() {
+			var terms = [new Term(this, 1)];
+			return terms;
 		}
 	};
 	
@@ -61,33 +81,33 @@ define([], function() {
 	
 	//TODO: Dimensions.create = function(...) {...}
 	
-	function DerivedUnit(unitPowers) {
-		this._unitPowers = unitPowers.slice(0);
+	function DerivedUnit(terms) {
+		this._terms = terms.slice(0);
 	}
 	
 	DerivedUnit.prototype = {
 		getDimensions: function() {
 			if (!this._dimensions) {
 				var dim = [];
-				for(var i = 0; i < this._unitPowers.length; i++) {
-					var unitPower = this._unitPowers[i];
-					var typeIndex = UnitType[unitPower.unit.name];
+				for(var i = 0; i < this._terms.length; i++) {
+					var term = this._terms[i];
+					var typeIndex = UnitType[term.unit().name];
 					
 					var currentValue = dim[typeIndex] || 0;
-					var updatedValue = currentValue + unitPower.power;
+					var updatedValue = currentValue + term.power;
 					dim[typeIndex] = updatedValue;
 				}
 				this._dimensions = new Dimensions(dim);
 			}
 			return this._dimensions;
 		},
-		getUnitPowers: function() {
-			var unitPowers = [];
-			for(var i = 0; i < this._unitPowers.length; i++) {
-				var up = this._unitPowers[i];
-				unitPowers[i] = up;
+		getTerms: function() {
+			var terms = [];
+			for(var i = 0; i < this._terms.length; i++) {
+				var up = this._terms[i];
+				terms[i] = up;
 			}
-			return unitPowers;	
+			return terms;	
 		}
 	}
 	
@@ -104,26 +124,26 @@ define([], function() {
 				throw 'incompatible unit dimensions';
 			}
 			
-			var oldUnitPowers = this.unit.getUnitPowers();
-			var newUnitPowers = newUnits.getUnitPowers();
+			var oldTerms = this.unit.getTerms();
+			var newTerms = newUnits.getTerms();
 			
 			var delta = {};
 			
-			var i, unitPower, unit, currentValue, updatedValue;
+			var i, term, unit, currentValue, updatedValue;
 			
-			for(i = 0; i < newUnitPowers.length; i++) {
-				unitPower = newUnitPowers[i];
-				unit = unitPower.unit();
+			for(i = 0; i < newTerms.length; i++) {
+				term = newTerms[i];
+				unit = term.unit();
 				currentValue = delta[unit.name] || 0;
-				updatedValue = currentValue + unitPower.power();
+				updatedValue = currentValue + term.power();
 				delta[unit.name] = updatedValue;
 			}
 			
-			for(i = 0; i < oldUnitPowers.length; i++) {
-				unitPower = oldUnitPowers[i];
-				unit = unitPower.unit();
-				currentValue = delta[unit] || 0;
-				updatedValue = currentValue - unitPower.power();
+			for(i = 0; i < oldTerms.length; i++) {
+				term = oldTerms[i];
+				unit = term.unit();
+				currentValue = delta[unit.name] || 0;
+				updatedValue = currentValue - term.power();
 				delta[unit.name] = updatedValue;
 			}
 			
@@ -152,8 +172,8 @@ define([], function() {
 	
 	//var meter = new Unit('meter', 'length', 'm', 1.0);
 	
-	function toUnitPower(desc) {
-		return new UnitPower(desc.unit, desc.power);
+	function toTerm(desc) {
+		return new Term(desc.unit, desc.power);
 	}
 				
 	return {
@@ -162,9 +182,9 @@ define([], function() {
 			unitTable[def.name] = unit;
 			return unit;
 		},
-		defineDerivedUnit: function(unitPowerDescriptors) {
-			var unitPowers = unitPowerDescriptors.map(toUnitPower);
-			var unit = new DerivedUnit(unitPowers);
+		defineDerivedUnit: function(termDescriptors) {
+			var terms = termDescriptors.map(toTerm);
+			var unit = new DerivedUnit(terms);
 			return unit;
 		},
 		quantity: function(unit, value) {
