@@ -1,4 +1,4 @@
-define(['src/Strontium'], function (Sr) {
+define(['src/Strontium'], function (Strontium) {
 
 	var ok = assert.ok,
 		deepEqual = assert.deepEqual,
@@ -6,10 +6,12 @@ define(['src/Strontium'], function (Sr) {
 	
 	suite("basic sanity", function () {
 		test('module returns object', function() {
-			ok(Sr);
+			ok(Strontium);
 		});
 		
 		test('quantity', function () {
+			var Sr = Strontium();
+			
 			var meter = Sr.unit({
 				name: 'meter',
 				type: 'length',
@@ -22,6 +24,8 @@ define(['src/Strontium'], function (Sr) {
 		});
 		
 		test('convertTo from one base unit to another base unit', function () {
+			var Sr = Strontium();
+			
 			var meter = Sr.unit({
 				name: 'meter',
 				type: 'length',
@@ -44,6 +48,8 @@ define(['src/Strontium'], function (Sr) {
 		});
 		
 		test('convertTo from one derived unit to another derived unit', function () {
+			var Sr = Strontium();
+			
 			var meter = Sr.unit({
 				name: 'meter',
 				type: 'length',
@@ -87,6 +93,44 @@ define(['src/Strontium'], function (Sr) {
 			
 			//equal(q2.unit.name, 'foot');
 			equal(q2.value, 393.7008);
+		});
+		
+		test('convertTo from one complex derived unit to simple derived unit', function () {
+			var Sr = Strontium();
+			
+			//F = ma
+			//N = kg * m / s^2
+			var kilogram = Sr.unit({
+				name: 'kilogram',
+				type: 'mass',
+				symbol: 'kg',
+				scale: 1.0
+			});
+			
+			var meter = Sr.unit({
+				name: 'meter',
+				type: 'length',
+				symbol: 'm',
+				scale: 1.0
+			});
+			
+			var second = Sr.unit({
+				name: 'second',
+				type: 'time',
+				symbol: 's',
+				scale: 60.0
+			});
+			
+			var Newton = Sr.defineDerivedUnit([
+				{ unit: kilogram, power: 1 },
+				{ unit: meter, power: 1 },
+				{ unit: second, power: -2 }
+			]);
+			
+			var q1 = Sr.quantity(Newton, 2);
+			
+			ok(q1);
+			//throw 'not implemented';
 		});
 	});
 });

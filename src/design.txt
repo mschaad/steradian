@@ -1,0 +1,48 @@
+Unit
+	name() : string
+	terms() : Term[]
+	isBase() : bool
+	isDerived() : bool
+	dimensions : Vector
+
+BaseUnit : Unit
+	type() : string
+
+DerivedUnit : Unit
+	expression() : UnitExpression
+
+Term:
+	power() : number
+	unit() : Unit
+
+UnitExpression:
+	terms() : Term[]
+	mult(UnitExpression) : UnitExpression
+	div(UnitExpression) : UnitExpression
+	pow(number) : UnitExpression
+	simplify() : UnitExpression
+
+Quantity
+	value : number
+	precision : number
+	units : UnitExpression
+	
+	
+------------------------
+let rec getEquivalentBaseTerms (term : Term) : Seq<Term> =
+	let sumPowersOf ts = ts |> Seq.sumBy fun t -> t.power
+	let unit = term.unit
+	match unit with
+		| u when u.isBase -> u.terms
+		| u when u.isDerived -> 
+			u.terms
+			|> Seq.bind getEquivalentBaseTerms 
+			|> Seq.map fun t -> t.mult(unit.pow)
+			|> List.groupBy fun t -> t.unit
+			|> List.aggregate fun (u, terms) -> new Term(u, sumPowersOf terms)
+
+	
+
+
+	
+	
