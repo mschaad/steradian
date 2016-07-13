@@ -10,7 +10,7 @@ define(['src/Strontium'], function (Sr) {
 		});
 		
 		test('quantity', function () {
-			var meter = Sr.defineBaseUnit({
+			var meter = Sr.unit({
 				name: 'meter',
 				type: 'length',
 				symbol: 'm',
@@ -22,14 +22,14 @@ define(['src/Strontium'], function (Sr) {
 		});
 		
 		test('convertTo from one base unit to another base unit', function () {
-			var meter = Sr.defineBaseUnit({
+			var meter = Sr.unit({
 				name: 'meter',
 				type: 'length',
 				symbol: 'm',
 				scale: 1.0
 			});
 			
-			var foot = Sr.defineBaseUnit({
+			var foot = Sr.unit({
 				name: 'foot',
 				type: 'length',
 				symbol: 'ft',
@@ -44,28 +44,28 @@ define(['src/Strontium'], function (Sr) {
 		});
 		
 		test('convertTo from one derived unit to another derived unit', function () {
-			var meter = Sr.defineBaseUnit({
+			var meter = Sr.unit({
 				name: 'meter',
 				type: 'length',
 				symbol: 'm',
 				scale: 1.0
 			});
 			
-			var second = Sr.defineBaseUnit({
+			var second = Sr.unit({
 				name: 'second',
 				type: 'time',
 				symbol: 's',
 				scale: 60.0
 			});
 			
-			var minute = Sr.defineBaseUnit({
+			var minute = Sr.unit({
 				name: 'minute',
 				type: 'time',
 				symbol: 'min',
 				scale: 1.0
 			});
 			
-			var foot = Sr.defineBaseUnit({
+			var foot = Sr.unit({
 				name: 'foot',
 				type: 'length',
 				symbol: 'ft',

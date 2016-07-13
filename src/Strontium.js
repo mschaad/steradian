@@ -177,7 +177,7 @@ define([], function() {
 	}
 				
 	return {
-		defineBaseUnit: function(def) {
+		unit: function(def) {
 			var unit = new Unit(def.name, def.type, def.symbol, def.scale);
 			unitTable[def.name] = unit;
 			return unit;
