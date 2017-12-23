@@ -8,19 +8,19 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "chai": "^3.0.0",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-watch": "^4.3.8",
-    "karma": "^0.12.37",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^0.2.0",
-    "karma-mocha": "^0.2.0",
-    "karma-mocha-reporter": "^2.2.5",
-    "karma-requirejs": "^0.2.2",
-    "mocha": "^2.2.5",
-    "requirejs": "^2.1.18"
+    "chai": "3.0.0",
+    "gulp": "3.9.1",
+    "gulp-concat": "2.6.0",
+    "gulp-rename": "1.2.2",
+    "gulp-watch": "4.3.8",
+    "karma": "^1.0.0",
+    "karma-chai": "0.1.0",
+    "karma-chrome-launcher": "0.2.0",
+    "karma-mocha": "0.2.0",
+    "karma-mocha-reporter": "2.2.5",
+    "karma-requirejs": "0.2.2",
+    "mocha": "2.2.5",
+    "requirejs": "2.1.18"
   },
   "scripts": {
     "test": "karma start karma.conf.js"
