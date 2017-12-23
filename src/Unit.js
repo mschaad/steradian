@@ -21,6 +21,11 @@ define(['src/UnitType', 'src/Term', 'src/Dimensions'],
 				return terms;
 			}
 		};
+
+		Unit.isUnit = function(value) {
+			return (value instanceof Unit);
+		};
+
 		return Unit;
 	}
 );

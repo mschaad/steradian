@@ -17,7 +17,7 @@ define([], function() {
 			return this.mult(inverseRhs);
 		},
 		pow: function(power) {
-			var exponentiatedTerms = this.terms().map(termExponent(power)));
+			var exponentiatedTerms = this.terms().map(termExponent(power));
 			return new UnitExpression(exponentiatedTerms);
 		},
 		simplify: function() {

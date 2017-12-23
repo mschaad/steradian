@@ -1,9 +1,11 @@
-define(['src/UnitType', 'src/Dimensions'], function(UnitType, Dimensions) {
+define(['src/UnitType', 'src/Dimensions', 'src/Unit'], function(UnitType, Dimensions, Unit) {
 	function DerivedUnit(terms) {
 		this._terms = terms.slice(0);
 	}
-	
-	DerivedUnit.prototype = {
+
+	DerivedUnit.prototype = Object.create(Unit.prototype);
+
+	var functions = {
 		getDimensions: function() {
 			if (!this._dimensions) {
 				var dim = [];
@@ -27,6 +29,9 @@ define(['src/UnitType', 'src/Dimensions'], function(UnitType, Dimensions) {
 			}
 			return terms;	
 		}
-	}
+	};
+
+	Object.assign(DerivedUnit.prototype, functions);
+
 	return DerivedUnit;
 });

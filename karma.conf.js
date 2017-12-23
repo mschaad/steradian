@@ -18,7 +18,7 @@ module.exports = function(config) {
 	  'test-main.js',
 	  {pattern: 'lib/**/*.js', included: false},
 	  {pattern: 'src/**/*.js', included: false},
-	  {pattern: 'test/**/*test.js', included: false}
+		{pattern: 'test/**/*.js', included: false}
 	],
 
 
@@ -34,8 +34,8 @@ module.exports = function(config) {
 
 	client: {
 	  mocha: {
-		reporter: 'html', // change Karma's debug.html to the mocha web reporter
-		ui: 'tdd'
+			reporter: 'html', // change Karma's debug.html to the mocha web reporter
+			ui: 'tdd'
 	  }
 	},
 
