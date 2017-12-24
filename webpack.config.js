@@ -11,7 +11,8 @@ module.exports = {
         filename: 'Strontium.js'
     },
     resolve: {
-        modules: ["src", "node_modules"]
+        modules: ["src", "node_modules"],
+        alias: {}
     },
     module: {
         rules: [

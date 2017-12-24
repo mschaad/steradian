@@ -1,7 +1,11 @@
-define(['src/Strontium', 'test/StandardStrontiumFn'], function (Strontium, StandardStrontiumFn) {
-	var ok = assert.ok,
+define(['mocha', 'chai', 'Strontium', 'test/StandardStrontiumFn'], function (mocha, chai, Strontium, StandardStrontiumFn) {
+    var assert = chai.assert;
+    
+    var ok = assert.ok,
 		deepEqual = assert.deepEqual,
         equal = assert.equal;
+
+    var suite = mocha.suite, test = mocha.test;
 	
 	suite("Quantity", function () {
         suite("convertTo", function() {

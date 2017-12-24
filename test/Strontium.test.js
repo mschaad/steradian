@@ -1,8 +1,11 @@
-define(['src/Strontium', 'test/StandardStrontiumFn', 'src/Unit'], function (Strontium, StandardStrontiumFn, Unit) {
+define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], function (mocha, chai, Strontium, Unit, StandardStrontiumFn) {
+	var assert = chai.assert;
 
 	var ok = assert.ok,
 		deepEqual = assert.deepEqual,
 		equal = assert.equal;
+	
+	var suite = mocha.suite, test = mocha.test;
 	
 	suite("Strontium", function () {
 		test('module returns object', function() {

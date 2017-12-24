@@ -1,9 +1,13 @@
-define(['src/Strontium', 'src/Unit', 'src/DerivedUnit', 'test/StandardStrontiumFn'], 
-function (Strontium, Unit, DerivedUnit, StandardStrontiumFn) {
-	var ok = assert.ok,
+define(['mocha', 'chai', 'Strontium', 'Unit', 'DerivedUnit', 'test/StandardStrontiumFn'], 
+function (mocha, chai, Strontium, Unit, DerivedUnit, StandardStrontiumFn) {
+    var assert = chai.assert;
+    
+    var ok = assert.ok,
 		deepEqual = assert.deepEqual,
         equal = assert.equal;
-	
+    
+    var suite = mocha.suite, test = mocha.test;
+
 	suite("DerivedUnit", function () {
         var Sr = StandardStrontiumFn();
 
