@@ -1,4 +1,4 @@
-define(['src/UnitType', 'src/Dimensions', 'src/Unit'], function(UnitType, Dimensions, Unit) {
+define(['UnitType', 'Dimensions', 'Unit'], function(UnitType, Dimensions, Unit) {
 	function DerivedUnit(terms) {
 		this._terms = terms.slice(0);
 	}

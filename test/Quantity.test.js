@@ -1,5 +1,4 @@
 define(['src/Strontium', 'test/StandardStrontiumFn'], function (Strontium, StandardStrontiumFn) {
-
 	var ok = assert.ok,
 		deepEqual = assert.deepEqual,
         equal = assert.equal;

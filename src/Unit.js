@@ -1,4 +1,4 @@
-define(['src/UnitType', 'src/Term', 'src/Dimensions'], 
+define(['UnitType', 'Term', 'Dimensions'], 
 	function(UnitType, Term, Dimensions) {
 		function Unit(name, type, symbol, scale) {
 			this.name = name;

@@ -1,4 +1,4 @@
-define(['src/Enum'], function(Enum) {
+define(['Enum'], function(Enum) {
 	return Enum.create([
 		'length',
 		'mass',

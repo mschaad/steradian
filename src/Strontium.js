@@ -1,6 +1,6 @@
 define(
-	['src/UnitType', 'src/Term', 'src/Unit', 'src/DerivedUnit', 'src/Quantity',
-		'src/Strings'
+	['UnitType', 'Term', 'Unit', 'DerivedUnit', 'Quantity',
+		'Strings'
 	], 
 	function(UnitType, Term, Unit, DerivedUnit, Quantity, Strings) {
 		function Strontium() {
