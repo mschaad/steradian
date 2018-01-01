@@ -45,6 +45,20 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				assert.equal(actual, meter);
 			});
 		});
+		
+		suite("definedDerivedUnit", function() {
+			test("happy path", function() {
+				var Sr = StandardStrontiumFn();
+
+				var metersPerSecond = Sr.defineDerivedUnit([
+					{ unit: "meter", power: 1 },
+					{ unit: "second", power: -1 }
+				]);
+
+				ok(metersPerSecond);
+				assert.isTrue(Unit.isUnit(metersPerSecond));
+			});
+		});
 
 		suite("convert", function() {
 			test('can convert from one base unit to another base unit', function () {
@@ -118,12 +132,13 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				//equal(q2.unit.name, 'foot');
 				equal(q2.value, 393.7008);
 			});
-			
-			test('can convert from one complex derived unit to simple derived unit', function () {
+
+			test('can convert from one complex derived unit to another complex derived unit', function () {
 				var Sr = Strontium();
 				
 				//F = ma
 				//N = kg * m / s^2
+
 				var kilogram = Sr.unit({
 					name: 'kilogram',
 					type: 'mass',
@@ -144,31 +159,44 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 					symbol: 's',
 					scale: 60.0
 				});
-				
+
 				var Newton = Sr.defineDerivedUnit([
 					{ unit: kilogram, power: 1 },
 					{ unit: meter, power: 1 },
 					{ unit: second, power: -2 }
 				]);
 				
-				var q1 = Sr.quantity(Newton, 2);
-				
-				ok(q1);
-				//throw 'not implemented';
-			});
-		});
+				var qNewtons = Sr.quantity(Newton, 1);
+				ok(qNewtons);
 
-		suite("definedDerivedUnit", function() {
-			test("happy path", function() {
-				var Sr = StandardStrontiumFn();
+				//F = ma
+				// lb = slug * (feet / s^2)
 
-				var metersPerSecond = Sr.defineDerivedUnit([
-					{ unit: "meter", power: 1 },
-					{ unit: "second", power: -1 }
+				var slug = Sr.unit({
+					name: 'slug',
+					symbol: 'slug',
+					type: 'mass',
+					scale: 0.0685218
+				});
+
+				var foot = Sr.unit({
+					name: 'foot',
+					symbol: 'ft',
+					type: 'length',
+					scale: 3.28084
+				});
+
+				var pound = Sr.defineDerivedUnit([
+					{ unit: slug, power: 1 },
+					{ unit: foot, power: 1 },
+					{ unit: second, power: -2 }
 				]);
 
-				ok(metersPerSecond);
-				assert.isTrue(Unit.isUnit(metersPerSecond));
+				var qPounds = Sr.convert(qNewtons, pound);
+				
+				//1 slug ft/s^2 = 4.44822162 newtons
+				//1 N = 0.224808942 slug-ft/s^2
+				assert.closeTo(qPounds.value, 0.224809, 1e-7);
 			});
 		});
 	});
