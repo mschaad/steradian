@@ -5,7 +5,7 @@ define([], function() {
 		
 	UnitExpression.prototype = {
 		terms: function() {
-			return this._terms();
+			return this._terms;
 		},
 		mult: function(rhs) {
 			var terms = flatten([this.terms(), rhs.terms()])

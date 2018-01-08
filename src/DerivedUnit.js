@@ -27,8 +27,56 @@ define(['UnitType', 'Dimensions', 'Unit'], function(UnitType, Dimensions, Unit) 
 				terms[i] = up;
 			}
 			return terms;
+		},
+		toString: function() {
+			var terms = this._terms.slice(0);
+			 var reduced = terms
+			 	.map(function(term) {
+					var unitString = term.unit().toString();
+					var opString = getOperatorString(term);
+					var powerString = getPowerString(term);
+					if (term.power() === 0) {
+						return "";
+					}
+					return opString + unitString + powerString;
+				})
+				.reduce(function(acc, termString) {
+					if (acc === "") {
+						if (termString.startsWith(" ")) {
+							termString = termString.substring(1);
+						}
+					}
+					return acc + termString;
+				}, "");
+
+			return reduced;
 		}
 	};
+
+	function getOperatorString(term) {
+		var power = term.power();
+		if (power === 0) {
+			return "";
+		}
+		else if (power < 0) {
+			return "/";
+		}
+		else if (power > 0) {
+			return " ";
+		}
+		else {
+			throw new Error("'power' had the unexpected value '" + power + "'.");
+		}
+	}
+
+	function getPowerString(term) {
+		var power = term.power();
+		var absPower = Math.abs(power);
+		if (absPower === 0 || absPower === 1) {
+			return "";
+		}
+		return "^" + absPower;
+	}
 
 	Object.assign(DerivedUnit.prototype, functions);
 

@@ -23,6 +23,9 @@ define(['Guard', 'UnitType', 'Term', 'Dimensions'],
 			getTerms: function() {
 				var terms = [new Term(this, 1)];
 				return terms;
+			},
+			toString: function() {
+				return this.symbol;
 			}
 		};
 
