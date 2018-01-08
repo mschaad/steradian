@@ -9,6 +9,13 @@ define([], function() {
                 scale: 1.0
             });
 
+            var slug = Sr.unit({
+                name: 'slug',
+                symbol: 'slug',
+                type: 'mass',
+                scale: 0.0685218
+            });
+            
             //LENGTH
             var meter = Sr.unit({
                 name: 'meter',

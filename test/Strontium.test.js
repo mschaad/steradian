@@ -62,24 +62,10 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 
 		suite("convert", function() {
 			test('can convert from one base unit to another base unit', function () {
-				var Sr = Strontium();
+				var Sr = StandardStrontiumFn();
 				
-				var meter = Sr.unit({
-					name: 'meter',
-					type: 'length',
-					symbol: 'm',
-					scale: 1.0
-				});
-				
-				var foot = Sr.unit({
-					name: 'foot',
-					type: 'length',
-					symbol: 'ft',
-					scale: 3.28084
-				});
-				
-				var q1 = Sr.quantity(meter, 2);
-				var q2 = Sr.convert(q1, foot);
+				var q1 = Sr.quantity('meter', 2);
+				var q2 = Sr.convert(q1, 'foot');
 				
 				equal(q2.unit.name, 'foot');
 				equal(q2.value, 6.56168);
@@ -106,36 +92,15 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 			});
 
 			test('can convert from one complex derived unit to another complex derived unit', function () {
-				var Sr = Strontium();
+				var Sr = StandardStrontiumFn();
 				
 				//F = ma
 				//N = kg * m / s^2
-
-				var kilogram = Sr.unit({
-					name: 'kilogram',
-					type: 'mass',
-					symbol: 'kg',
-					scale: 1.0
-				});
 				
-				var meter = Sr.unit({
-					name: 'meter',
-					type: 'length',
-					symbol: 'm',
-					scale: 1.0
-				});
-				
-				var second = Sr.unit({
-					name: 'second',
-					type: 'time',
-					symbol: 's',
-					scale: 60.0
-				});
-
 				var Newton = Sr.defineDerivedUnit([
-					{ unit: kilogram, power: 1 },
-					{ unit: meter, power: 1 },
-					{ unit: second, power: -2 }
+					{ unit: 'kilogram', power: 1 },
+					{ unit: 'meter', power: 1 },
+					{ unit: 'second', power: -2 }
 				]);
 				
 				var qNewtons = Sr.quantity(Newton, 1);
@@ -143,25 +108,10 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 
 				//F = ma
 				// lb = slug * (feet / s^2)
-
-				var slug = Sr.unit({
-					name: 'slug',
-					symbol: 'slug',
-					type: 'mass',
-					scale: 0.0685218
-				});
-
-				var foot = Sr.unit({
-					name: 'foot',
-					symbol: 'ft',
-					type: 'length',
-					scale: 3.28084
-				});
-
 				var pound = Sr.defineDerivedUnit([
-					{ unit: slug, power: 1 },
-					{ unit: foot, power: 1 },
-					{ unit: second, power: -2 }
+					{ unit: 'slug', power: 1 },
+					{ unit: 'foot', power: 1 },
+					{ unit: 'second', power: -2 }
 				]);
 
 				var qPounds = Sr.convert(qNewtons, pound);
