@@ -12,7 +12,11 @@ define(
 					unit = identifierOrUnit;
 				}
 				else if (Strings.isString(identifierOrUnit)) {
-					unit = unitTable[identifierOrUnit];
+					var identifier = identifierOrUnit;
+					unit = unitTable[identifier];
+					if (!unit) {
+						throw new Error("Unit '" + identifier + "' not found");
+					}
 				}
 				else {
 					throw new Error("Expected: unit name or Unit but found object of type '" +

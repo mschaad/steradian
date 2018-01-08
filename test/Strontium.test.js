@@ -86,44 +86,16 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 			});
 			
 			test('can convert from one derived unit to another derived unit', function () {
-				var Sr = Strontium();
-				
-				var meter = Sr.unit({
-					name: 'meter',
-					type: 'length',
-					symbol: 'm',
-					scale: 1.0
-				});
-				
-				var second = Sr.unit({
-					name: 'second',
-					type: 'time',
-					symbol: 's',
-					scale: 60.0
-				});
-				
-				var minute = Sr.unit({
-					name: 'minute',
-					type: 'time',
-					symbol: 'min',
-					scale: 1.0
-				});
-				
-				var foot = Sr.unit({
-					name: 'foot',
-					type: 'length',
-					symbol: 'ft',
-					scale: 3.28084
-				});
+				var Sr = StandardStrontiumFn();
 				
 				var metersPerSecond = Sr.defineDerivedUnit([
-					{ unit: meter, power: 1 },
-					{ unit: second, power: -1 }
+					{ unit: 'meter', power: 1 },
+					{ unit: 'second', power: -1 }
 				]);
 				
 				var feetPerMinute = Sr.defineDerivedUnit([
-					{ unit: foot, power: 1 },
-					{ unit: minute, power: -1 }
+					{ unit: 'foot', power: 1 },
+					{ unit: 'minute', power: -1 }
 				]);
 				
 				var q1 = Sr.quantity(metersPerSecond, 2);

@@ -8,16 +8,15 @@ define(['UnitType', 'Dimensions', 'Unit'], function(UnitType, Dimensions, Unit) 
 	var functions = {
 		getDimensions: function() {
 			if (!this._dimensions) {
-				var dim = [];
-				for(var i = 0; i < this._terms.length; i++) {
-					var term = this._terms[i];
-					var typeIndex = UnitType[term.unit().name];
-					
-					var currentValue = dim[typeIndex] || 0;
-					var updatedValue = currentValue + term.power;
-					dim[typeIndex] = updatedValue;
-				}
-				this._dimensions = new Dimensions(dim);
+				var dim = this._terms
+					.map(function(t) {
+						return t.unit().getDimensions();
+					})
+					.reduce(function(acc, item) {
+						return acc.add(item);
+					}, Dimensions.empty());
+				
+				this._dimensions = dim;
 			}
 			return this._dimensions;
 		},
@@ -27,7 +26,7 @@ define(['UnitType', 'Dimensions', 'Unit'], function(UnitType, Dimensions, Unit) 
 				var up = this._terms[i];
 				terms[i] = up;
 			}
-			return terms;	
+			return terms;
 		}
 	};
 

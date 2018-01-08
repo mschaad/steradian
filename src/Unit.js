@@ -1,9 +1,13 @@
-define(['UnitType', 'Term', 'Dimensions'], 
-	function(UnitType, Term, Dimensions) {
+define(['Guard', 'UnitType', 'Term', 'Dimensions'], 
+	function(Guard, UnitType, Term, Dimensions) {
 		function Unit(name, type, symbol, scale) {
+			Guard(name, "name").isString().isTruthy();
 			this.name = name;
+			Guard(type, "type").isString().isTruthy();
 			this.type = type;
+			Guard(symbol, "symbol").isString().isTruthy();
 			this.symbol = symbol;
+			Guard(scale, "scale").isNumber().isNotZero();
 			this.scale = scale;
 		}
 			
