@@ -15,14 +15,6 @@ function (mocha, chai, Strontium, Unit, StandardUnitDefinitions) {
     }
 	
 	suite("Unit", function () {
-        suite("toString", function() {
-            var Sr = newStrontium();
-            var meter = Sr.getUnit("meter");
-            
-            test("m", function() {
-               equal("m", meter.toString()); 
-            });
-        });
         suite("isUnit", function() {
             var Sr = newStrontium();
             var foo = Sr.unit({

@@ -1,8 +1,8 @@
 define(
-	['UnitType', 'Term', 'Unit', 'DerivedUnit', 'Quantity',
-		'Strings'
+	['UnitType', 'Term', 'Unit', 'BaseUnit',
+	'DerivedUnit', 'Quantity', 'Strings'
 	], 
-	function(UnitType, Term, Unit, DerivedUnit, Quantity, Strings) {
+	function(UnitType, Term, Unit, BaseUnit, DerivedUnit, Quantity, Strings) {
 		function Strontium() {
 			var unitTable = {};
 			
@@ -100,7 +100,7 @@ define(
 
 			var SrInstance = {
 				unit: function(def) {
-					var unit = new Unit(def.name, def.type, def.symbol, def.scale);
+					var unit = new BaseUnit(def.name, def.type, def.symbol, def.scale);
 					unitTable[def.name] = unit;
 					return unit;
 				},
