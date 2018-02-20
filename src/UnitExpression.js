@@ -1,6 +1,7 @@
-define([], function() {
+define(['Guard', 'Term', 'Units'], function(Guard, Term, Units) {
 	function UnitExpression(terms) {
-		this._terms = terms;
+		Guard(terms, "terms").isArrayOf(Term);
+		this._terms = Array.prototype.slice.call(terms, 0);
 	}
 		
 	UnitExpression.prototype = {
@@ -21,8 +22,19 @@ define([], function() {
 			return new UnitExpression(exponentiatedTerms);
 		},
 		simplify: function() {
-			var baseTerms = getEquivalentBaseTerms(this.terms());
+			var baseTerms = getEquivalentBaseTermsForList(this.terms());
 			return new UnitExpression(baseTerms);
+		},
+		toMap: function() {
+			var terms = combineLikeTerms(this.terms());
+
+			return terms.reduce(
+				function(map, term) {
+					map[term.unit().name] = term.power();
+					return map;
+				}, 
+				Object.create(null)
+			);
 		},
 		toString: function() {
 			var terms = this._terms.slice(0);
@@ -60,11 +72,14 @@ define([], function() {
 	}
 	
 	function combineLikeTerms(terms) {
-		terms = groupBy(terms, unitProperty);
-		terms = terms.map(function(group) {
-			return new Term(group.key, sumPowersOf(group.items));
-		});
-		return terms;
+		Guard(terms, "terms").isArrayOf(Term);
+		var groupedTerms = groupBy(terms, unitProperty);
+		var outputTerms = Object.keys(groupedTerms)
+			.map(function(groupName) {
+				var group = groupedTerms[groupName];
+				return new Term(group.key, sumPowersOf(group.items));
+			});
+		return outputTerms;
 	}
 	
 	function invert(term) {
@@ -73,7 +88,6 @@ define([], function() {
 	
 	function flatten(arrays) {
 		var flattened = [];
-		flattened.length = arrays.reduce(function(acc, arr) { return acc + arr.length; }, 0);
 		arrays.forEach(function(a) { 
 			Array.prototype.push.apply(flattened, a);
 		});
@@ -81,7 +95,7 @@ define([], function() {
 	}
 	
 	function groupBy(arr, keySelector) {
-		var groups = {};
+		var groups = Object.create(null);
 		for (var i = 0; i < arr.length; i++) {
 			var item = arr[i];
 			var key = keySelector(item);
@@ -93,24 +107,32 @@ define([], function() {
 	}
 	
 	function sumPowersOf(terms) {
-		var sum = terms.reduce(function(acc, t) { acc + t.power() }, 0);
+		var sum = terms.reduce(function(acc, t) { return acc + t.power() }, 0);
 		return sum;
 	}
-		
+	
+	function emptyUnitExpression() {
+		return new UnitExpression([]);
+	}
+
+	function getEquivalentBaseTermsForList(terms) {
+		return terms.map(function(term) {
+			return new UnitExpression(getEquivalentBaseTerms(term));
+		}).reduce(function(acc, expr) {
+			return acc.mult(expr);
+		}, emptyUnitExpression()
+		).terms();
+	}
+
 	function getEquivalentBaseTerms(term) {
+		Guard(term, "term").instanceOf(Term);
 		var unit = term.unit();
-		if (u.isBase()) {
-			return u.terms();
+		if (Units.isBaseUnit(unit)) {
+			return [ term ];
 		}
 		else {
-			var terms;
-			terms = u.terms();
-			terms = flatten(terms.map(getEquivalentBaseTerms));
-			terms = terms.map(function(innerTerm) {
-				return new Term(innerTerm.unit(), innerTerm.power() * term.power());
-			});
-			terms = combineLikeTerms(terms);
-			return terms;
+			var subTermsExpr = new UnitExpression(unit.getTerms()).pow(term.power());
+			return getEquivalentBaseTermsForList(subTermsExpr.terms());			
 		}
 	}
 	

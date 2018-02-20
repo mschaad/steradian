@@ -1,8 +1,8 @@
-fix karma configuration
-
-distinguish between or unify anonymous derived units and named derived units
-    probably should move current impl of DerivedUnit to UnitExpression and make DerivedUnit a *named* derived unit.
-    Then DerivedUnit becomes a named wrapper over UnitExpression.
+change return type of Unit.getTerms() from Array<Unit> to UnitExpression
+rename UnitExpression.simplify() to .toBaseUnits()
+add another UnitExpression.simplify() that only combines like terms
+add support for resolving DerivedUnits by Sr.getUnit(string)
 Quantity::toString()
 Quantity::add/sub/multiply/divide
 unit aliases
+fix karma configuration
