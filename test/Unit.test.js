@@ -31,7 +31,7 @@ function (mocha, chai, Strontium, Unit, StandardUnitDefinitions) {
                 scale: 1.0
             });
 
-            var fooPerBar = Sr.defineDerivedUnit({
+            var fooPerBar = Sr.derivedUnit({
                 name: "fooPerBar",
                 symbol: "fpb",
                 units: [

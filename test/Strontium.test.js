@@ -50,7 +50,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 			test("happy path", function() {
 				var Sr = StandardStrontiumFn();
 
-				var metersPerSecond = Sr.defineDerivedUnit({
+				var metersPerSecond = Sr.derivedUnit({
 					name: "meterPerSecond",
 					symbol: "mps",
 					units: [
@@ -78,7 +78,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 			test('can convert from one derived unit to another derived unit', function () {
 				var Sr = StandardStrontiumFn();
 				
-				var metersPerSecond = Sr.defineDerivedUnit({
+				var metersPerSecond = Sr.derivedUnit({
 					name: "meterPerSecond",
 					symbol: "mps",
 					units: [
@@ -87,7 +87,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 					]
 				});
 				
-				var feetPerMinute = Sr.defineDerivedUnit({
+				var feetPerMinute = Sr.derivedUnit({
 					name: "feetPerMinute",
 					symbol: "ftPerMin",
 					units: [
@@ -109,7 +109,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				//F = ma
 				//N = kg * m / s^2
 				
-				var Newton = Sr.defineDerivedUnit({
+				var Newton = Sr.derivedUnit({
 					name: "Newton",
 					symbol: "N",
 					units: [
@@ -124,7 +124,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 
 				//F = ma
 				// lb = slug * (feet / s^2)
-				var pound = Sr.defineDerivedUnit({
+				var pound = Sr.derivedUnit({
 					name: "pound",
 					symbol: "lb",
 					units: [

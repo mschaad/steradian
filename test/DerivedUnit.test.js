@@ -29,7 +29,7 @@ function (
             scale: 0.001
         });
 
-        var Newton = Sr.defineDerivedUnit({
+        var Newton = Sr.derivedUnit({
             name: "Newton",
             symbol: "N",
             units: [
@@ -43,7 +43,7 @@ function (
         var foot = Sr.getUnit('foot');
 
         suite('constructor', function() {
-            var FakeForce = Sr.defineDerivedUnit({
+            var FakeForce = Sr.derivedUnit({
                 name: "FakeForce",
                 symbol: "ff",
                 scale: 2.0,
@@ -55,7 +55,7 @@ function (
             });
 
             test("scale has default value of 1.0", function() {
-                var FakeForce2 = Sr.defineDerivedUnit({
+                var FakeForce2 = Sr.derivedUnit({
                     name: "FakeForce2",
                     symbol: "ff2",
                     units: [

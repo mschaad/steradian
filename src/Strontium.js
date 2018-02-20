@@ -106,7 +106,7 @@ define(
 					unitTable[def.name] = unit;
 					return unit;
 				},
-				defineDerivedUnit: function(def) {
+				derivedUnit: function(def) {
 					Guard(def.units, 'def.units').isTruthy().isArray();
 					var terms = def.units.map(toTerm);
 					var scale = def.scale || 1;
