@@ -46,6 +46,18 @@ define([], function() {
 			}
 			return new Dimensions(newDimensions);
 		};
+
+		this.mult = function(scalar) {
+			var lhs = this;
+			var newDimensions = [];
+			var i;
+			newDimensions.length = lhs.size();
+			for(i = 0; i < lhs.size(); i++) {
+				var value = lhs.get(i) || 0;
+				newDimensions[i] = value * scalar;
+			}
+			return new Dimensions(newDimensions);
+		};
 	}
 
 	var empty = new Dimensions([]);

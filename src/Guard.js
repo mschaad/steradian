@@ -27,6 +27,12 @@ define(['Strings'], function(Strings) {
 				}
 				return this;
 			},
+			isArray: function() {
+				if (!Array.isArray(value)) {
+					throw getError("an array");
+				}
+				return this;
+			},
 			isNumber: function() {
 				if (!isNaN(parseFloat(value)) && isFinite(value)) {
 					return this;

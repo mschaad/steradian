@@ -31,10 +31,14 @@ function (mocha, chai, Strontium, Unit, StandardUnitDefinitions) {
                 scale: 1.0
             });
 
-            var fooPerBar = Sr.defineDerivedUnit([
-                { unit: foo, power: 1 },
-                { unit: bar, power: -1 }
-            ]);
+            var fooPerBar = Sr.defineDerivedUnit({
+                name: "fooPerBar",
+                symbol: "fpb",
+                units: [
+                    { unit: foo, power: 1 },
+                    { unit: bar, power: -1 }
+                ]
+            });
 
             test('returns true for Unit object', function() {                
                 assert.isTrue(Unit.isUnit(foo));

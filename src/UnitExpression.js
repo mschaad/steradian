@@ -24,6 +24,29 @@ define([], function() {
 			var baseTerms = getEquivalentBaseTerms(this.terms());
 			return new UnitExpression(baseTerms);
 		},
+		toString: function() {
+			var terms = this._terms.slice(0);
+			 var reduced = terms
+			 	.map(function(term) {
+					var unitString = term.unit().toString();
+					var opString = getOperatorString(term);
+					var powerString = getPowerString(term);
+					if (term.power() === 0) {
+						return "";
+					}
+					return opString + unitString + powerString;
+				})
+				.reduce(function(acc, termString) {
+					if (acc === "") {
+						if (termString.startsWith(" ")) {
+							termString = termString.substring(1);
+						}
+					}
+					return acc + termString;
+				}, "");
+
+			return reduced;
+		}
 	};
 	
 	function termExponent(power) {

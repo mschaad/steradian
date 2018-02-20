@@ -1,8 +1,10 @@
 define(
-	['UnitType', 'Term', 'Unit', 'BaseUnit',
+	[
+	'Guard',
+	'UnitType', 'Term', 'Unit', 'BaseUnit',
 	'DerivedUnit', 'Quantity', 'Strings'
 	], 
-	function(UnitType, Term, Unit, BaseUnit, DerivedUnit, Quantity, Strings) {
+	function(Guard, UnitType, Term, Unit, BaseUnit, DerivedUnit, Quantity, Strings) {
 		function Strontium() {
 			var unitTable = {};
 			
@@ -104,9 +106,11 @@ define(
 					unitTable[def.name] = unit;
 					return unit;
 				},
-				defineDerivedUnit: function(termDescriptors) {
-					var terms = termDescriptors.map(toTerm);
-					var unit = new DerivedUnit(terms);
+				defineDerivedUnit: function(def) {
+					Guard(def.units, 'def.units').isTruthy().isArray();
+					var terms = def.units.map(toTerm);
+					var scale = def.scale || 1;
+					var unit = new DerivedUnit(def.name, def.symbol, scale, terms);
 					return unit;
 				},
 				quantity: quantity,

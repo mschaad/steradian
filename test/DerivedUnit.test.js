@@ -1,5 +1,12 @@
-define(['mocha', 'chai', 'Strontium', 'Unit', 'DerivedUnit', 'test/StandardStrontiumFn'], 
-function (mocha, chai, Strontium, Unit, DerivedUnit, StandardStrontiumFn) {
+define([
+    'mocha', 'chai', 
+    'Strontium', 'Unit', 'DerivedUnit', 'UnitType',
+    'test/StandardStrontiumFn'], 
+function (
+    mocha, chai, 
+    Strontium, Unit, DerivedUnit, UnitType,
+    StandardStrontiumFn
+) {
     var assert = chai.assert;
     
     var ok = assert.ok,
@@ -9,66 +16,79 @@ function (mocha, chai, Strontium, Unit, DerivedUnit, StandardStrontiumFn) {
     var suite = mocha.suite, test = mocha.test;
 
 	suite("DerivedUnit", function () {
-        var Sr = StandardStrontiumFn();
-
-        var metersPerSecond = Sr.defineDerivedUnit([
-            { unit: "meter", power: 1 },
-            { unit: "second", power: -1 }
-        ]);
-
         test("module returns object", function() {
             ok(DerivedUnit);
         });
+        
+        var Sr = StandardStrontiumFn();
 
-        test("instances have appropriate methods", function() {
-            ok(metersPerSecond.getDimensions);
-            ok(metersPerSecond.getTerms);
+        var Millisecond = Sr.unit({
+            name: 'millisecond', 
+            symbol: 'ms', 
+            type: 'time', 
+            scale: 0.001
+        });
+
+        var Newton = Sr.defineDerivedUnit({
+            name: "Newton",
+            symbol: "N",
+            units: [
+                { unit: "kilogram", power: 1 },
+                { unit: "meter", power: 1 },
+                { unit: "second", power: -2 }
+            ]
+        });
+
+        var slug = Sr.getUnit('slug');
+        var foot = Sr.getUnit('foot');
+
+        suite('constructor', function() {
+            var FakeForce = Sr.defineDerivedUnit({
+                name: "FakeForce",
+                symbol: "ff",
+                scale: 2.0,
+                units: [
+                    { unit: "slug", power: 1 },
+                    { unit: "foot", power: 1 },
+                    { unit: "millisecond", power: -2 }
+                ]
+            });
+
+            test("scale has default value of 1.0", function() {
+                var FakeForce2 = Sr.defineDerivedUnit({
+                    name: "FakeForce2",
+                    symbol: "ff2",
+                    units: [
+                        { unit: "slug", power: 1 },
+                        { unit: "foot", power: 1 },
+                        { unit: "millisecond", power: -2 }
+                    ]
+                });
+
+                var expected = 1.0 * slug.scale * foot.scale / Math.pow(Millisecond.scale, 2);
+
+                equal(expected, FakeForce2.scale);
+            });
+
+            test("scale calculation", function() {
+                var expected = 2.0 * slug.scale * foot.scale / Math.pow(Millisecond.scale, 2);
+                equal(expected, FakeForce.scale);
+            });
+        })
+
+        suite('getDimensions', function() {
+            var dim = Newton.getDimensions();
+            equal(3, dim.size());
+            equal(1, dim.get(UnitType.mass));
+            equal(1, dim.get(UnitType.length));
+            equal(-2, dim.get(UnitType.time));
         });
 
         suite('toString', function() {
             var Sr = StandardStrontiumFn();
 
-            test('m/s', function() {
-                var meterPerSecond = Sr.defineDerivedUnit([
-                    { unit: 'meter', power: 1 },
-                    { unit: 'second', power: -1 }
-                ]);
-    
-                equal('m/s', meterPerSecond.toString());
-            });
-            
-            test("m/s^2", function() {
-                var meterPerSecondSq = Sr.defineDerivedUnit([
-                    { unit: 'meter', power: 1 },
-                    { unit: 'second', power: -2 }
-                ]);
-    
-                equal('m/s^2', meterPerSecondSq.toString());
-            });
-
-            test("m s", function() {
-                var meterSecond = Sr.defineDerivedUnit([
-                    { unit: 'meter', power: 1 },
-                    { unit: 'second', power: 1 }
-                ]);
-    
-                equal('m s', meterSecond.toString());
-            });
-
-            test("m^2", function() {
-                var meterSquared = Sr.defineDerivedUnit([
-                    { unit: 'meter', power: 2 }
-                ]);
-    
-                equal('m^2', meterSquared.toString());
-            });
-
-            test("m^0", function() {
-                var meterSquared = Sr.defineDerivedUnit([
-                    { unit: 'meter', power: 0 }
-                ]);
-    
-                equal('', meterSquared.toString());
+            test("Newton", function() {
+                equal("N", Newton.toString());
             });
         });
     })

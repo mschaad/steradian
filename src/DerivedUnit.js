@@ -1,6 +1,23 @@
-define(['UnitType', 'Dimensions', 'Unit'], function(UnitType, Dimensions, Unit) {
-	function DerivedUnit(terms) {
+define(['Guard', 'UnitType', 'Dimensions', 'Unit'], 
+function(Guard, UnitType, Dimensions, Unit) {
+	function DerivedUnit(name, symbol, scale, terms) {
+		Guard(terms, 'terms').isTruthy().isArray();
+		var compositeScale = scale * getScaleOfTerms(terms);
+		Unit.call(this, name, symbol, compositeScale);
 		this._terms = terms.slice(0);
+	}
+
+	function getScaleOfTerms(terms) {
+		return terms
+		.map(function(term) {
+			return Math.pow(term.unit().scale, term.power());
+		})
+		.reduce(
+			function(acc, factor) {
+				return acc * factor;
+			}, 
+			1
+		)
 	}
 
 	DerivedUnit.prototype = Object.create(Unit.prototype);
@@ -10,7 +27,9 @@ define(['UnitType', 'Dimensions', 'Unit'], function(UnitType, Dimensions, Unit) 
 			if (!this._dimensions) {
 				var dim = this._terms
 					.map(function(t) {
-						return t.unit().getDimensions();
+						return t.unit()
+							.getDimensions()
+							.mult(t.power());
 					})
 					.reduce(function(acc, item) {
 						return acc.add(item);
@@ -29,27 +48,7 @@ define(['UnitType', 'Dimensions', 'Unit'], function(UnitType, Dimensions, Unit) 
 			return terms;
 		},
 		toString: function() {
-			var terms = this._terms.slice(0);
-			 var reduced = terms
-			 	.map(function(term) {
-					var unitString = term.unit().toString();
-					var opString = getOperatorString(term);
-					var powerString = getPowerString(term);
-					if (term.power() === 0) {
-						return "";
-					}
-					return opString + unitString + powerString;
-				})
-				.reduce(function(acc, termString) {
-					if (acc === "") {
-						if (termString.startsWith(" ")) {
-							termString = termString.substring(1);
-						}
-					}
-					return acc + termString;
-				}, "");
-
-			return reduced;
+			return this.symbol;
 		}
 	};
 
