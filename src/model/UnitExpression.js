@@ -25,6 +25,12 @@ define(['Guard', 'Term', 'Units'], function(Guard, Term, Units) {
 			var baseTerms = getEquivalentBaseTermsForList(this.terms());
 			return new UnitExpression(baseTerms);
 		},
+		/**
+		 * Simplifies the UnitExpression by combining like Terms.
+		 */
+		simplify: function() {
+			return new UnitExpression(combineLikeTerms(this.terms()));
+		},
 		toMap: function() {
 			var terms = combineLikeTerms(this.terms());
 

@@ -56,6 +56,30 @@ function (
             });
         });
 
+        suite("simplify", function() {
+            test("simple", function() {
+                var lhs = new UnitExpression([
+                    term('meter', 2),
+                    term('meter', -1),
+                    term('second', 1),
+                    term('meter', 1),
+                    term('meter', 1),
+                    term('second', 1)
+                ]);
+    
+                var combined = lhs.simplify();
+                var terms = combined.terms();
+    
+                equal(2, terms.length);
+                
+                equal("meter", terms[0].unit().name);
+                equal(3, terms[0].power());
+
+                equal("second", terms[1].unit().name);
+                equal(2, terms[1].power());
+            });
+        });
+
         suite("toMap", function() {
             test("simple", function() {
                 var lhs = new UnitExpression([
