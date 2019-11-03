@@ -12,7 +12,11 @@ module.exports = {
     },
     resolve: {
         modules: ["src", "node_modules"],
-        alias: {}
+        alias: {
+            Guard: "util/Guard",
+            Strings: "util/Strings",
+            Enum: "util/Enum"
+        }
     },
     module: {
         rules: [

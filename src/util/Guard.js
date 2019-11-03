@@ -1,4 +1,4 @@
-define(['Strings'], function(Strings) {
+define("Guard", ['Strings'], function(Strings) {
 	function Guard(value, name) {
 		function getErrorMessage(args) {
 			return name + 
