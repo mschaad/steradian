@@ -15,7 +15,17 @@ module.exports = {
         alias: {
             Guard: "util/Guard",
             Strings: "util/Strings",
-            Enum: "util/Enum"
+            Enum: "util/Enum",
+
+            BaseUnit: "model/BaseUnit",
+            DerivedUnit: "model/DerivedUnit",
+            Dimensions: "model/Dimensions",
+            Quantity: "model/Quantity",
+            Term: "model/Term",
+            Unit: "model/Unit",
+            UnitExpression: "model/UnitExpression",
+            Units: "model/Units",
+            UnitType: "model/UnitType",
         }
     },
     module: {

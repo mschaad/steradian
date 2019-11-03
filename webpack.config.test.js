@@ -7,8 +7,9 @@ function resolvePath(dir) {
 }
 
 config.resolve.modules.push("test");
-//config.entry = resolvePath("test/**/*.test.js");
-config.resolve.alias.test = "../test";
+config.entry = resolvePath("test/**/*.test.js");
+config.resolve.alias["test/StandardStrontiumFn"] = "StandardStrontiumFn";
+config.resolve.alias["test/StandardUnitDefinitions"] = "StandardUnitDefinitions";
 config.output = {
     path: resolvePath('dist'),
     filename: 'Strontium.tests.js'
