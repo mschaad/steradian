@@ -21,7 +21,7 @@ define(['Guard', 'Term', 'Units'], function(Guard, Term, Units) {
 			var exponentiatedTerms = this.terms().map(termExponent(power));
 			return new UnitExpression(exponentiatedTerms);
 		},
-		simplify: function() {
+		toBaseUnits: function() {
 			var baseTerms = getEquivalentBaseTermsForList(this.terms());
 			return new UnitExpression(baseTerms);
 		},
@@ -115,6 +115,11 @@ define(['Guard', 'Term', 'Units'], function(Guard, Term, Units) {
 		return new UnitExpression([]);
 	}
 
+	/**
+	 * Given an array of Terms (which could be in any type of units), returns an
+	 * array of equivalent BaseUnit terms.
+	 * @param {Term[]} terms 
+	 */
 	function getEquivalentBaseTermsForList(terms) {
 		return terms.map(function(term) {
 			return new UnitExpression(getEquivalentBaseTerms(term));
@@ -124,6 +129,11 @@ define(['Guard', 'Term', 'Units'], function(Guard, Term, Units) {
 		).terms();
 	}
 
+	/**
+	 * Given a Term (which could be in any Units) returns an equivalent array of 
+	 * Terms expressed in BaseUnits.
+	 * @param {Term} term 
+	 */
 	function getEquivalentBaseTerms(term) {
 		Guard(term, "term").instanceOf(Term);
 		var unit = term.unit();

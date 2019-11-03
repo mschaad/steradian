@@ -130,14 +130,14 @@ function (
             });
         });
 
-        suite("simplify", function() {
+        suite("toBaseUnits", function() {
             test("simple", function() {
                 var lhs = new UnitExpression([
                     new Term(Newton, 3),
                     new Term(Newton, -1)
                 ]);
 
-                var actual = lhs.simplify();
+                var actual = lhs.toBaseUnits();
                 var actualMap = actual.toMap();
 
                 equal(2, actualMap.kilogram);
