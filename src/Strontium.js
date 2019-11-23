@@ -7,6 +7,20 @@ define(
 	function(Guard, UnitType, Term, Unit, BaseUnit, DerivedUnit, Quantity, Strings) {
 		function Strontium() {
 			var unitTable = {};
+
+			function createUnit(def) {
+				var unit = new BaseUnit(def.name, def.type, def.symbol, def.scale);
+				unitTable[def.name] = unit;
+				return unit;
+			}
+
+			function getUnit(name) {
+				var unit = unitTable[name];
+				if (!unit) {
+					throw new Error("no unit found by the name '" + name + "'");
+				}
+				return unit;
+			}
 			
 			function toUnit(identifierOrUnit) {
 				var unit;
@@ -101,11 +115,7 @@ define(
 			}
 
 			var SrInstance = {
-				unit: function(def) {
-					var unit = new BaseUnit(def.name, def.type, def.symbol, def.scale);
-					unitTable[def.name] = unit;
-					return unit;
-				},
+				unit: createUnit,
 				derivedUnit: function(def) {
 					Guard(def.units, 'def.units').isTruthy().isArray();
 					var terms = def.units.map(toTerm);
@@ -114,13 +124,7 @@ define(
 					return unit;
 				},
 				quantity: quantity,
-				getUnit: function(name) {
-					var unit = unitTable[name];
-					if (!unit) {
-						throw new Error("no unit found by the name '" + name + "'");
-					}
-					return unit;
-				},
+				getUnit: getUnit,
 				convert: convert
 			};
 
