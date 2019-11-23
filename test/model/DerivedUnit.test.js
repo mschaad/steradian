@@ -39,8 +39,8 @@ function (
             ]
         });
 
-        var slug = Sr.getUnit('slug');
-        var foot = Sr.getUnit('foot');
+        var slug = Sr.unit('slug');
+        var foot = Sr.unit('foot');
 
         suite('constructor', function() {
             var FakeForce = Sr.derivedUnit({

@@ -28,7 +28,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 			});
 		});
 
-		suite("getUnit", function() {
+		suite("unit(string)", function() {
 			test('can get registered unit', function () {
 				var Sr = Strontium();
 				
@@ -39,7 +39,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 					scale: 1.0
 				});
 				
-				var actual = Sr.getUnit("meter");
+				var actual = Sr.unit("meter");
 
 				ok(actual);
 				assert.equal(actual, meter);
@@ -79,14 +79,14 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 					]
 				});
 				
-				var actual = Sr.getUnit("Newton");
+				var actual = Sr.unit("Newton");
 
 				ok(actual);
 				assert.equal(actual, Newton);
 			});
 		});
 		
-		suite("definedDerivedUnit", function() {
+		suite("derivedUnit", function() {
 			test("happy path", function() {
 				var Sr = StandardStrontiumFn();
 

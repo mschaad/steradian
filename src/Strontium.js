@@ -137,7 +137,6 @@ define(
 				},
 				derivedUnit: createDerivedUnit,
 				quantity: quantity,
-				getUnit: getUnit,
 				convert: convert
 			};
 

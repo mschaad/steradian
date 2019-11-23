@@ -17,7 +17,7 @@ function (mocha, chai, Strontium, Unit, BaseUnit, StandardUnitDefinitions) {
 	suite("BaseUnit", function () {
         suite("toString", function() {
             var Sr = newStrontium();
-            var meter = Sr.getUnit("meter");
+            var meter = Sr.unit("meter");
             
             test("m", function() {
                equal("m", meter.toString()); 
@@ -26,7 +26,7 @@ function (mocha, chai, Strontium, Unit, BaseUnit, StandardUnitDefinitions) {
 
         test("isBaseUnit", function() {
             var Sr = newStrontium();
-            var meter = Sr.getUnit("meter");
+            var meter = Sr.unit("meter");
             equal(true, meter.isBaseUnit());
         });
     });

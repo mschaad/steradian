@@ -32,7 +32,7 @@ function (
 
         function term(name, power) {
             return new Term(
-                Sr.getUnit(name),
+                Sr.unit(name),
                 power
             );
         }
