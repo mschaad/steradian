@@ -44,6 +44,46 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				ok(actual);
 				assert.equal(actual, meter);
 			});
+
+			test('can get registered derived unit', function () {
+				var Sr = Strontium();
+				
+				var meter = Sr.unit({
+					name: 'meter',
+					type: 'length',
+					symbol: 'm',
+					scale: 1.0
+				});
+
+				var second = Sr.unit({
+					name: 'second',
+					type: 'time',
+					symbol: 's',
+					scale: 1.0
+				});
+
+				var kilogram = Sr.unit({
+					name: 'kilogram',
+					type: 'mass',
+					symbol: 'kg',
+					scale: 1.0
+				});
+
+				var Newton = Sr.derivedUnit({
+					name: "Newton",
+					symbol: "N",
+					units: [
+						{ unit: "kilogram", power: 1 },
+						{ unit: "meter", power: 1 },
+						{ unit: "second", power: -2 }
+					]
+				});
+				
+				var actual = Sr.getUnit("Newton");
+
+				ok(actual);
+				assert.equal(actual, Newton);
+			});
 		});
 		
 		suite("definedDerivedUnit", function() {

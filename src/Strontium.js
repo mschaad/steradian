@@ -8,9 +8,22 @@ define(
 		function Strontium() {
 			var unitTable = {};
 
+			function registerUnit(unit) {
+				unitTable[unit.name] = unit;
+			}
+
 			function createUnit(def) {
 				var unit = new BaseUnit(def.name, def.type, def.symbol, def.scale);
-				unitTable[def.name] = unit;
+				registerUnit(unit);
+				return unit;
+			}
+
+			function createDerivedUnit(def) {
+				Guard(def.units, 'def.units').isTruthy().isArray();
+				var terms = def.units.map(toTerm);
+				var scale = def.scale || 1;
+				var unit = new DerivedUnit(def.name, def.symbol, scale, terms);
+				registerUnit(unit);
 				return unit;
 			}
 
@@ -122,13 +135,7 @@ define(
 						return createUnit(idOrDef);	
 					}
 				},
-				derivedUnit: function(def) {
-					Guard(def.units, 'def.units').isTruthy().isArray();
-					var terms = def.units.map(toTerm);
-					var scale = def.scale || 1;
-					var unit = new DerivedUnit(def.name, def.symbol, scale, terms);
-					return unit;
-				},
+				derivedUnit: createDerivedUnit,
 				quantity: quantity,
 				getUnit: getUnit,
 				convert: convert
