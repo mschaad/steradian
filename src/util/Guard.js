@@ -1,4 +1,4 @@
-define("Guard", ['Strings'], function(Strings) {
+define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 	function Guard(value, name) {
 		function getErrorMessage(args) {
 			return name + 
@@ -21,7 +21,7 @@ define("Guard", ['Strings'], function(Strings) {
 				}
 			},
 			isString: function() {
-				if (!Strings.isString(value)) {
+				if (!Test.isString(value)) {
 					throw getError("a String");
 				}
 				return that;

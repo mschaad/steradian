@@ -16,6 +16,15 @@ define(['mocha', 'chai', 'Strings'], function(mocha, chai, Strings) {
 			test('returns true for new String()', function() {
 				assert.isTrue(Strings.isString(new String("foo")));
 			});
+
+			test('returns false for object', function() {
+				assert.isFalse(Strings.isString({
+					name: 'kilogram',
+					type: 'mass',
+					symbol: 'kg',
+					scale: 1.0
+				}));
+			});
 		})
     });
 });

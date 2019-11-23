@@ -1,10 +1,10 @@
 define(
 	[
-	'Guard',
+	'Guard', 'Test',
 	'UnitType', 'Term', 'Unit', 'BaseUnit',
 	'DerivedUnit', 'Quantity', 'Strings'
 	], 
-	function(Guard, UnitType, Term, Unit, BaseUnit, DerivedUnit, Quantity, Strings) {
+	function(Guard, Test, UnitType, Term, Unit, BaseUnit, DerivedUnit, Quantity, Strings) {
 		function Strontium() {
 			var unitTable = {};
 
@@ -115,7 +115,13 @@ define(
 			}
 
 			var SrInstance = {
-				unit: createUnit,
+				unit: function(idOrDef) {
+					if (Test.isString(idOrDef)) {
+						return getUnit(idOrDef);
+					} else {
+						return createUnit(idOrDef);	
+					}
+				},
 				derivedUnit: function(def) {
 					Guard(def.units, 'def.units').isTruthy().isArray();
 					var terms = def.units.map(toTerm);
