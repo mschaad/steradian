@@ -24,20 +24,7 @@ function(Guard, UnitType, Dimensions, Unit, UnitExpression) {
 
 	var functions = {
 		getDimensions: function() {
-			if (!this._dimensions) {
-				var dim = this._terms
-					.map(function(t) {
-						return t.unit()
-							.getDimensions()
-							.mult(t.power());
-					})
-					.reduce(function(acc, item) {
-						return acc.add(item);
-					}, Dimensions.empty());
-				
-				this._dimensions = dim;
-			}
-			return this._dimensions;
+			return this.expression().dimensions();
 		},
 		isBaseUnit: function() {
 			return false;

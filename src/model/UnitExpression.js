@@ -1,4 +1,4 @@
-define(['Guard', 'Term'], function(Guard, Term) {
+define(['Guard', 'Term', 'Dimensions'], function(Guard, Term, Dimensions) {
 	function UnitExpression(terms) {
 		Guard(terms, "terms").isArrayOf(Term);
 		this._terms = Array.prototype.slice.call(terms, 0);
@@ -7,6 +7,22 @@ define(['Guard', 'Term'], function(Guard, Term) {
 	UnitExpression.prototype = {
 		terms: function() {
 			return Array.prototype.slice.call(this._terms, 0);
+		},
+		dimensions: function() {
+			if (!this._dimensions) {
+				var dim = this._terms
+					.map(function(t) {
+						return t.unit()
+							.getDimensions()
+							.mult(t.power());
+					})
+					.reduce(function(acc, item) {
+						return acc.add(item);
+					}, Dimensions.empty());
+				
+				this._dimensions = dim;
+			}
+			return this._dimensions;
 		},
 		mult: function(rhs) {
 			var terms = flatten([this.terms(), rhs.terms()])
