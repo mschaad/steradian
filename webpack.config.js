@@ -11,6 +11,7 @@ module.exports = {
         path: resolvePath('dist'),
         filename: 'Strontium.js'
     },
+    devtool: 'source-map',
     resolve: {
         modules: ["src", "node_modules"],
         alias: {
