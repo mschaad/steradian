@@ -13,8 +13,8 @@ define(['Guard', 'UnitType', 'Term', 'Dimensions'],
 			getDimensions: function() {
 				throw new Error("the getDimensions method must be overridden.");
 			},
-			getTerms: function() {
-				throw new Error("the getTerms method must be overridden.");
+			expression: function() {
+				throw new Error("the expression method must be overridden.");
 			},
 			isBaseUnit: function() {
 				throw new Error("the isBaseUnit method must be overridden.");

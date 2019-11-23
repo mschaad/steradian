@@ -1,5 +1,5 @@
-define(['Guard', 'UnitType', 'Dimensions', 'Unit'], 
-function(Guard, UnitType, Dimensions, Unit) {
+define(['Guard', 'UnitType', 'Dimensions', 'Unit', 'UnitExpression'], 
+function(Guard, UnitType, Dimensions, Unit, UnitExpression) {
 	function DerivedUnit(name, symbol, scale, terms) {
 		Guard(terms, 'terms').isTruthy().isArray();
 		var compositeScale = scale * getScaleOfTerms(terms);
@@ -42,43 +42,18 @@ function(Guard, UnitType, Dimensions, Unit) {
 		isBaseUnit: function() {
 			return false;
 		},
-		getTerms: function() {
+		expression: function() {
 			var terms = [];
 			for(var i = 0; i < this._terms.length; i++) {
 				var up = this._terms[i];
 				terms[i] = up;
 			}
-			return terms;
+			return new UnitExpression(terms);
 		},
 		toString: function() {
 			return this.symbol;
 		}
 	};
-
-	function getOperatorString(term) {
-		var power = term.power();
-		if (power === 0) {
-			return "";
-		}
-		else if (power < 0) {
-			return "/";
-		}
-		else if (power > 0) {
-			return " ";
-		}
-		else {
-			throw new Error("'power' had the unexpected value '" + power + "'.");
-		}
-	}
-
-	function getPowerString(term) {
-		var power = term.power();
-		var absPower = Math.abs(power);
-		if (absPower === 0 || absPower === 1) {
-			return "";
-		}
-		return "^" + absPower;
-	}
 
 	Object.assign(DerivedUnit.prototype, functions);
 

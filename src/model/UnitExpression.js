@@ -6,7 +6,7 @@ define(['Guard', 'Term'], function(Guard, Term) {
 		
 	UnitExpression.prototype = {
 		terms: function() {
-			return this._terms;
+			return Array.prototype.slice.call(this._terms, 0);
 		},
 		mult: function(rhs) {
 			var terms = flatten([this.terms(), rhs.terms()])
@@ -147,7 +147,7 @@ define(['Guard', 'Term'], function(Guard, Term) {
 			return [ term ];
 		}
 		else {
-			var subTermsExpr = new UnitExpression(unit.getTerms()).pow(term.power());
+			var subTermsExpr = unit.expression().pow(term.power());
 			return getEquivalentBaseTermsForList(subTermsExpr.terms());			
 		}
 	}

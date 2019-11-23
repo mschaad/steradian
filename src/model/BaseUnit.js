@@ -1,5 +1,5 @@
-define(['Guard', 'Unit', 'UnitType', 'Dimensions', 'Term'], 
-function(Guard, Unit, UnitType, Dimensions, Term) {
+define(['Guard', 'Unit', 'UnitType', 'Dimensions', 'Term', 'UnitExpression'], 
+function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
     function BaseUnit(name, type, symbol, scale) {
         Unit.call(this, name, symbol, scale);
         Guard(type, "type").isString().isTruthy();
@@ -22,9 +22,9 @@ function(Guard, Unit, UnitType, Dimensions, Term) {
             isBaseUnit: function() {
                 return true;
             },
-            getTerms: function() {
+            expression: function() {
 				var terms = [new Term(this, 1)];
-				return terms;
+				return new UnitExpression(terms);
             }
         }
     )

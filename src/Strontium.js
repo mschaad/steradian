@@ -51,8 +51,8 @@ define(
 					throw 'incompatible unit dimensions';
 				}
 				
-				var oldTerms = q.unit.getTerms();
-				var newTerms = newUnits.getTerms();
+				var oldTerms = q.unit.expression().terms();
+				var newTerms = newUnits.expression().terms();
 				
 				var delta = {};
 				

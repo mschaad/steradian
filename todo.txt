@@ -1,4 +1,3 @@
-change return type of Unit.getTerms() from Array<Unit> to UnitExpression
 add support for resolving DerivedUnits by Sr.getUnit(string)
 Quantity::toString()
 Quantity::add/sub/multiply/divide
