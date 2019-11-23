@@ -20,6 +20,8 @@ module.exports = {
             Test: "util/Test",
             Enum: "util/Enum",
 
+            Convert: "logic/Convert",
+
             BaseUnit: "model/BaseUnit",
             DerivedUnit: "model/DerivedUnit",
             Dimensions: "model/Dimensions",

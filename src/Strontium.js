@@ -1,10 +1,15 @@
 define(
 	[
-	'Guard', 'Test',
+	'Guard', 'Test', 'Strings',
 	'UnitType', 'Term', 'Unit', 'BaseUnit',
-	'DerivedUnit', 'Quantity', 'Strings'
+	'DerivedUnit', 'Quantity',
+	'Convert'
 	], 
-	function(Guard, Test, UnitType, Term, Unit, BaseUnit, DerivedUnit, Quantity, Strings) {
+	function(
+		Guard, Test, Strings,
+		UnitType, Term, Unit, BaseUnit, 
+		DerivedUnit, Quantity,
+		Convert) {
 		function Strontium() {
 			var unitTable = {};
 
@@ -70,63 +75,6 @@ define(
 				return q;
 			}
 
-			function convert(q, newUnits) {
-				var originalDimensions = q.unit.getDimensions();
-				newUnits = toUnit(newUnits);
-				var newDimensions = newUnits.getDimensions();
-				if (!originalDimensions.equals(newDimensions)) {
-					throw 'incompatible unit dimensions';
-				}
-				
-				var oldTerms = q.unit.expression().terms();
-				var newTerms = newUnits.expression().terms();
-				
-				var delta = {};
-				
-				var unitTable = {};
-				
-				var i, term, unit, currentValue, updatedValue;
-				
-				for(i = 0; i < newTerms.length; i++) {
-					term = newTerms[i];
-					unit = term.unit();
-					unitTable[unit.name] = unit;
-					currentValue = delta[unit.name] || 0;
-					updatedValue = currentValue + term.power();
-					delta[unit.name] = updatedValue;
-				}
-				
-				for(i = 0; i < oldTerms.length; i++) {
-					term = oldTerms[i];
-					unit = term.unit();
-					unitTable[unit.name] = unit;
-					currentValue = delta[unit.name] || 0;
-					updatedValue = currentValue - term.power();
-					delta[unit.name] = updatedValue;
-				}
-				
-				var scale = 1;
-				for(var unitName in delta) {
-					if (delta.hasOwnProperty(unitName)) {
-						power = delta[unitName];
-						unit = unitTable[unitName];
-						if (power > 0) {
-							scale = scale * Math.pow(unit.scale, power);
-						}
-						else if (power < 0) {
-							scale = scale / Math.pow(unit.scale, power);
-						}
-						else { //-> power == 0
-							//that's interesting.  but still, do nothing.
-						}
-					}
-				}
-				
-				var newValue = q.value * scale;
-				
-				return quantity(newUnits, newValue);
-			}
-
 			var SrInstance = {
 				unit: function(idOrDef) {
 					if (Test.isString(idOrDef)) {
@@ -137,7 +85,9 @@ define(
 				},
 				derivedUnit: createDerivedUnit,
 				quantity: quantity,
-				convert: convert
+				convert: function(q, newUnits) {
+					return Convert.convert(SrInstance, q, newUnits);
+				}
 			};
 
 			return SrInstance;
