@@ -167,6 +167,31 @@ define(['Guard', 'Term', 'Dimensions'], function(Guard, Term, Dimensions) {
 			return getEquivalentBaseTermsForList(subTermsExpr.terms());			
 		}
 	}
+
+	function getOperatorString(term) {
+		var power = term.power();
+		if (power === 0) {
+			return "";
+		}
+		else if (power < 0) {
+			return "/";
+		}
+		else if (power > 0) {
+			return " ";
+		}
+		else {
+			throw new Error("'power' had the unexpected value '" + power + "'.");
+		}
+	}
+
+	function getPowerString(term) {
+		var power = term.power();
+		var absPower = Math.abs(power);
+		if (absPower === 0 || absPower === 1) {
+			return "";
+		}
+		return "^" + absPower;
+	}
 	
 	return UnitExpression;
 });

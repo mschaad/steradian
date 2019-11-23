@@ -111,7 +111,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				var q1 = Sr.quantity('meter', 2);
 				var q2 = Sr.convert(q1, 'foot');
 				
-				equal(q2.unit.name, 'foot');
+				equal(q2.unitExpression().toString(), 'ft');
 				equal(q2.value, 6.56168);
 			});
 			

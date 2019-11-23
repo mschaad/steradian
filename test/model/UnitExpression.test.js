@@ -1,11 +1,9 @@
 define([
     'mocha', 'chai', 
-    'Strontium', 'Unit', 'DerivedUnit', 
     'UnitExpression', 'Term',
     'test/StandardStrontiumFn'], 
 function (
     mocha, chai, 
-    Strontium, Unit, DerivedUnit, 
     UnitExpression, Term,
     StandardStrontiumFn
 ) {

@@ -1,35 +1,38 @@
-define(['Unit', 'Strings'], 
-function(Unit, Strings) {
-    function toUnit(Sr, identifierOrUnit) {
-        var unit;
-        if (Unit.isUnit(identifierOrUnit)) {
-            unit = identifierOrUnit;
+define(['Strings', 'Test', 'Unit', 'UnitExpression'], 
+function(Strings, Test, Unit, UnitExpression) {
+    function coerceToUnitExpression(Sr, obj) {
+        if (Test.instanceOf(obj, UnitExpression)) {
+            return obj;
         }
-        else if (Strings.isString(identifierOrUnit)) {
-            var identifier = identifierOrUnit;
+        var unit;
+        if (Unit.isUnit(obj)) {
+            unit = obj;
+        }
+        else if (Strings.isString(obj)) {
+            var identifier = obj;
             unit = Sr.unit(identifier);
             if (!unit) {
                 throw new Error("Unit '" + identifier + "' not found");
             }
         }
         else {
-            throw new Error("Expected: unit name or Unit but found object of type '" +
-                typeof(identifierOrUnit) + "'");
+            throw new Error("Expected: unit name or Unit or UnitExpression but found object of type '" +
+                typeof(obj) + "'");
         }
-        return unit;
+        return unit.expression();
     }
 
     var Convert = {
         convert: function (Sr, q, newUnits) {
-            var originalDimensions = q.unit.getDimensions();
-            newUnits = toUnit(Sr, newUnits);
-            var newDimensions = newUnits.getDimensions();
+            var originalDimensions = q.unitExpression().dimensions();
+            newUnits = coerceToUnitExpression(Sr, newUnits);
+            var newDimensions = newUnits.dimensions();
             if (!originalDimensions.equals(newDimensions)) {
                 throw 'incompatible unit dimensions';
             }
             
-            var oldTerms = q.unit.expression().terms();
-            var newTerms = newUnits.expression().terms();
+            var oldTerms = q.unitExpression().terms();
+            var newTerms = newUnits.terms();
             
             var delta = {};
             

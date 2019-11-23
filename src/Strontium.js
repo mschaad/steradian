@@ -2,13 +2,13 @@ define(
 	[
 	'Guard', 'Test', 'Strings',
 	'UnitType', 'Term', 'Unit', 'BaseUnit',
-	'DerivedUnit', 'Quantity',
+	'UnitExpression','DerivedUnit', 'Quantity',
 	'Convert'
 	], 
 	function(
 		Guard, Test, Strings,
 		UnitType, Term, Unit, BaseUnit, 
-		DerivedUnit, Quantity,
+		UnitExpression,DerivedUnit, Quantity,
 		Convert) {
 		function Strontium() {
 			var unitTable = {};
@@ -66,13 +66,26 @@ define(
 				);
 			}
 
-			function quantity(unit, value) {
-				unit = toUnit(unit);
-				if (!SrInstance) {
-					throw new Error("SrInstance was not an object");
+			function coerceToUnitExpression(Sr, obj) {
+				if (Test.instanceOf(obj, UnitExpression)) {
+					return obj;
 				}
-				var q = new Quantity(unit, value, SrInstance);
-				return q;
+				var unit;
+				if (Unit.isUnit(obj)) {
+					unit = obj;
+				}
+				else if (Strings.isString(obj)) {
+					var identifier = obj;
+					unit = Sr.unit(identifier);
+					if (!unit) {
+						throw new Error("Unit '" + identifier + "' not found");
+					}
+				}
+				else {
+					throw new Error("Expected: unit name or Unit or UnitExpression but found object of type '" +
+						typeof(obj) + "'");
+				}
+				return unit.expression();
 			}
 
 			var SrInstance = {
@@ -84,7 +97,14 @@ define(
 					}
 				},
 				derivedUnit: createDerivedUnit,
-				quantity: quantity,
+				quantity: function (unitExpression, value) {
+					unitExpression = coerceToUnitExpression(SrInstance, unitExpression);
+					if (!SrInstance) {
+						throw new Error("SrInstance was not an object");
+					}
+					var q = new Quantity(unitExpression, value, SrInstance);
+					return q;
+				},
 				convert: function(q, newUnits) {
 					return Convert.convert(SrInstance, q, newUnits);
 				}

@@ -16,7 +16,7 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 
 		var that = {
 			instanceOf: function(objType) {
-				if (!(value instanceof objType)) {
+				if (!Test.instanceOf(value, objType)) {
 					throw getError("an instance of " + objType.name);
 				}
 			},
