@@ -91,5 +91,9 @@ function (
                 equal("N", Newton.toString());
             });
         });
+
+        test("isBaseUnit", function() {
+            equal(false, Newton.isBaseUnit());
+        });
     })
 });

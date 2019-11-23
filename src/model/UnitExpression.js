@@ -1,4 +1,4 @@
-define(['Guard', 'Term', 'Units'], function(Guard, Term, Units) {
+define(['Guard', 'Term'], function(Guard, Term) {
 	function UnitExpression(terms) {
 		Guard(terms, "terms").isArrayOf(Term);
 		this._terms = Array.prototype.slice.call(terms, 0);
@@ -143,7 +143,7 @@ define(['Guard', 'Term', 'Units'], function(Guard, Term, Units) {
 	function getEquivalentBaseTerms(term) {
 		Guard(term, "term").instanceOf(Term);
 		var unit = term.unit();
-		if (Units.isBaseUnit(unit)) {
+		if (unit.isBaseUnit()) {
 			return [ term ];
 		}
 		else {

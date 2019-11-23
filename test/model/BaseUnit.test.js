@@ -23,5 +23,11 @@ function (mocha, chai, Strontium, Unit, BaseUnit, StandardUnitDefinitions) {
                equal("m", meter.toString()); 
             });
         });
+
+        test("isBaseUnit", function() {
+            var Sr = newStrontium();
+            var meter = Sr.getUnit("meter");
+            equal(true, meter.isBaseUnit());
+        });
     });
 });

@@ -39,6 +39,9 @@ function(Guard, UnitType, Dimensions, Unit) {
 			}
 			return this._dimensions;
 		},
+		isBaseUnit: function() {
+			return false;
+		},
 		getTerms: function() {
 			var terms = [];
 			for(var i = 0; i < this._terms.length; i++) {

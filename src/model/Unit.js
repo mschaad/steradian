@@ -16,6 +16,9 @@ define(['Guard', 'UnitType', 'Term', 'Dimensions'],
 			getTerms: function() {
 				throw new Error("the getTerms method must be overridden.");
 			},
+			isBaseUnit: function() {
+				throw new Error("the isBaseUnit method must be overridden.");
+			},
 			toString: function() {
 				return this.symbol;
 			}

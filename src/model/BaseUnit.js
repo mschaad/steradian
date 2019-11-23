@@ -18,7 +18,10 @@ function(Guard, Unit, UnitType, Dimensions, Term) {
 					this._dimensions = new Dimensions(dim);
 				}
 				return this._dimensions;
-			},
+            },
+            isBaseUnit: function() {
+                return true;
+            },
             getTerms: function() {
 				var terms = [new Term(this, 1)];
 				return terms;
