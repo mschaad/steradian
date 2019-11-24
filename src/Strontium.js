@@ -1,20 +1,22 @@
 define(
 	[
 	'Guard', 'Test', 'Strings',
-	'UnitType', 'Term', 'Unit', 'BaseUnit',
+	'Term', 'Unit', 'BaseUnit',
 	'UnitExpression','DerivedUnit', 'Quantity',
+	'UnitRegistry',
 	'Convert'
 	], 
 	function(
 		Guard, Test, Strings,
-		UnitType, Term, Unit, BaseUnit, 
+		Term, Unit, BaseUnit, 
 		UnitExpression,DerivedUnit, Quantity,
+		UnitRegistry,
 		Convert) {
 		function Strontium() {
-			var unitTable = {};
+			var registry = new UnitRegistry();
 
 			function registerUnit(unit) {
-				unitTable[unit.name] = unit;
+				registry.register(unit);
 			}
 
 			function createUnit(def) {
@@ -33,7 +35,7 @@ define(
 			}
 
 			function getUnit(name) {
-				var unit = unitTable[name];
+				var unit = registry.get(name);
 				if (!unit) {
 					throw new Error("no unit found by the name '" + name + "'");
 				}
@@ -47,7 +49,7 @@ define(
 				}
 				else if (Strings.isString(identifierOrUnit)) {
 					var identifier = identifierOrUnit;
-					unit = unitTable[identifier];
+					unit = getUnit(identifier);
 					if (!unit) {
 						throw new Error("Unit '" + identifier + "' not found");
 					}
