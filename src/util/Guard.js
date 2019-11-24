@@ -15,10 +15,17 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 		}
 
 		var that = {
+			isValue: function() {
+				if (!Test.isValue(value)) {
+					throw getError('a value');
+				}
+				return that;
+			},
 			instanceOf: function(objType) {
 				if (!Test.instanceOf(value, objType)) {
 					throw getError("an instance of " + objType.name);
 				}
+				return that;
 			},
 			isString: function() {
 				if (!Test.isString(value)) {

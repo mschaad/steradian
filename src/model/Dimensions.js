@@ -1,22 +1,18 @@
-define([], function() {
+define(['Guard', 'Arrays'], function(Guard, Arrays) {
 	function Dimensions(dim) {
-		if (!dim) {
-			throw new Error("dim was not an array");
-		}
-		var _values = [];
-		for(var i = 0; i < dim.length; i++) {
-			_values[i] = dim[i];
-		}
-		
-		this.get = function(i) {
-			return _values[i];
-		};
+		Guard(dim, "dim").isValue().isArray();
+		this._values = Arrays.frozenClone(dim);
+		Object.freeze(this);
+	}
 
-		this.size = function() {
-			return _values.length;
-		};
-		
-		this.equals = function(rhs) {
+	Dimensions.prototype = {
+		get: function(i) {
+			return this._values[i];
+		},
+		size: function() {
+			return this._values.length;
+		},
+		equals: function(rhs) {
 			var lhs = this;
 			if (lhs.size() !== rhs.size()) {
 				return false;
@@ -27,9 +23,8 @@ define([], function() {
 				}
 			}
 			return true;
-		};
-
-		this.add = function(rhs) {
+		},
+		add: function(rhs) {
 			var lhs = this;
 			var lhs_i, rhs_i;
 			var newDimensions = [];
@@ -45,9 +40,8 @@ define([], function() {
 				newDimensions[i] = lhs_i + rhs_i;
 			}
 			return new Dimensions(newDimensions);
-		};
-
-		this.mult = function(scalar) {
+		},
+		mult: function(scalar) {
 			var lhs = this;
 			var newDimensions = [];
 			var i;
@@ -57,9 +51,8 @@ define([], function() {
 				newDimensions[i] = value * scalar;
 			}
 			return new Dimensions(newDimensions);
-		};
-		Object.freeze(this);
-	}
+		}
+	};
 
 	var empty = new Dimensions([]);
 	Dimensions.empty = function() {
