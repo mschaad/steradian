@@ -83,6 +83,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 
 				ok(actual);
 				assert.equal(actual, Newton);
+				assert.equal("Newton", Newton.name);
 			});
 		});
 		
@@ -139,7 +140,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				var q1 = Sr.quantity(metersPerSecond, 2);
 				var q2 = Sr.convert(q1, feetPerMinute);
 				
-				//equal(q2.unit.name, 'foot');
+				equal(q2.unitExpression().toString(), 'ftPerMin');
 				equal(q2.value, 393.7008);
 			});
 

@@ -36,15 +36,26 @@ define([], function() {
                 name: 'second',
                 type: 'time',
                 symbol: 's',
-                scale: 60.0
+                scale: 1
             });
             
             var minute = Sr.unit({
 				name: 'minute',
 				type: 'time',
 				symbol: 'min',
-				scale: 1.0
-			});
+				scale: 1/60
+            });
+            
+            var Newton = Sr.derivedUnit({
+                name: "Newton",
+                symbol: "N",
+                scale: 1,
+                units: [
+                    { unit: 'kilogram', power: 1 },
+                    { unit: 'meter', power: 1 },
+                    { unit: 'second', power: -2 }
+                ]
+            });
        }
    };
 });

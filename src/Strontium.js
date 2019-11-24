@@ -85,7 +85,7 @@ define(
 					throw new Error("Expected: unit name or Unit or UnitExpression but found object of type '" +
 						typeof(obj) + "'");
 				}
-				return unit.expression();
+				return new UnitExpression([new Term(unit, 1)]);
 			}
 
 			var SrInstance = {

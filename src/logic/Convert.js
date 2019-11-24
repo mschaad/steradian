@@ -1,5 +1,5 @@
-define(['Strings', 'Test', 'Unit', 'UnitExpression'], 
-function(Strings, Test, Unit, UnitExpression) {
+define(['Strings', 'Test', 'Unit', 'UnitExpression', 'Term'], 
+function(Strings, Test, Unit, UnitExpression, Term) {
     function coerceToUnitExpression(Sr, obj) {
         if (Test.instanceOf(obj, UnitExpression)) {
             return obj;
@@ -19,7 +19,7 @@ function(Strings, Test, Unit, UnitExpression) {
             throw new Error("Expected: unit name or Unit or UnitExpression but found object of type '" +
                 typeof(obj) + "'");
         }
-        return unit.expression();
+        return new UnitExpression([new Term(unit, 1)]);
     }
 
     var Convert = {

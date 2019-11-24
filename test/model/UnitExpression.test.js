@@ -173,6 +173,7 @@ function (
 
             var meter = Sr.unit('meter');
             var second = Sr.unit('second');
+            var Newton = Sr.unit('Newton');
 
             test('m/s', function() {
                 var meterPerSecond = new UnitExpression([
@@ -215,6 +216,14 @@ function (
                 ]);
     
                 equal('', meterSquared.toString());
+            });
+
+            test("N", function() {
+                var newtonExp = new UnitExpression([
+                    new Term(Newton, 1)
+                ]);
+    
+                equal('N', newtonExp.toString());
             });
         });
     })

@@ -3,7 +3,7 @@ define(['Guard', 'Term', 'Dimensions'], function(Guard, Term, Dimensions) {
 		Guard(terms, "terms").isArrayOf(Term);
 		this._terms = Array.prototype.slice.call(terms, 0);
 	}
-		
+
 	UnitExpression.prototype = {
 		terms: function() {
 			return Array.prototype.slice.call(this._terms, 0);
