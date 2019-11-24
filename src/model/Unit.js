@@ -1,5 +1,5 @@
-define(['Guard', 'UnitType', 'Term', 'Dimensions'], 
-	function(Guard, UnitType, Term, Dimensions) {
+define(['Guard'], 
+	function(Guard) {
 		function Unit(name, symbol, scale) {
 			Guard(name, "name").isString().isTruthy();
 			this.name = name;

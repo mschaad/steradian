@@ -1,12 +1,14 @@
-define(['Guard', 'UnitType', 'Dimensions', 'Unit', 'UnitExpression'], 
-function(Guard, UnitType, Dimensions, Unit, UnitExpression) {
+define([
+	'Guard', 'Arrays',
+	'Unit', 'UnitExpression'], 
+function(Guard, Arrays, Unit, UnitExpression) {
 	function DerivedUnit(name, symbol, scale, terms) {
 		Guard(terms, 'terms').isTruthy().isArray();
 		if (terms.length === 0) {
 			throw new Error("terms list was empty");
 		}
 		var compositeScale = scale * getScaleOfTerms(terms);
-		this._terms = Array.prototype.slice.call(terms, 0);
+		this._terms = Arrays.frozenClone(terms);
 		Unit.call(this, name, symbol, compositeScale);
 		Object.freeze(this);
 	}

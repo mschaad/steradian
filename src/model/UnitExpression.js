@@ -1,7 +1,7 @@
-define(['Guard', 'Term', 'Dimensions'], function(Guard, Term, Dimensions) {
+define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, Dimensions) {
 	function UnitExpression(terms) {
 		Guard(terms, "terms").isArrayOf(Term);
-		this._terms = Array.prototype.slice.call(terms, 0);
+		this._terms = Arrays.frozenClone(terms);
 		var that = this;
 		var dimensions = null;
 		this._dimensions = function() {
@@ -28,7 +28,7 @@ define(['Guard', 'Term', 'Dimensions'], function(Guard, Term, Dimensions) {
 
 	UnitExpression.prototype = {
 		terms: function() {
-			return Array.prototype.slice.call(this._terms, 0);
+			return this._terms;
 		},
 		dimensions: function() {
 			return this._dimensions();
@@ -68,7 +68,7 @@ define(['Guard', 'Term', 'Dimensions'], function(Guard, Term, Dimensions) {
 			);
 		},
 		toString: function() {
-			var terms = this._terms.slice(0);
+			var terms = this._terms;
 			 var reduced = terms
 			 	.map(function(term) {
 					var unitString = term.unit().toString();
