@@ -17,7 +17,7 @@ define(['Guard', 'Term', 'Dimensions'], function(Guard, Term, Dimensions) {
 		var dim = this._terms
 			.map(function(t) {
 				return t.unit()
-					.getDimensions()
+					.dimensions()
 					.mult(t.power());
 			})
 			.reduce(function(acc, item) {

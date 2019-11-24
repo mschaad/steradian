@@ -10,8 +10,8 @@ define(['Guard', 'UnitType', 'Term', 'Dimensions'],
 		}
 
 		Unit.prototype = {
-			getDimensions: function() {
-				throw new Error("the getDimensions method must be overridden.");
+			dimensions: function() {
+				throw new Error("the dimensions method must be overridden.");
 			},
 			expression: function() {
 				throw new Error("the expression method must be overridden.");

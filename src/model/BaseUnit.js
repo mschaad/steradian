@@ -27,7 +27,7 @@ function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
     Object.assign(
         BaseUnit.prototype,
         {
-            getDimensions: function() {
+            dimensions: function() {
                 return this._dimensions();
             },
             isBaseUnit: function() {

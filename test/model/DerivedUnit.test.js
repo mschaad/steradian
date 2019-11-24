@@ -76,8 +76,8 @@ function (
             });
         })
 
-        suite('getDimensions', function() {
-            var dim = Newton.getDimensions();
+        suite('dimensions', function() {
+            var dim = Newton.dimensions();
             equal(3, dim.size());
             equal(1, dim.get(UnitType.mass));
             equal(1, dim.get(UnitType.length));

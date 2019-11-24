@@ -27,7 +27,7 @@ function(Guard, UnitType, Dimensions, Unit, UnitExpression) {
 	DerivedUnit.prototype = Object.create(Unit.prototype);
 
 	var functions = {
-		getDimensions: function() {
+		dimensions: function() {
 			return this.expression().dimensions();
 		},
 		isBaseUnit: function() {
