@@ -2,6 +2,28 @@ define(['Guard', 'Term', 'Dimensions'], function(Guard, Term, Dimensions) {
 	function UnitExpression(terms) {
 		Guard(terms, "terms").isArrayOf(Term);
 		this._terms = Array.prototype.slice.call(terms, 0);
+		var that = this;
+		var dimensions = null;
+		this._dimensions = function() {
+			if (dimensions === null) {
+				dimensions = getDimensions.call(that);
+			}
+			return dimensions;
+		}
+		Object.freeze(this);
+	}
+
+	function getDimensions() {
+		var dim = this._terms
+			.map(function(t) {
+				return t.unit()
+					.getDimensions()
+					.mult(t.power());
+			})
+			.reduce(function(acc, item) {
+				return acc.add(item);
+			}, Dimensions.empty());
+		return dim;
 	}
 
 	UnitExpression.prototype = {
@@ -9,20 +31,7 @@ define(['Guard', 'Term', 'Dimensions'], function(Guard, Term, Dimensions) {
 			return Array.prototype.slice.call(this._terms, 0);
 		},
 		dimensions: function() {
-			if (!this._dimensions) {
-				var dim = this._terms
-					.map(function(t) {
-						return t.unit()
-							.getDimensions()
-							.mult(t.power());
-					})
-					.reduce(function(acc, item) {
-						return acc.add(item);
-					}, Dimensions.empty());
-				
-				this._dimensions = dim;
-			}
-			return this._dimensions;
+			return this._dimensions();
 		},
 		mult: function(rhs) {
 			var terms = flatten([this.terms(), rhs.terms()])

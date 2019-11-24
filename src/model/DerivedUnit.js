@@ -1,13 +1,14 @@
 define(['Guard', 'UnitType', 'Dimensions', 'Unit', 'UnitExpression'], 
 function(Guard, UnitType, Dimensions, Unit, UnitExpression) {
 	function DerivedUnit(name, symbol, scale, terms) {
+		Guard(terms, 'terms').isTruthy().isArray();
 		if (terms.length === 0) {
 			throw new Error("terms list was empty");
 		}
-		Guard(terms, 'terms').isTruthy().isArray();
 		var compositeScale = scale * getScaleOfTerms(terms);
-		Unit.call(this, name, symbol, compositeScale);
 		this._terms = Array.prototype.slice.call(terms, 0);
+		Unit.call(this, name, symbol, compositeScale);
+		Object.freeze(this);
 	}
 
 	function getScaleOfTerms(terms) {

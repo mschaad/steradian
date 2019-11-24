@@ -1,5 +1,10 @@
-add support for resolving DerivedUnits by Sr.getUnit(string)
-Quantity::toString()
 Quantity::add/sub/multiply/divide
-unit aliases
 fix karma configuration
+extract UnitRegistry
+
+IDEAS
+add support for dimensionless scalar types (e.g. Mol)
+unit aliases
+add unit parsing.  i.e. recognize "m/s" as "meters per second"
+add concept of unit systems, such as SI vs imperial
+add concept of tags for distinguishing semantically different types of the same dimensions, such work (F.d) and torque (r x F)

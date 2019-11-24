@@ -6,6 +6,7 @@ define([], function() {
 			throw new Error("Sr was not an object.");
 		}
 		this.Sr = Sr;
+		Object.freeze(this);
 	}
 
 	Quantity.prototype = {

@@ -58,6 +58,7 @@ define([], function() {
 			}
 			return new Dimensions(newDimensions);
 		};
+		Object.freeze(this);
 	}
 
 	var empty = new Dimensions([]);
