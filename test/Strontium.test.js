@@ -118,30 +118,44 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 			
 			test('can convert from one derived unit to another derived unit', function () {
 				var Sr = StandardStrontiumFn();
-				
-				var metersPerSecond = Sr.derivedUnit({
-					name: "meterPerSecond",
-					symbol: "mps",
+
+				var decaSecond = Sr.unit({
+					name: 'decasecond',
+					symbol: "das",
+					scale: 1/10,
+					type: 'time'
+				});
+
+				var metersSquaredPerDecasecondSquared = Sr.derivedUnit({
+					name: "meterSquaredPerDecasecondSquared",
+					symbol: "m^2/das^2",
 					units: [
-						{ unit: 'meter', power: 1 },
-						{ unit: 'second', power: -1 }
+						{ unit: 'meter', power: 2 },
+						{ unit: 'decasecond', power: -2 }
+					]
+				});
+
+				var hectoSecond = Sr.unit({
+					name: 'hectosecond',
+					symbol: "hs",
+					scale: 1/100,
+					type: 'time'
+				});
+				
+				var feetSquaredPerDecasecondSquared = Sr.derivedUnit({
+					name: "feetSquaredPerHectosecondSquared",
+					symbol: "ft^2/hs^2",
+					units: [
+						{ unit: 'foot', power: 2 },
+						{ unit: 'hectosecond', power: -2 }
 					]
 				});
 				
-				var feetPerMinute = Sr.derivedUnit({
-					name: "feetPerMinute",
-					symbol: "ftPerMin",
-					units: [
-						{ unit: 'foot', power: 1 },
-						{ unit: 'minute', power: -1 }
-					]
-				});
+				var q1 = Sr.quantity(metersSquaredPerDecasecondSquared, 2);
+				var q2 = Sr.convert(q1, feetSquaredPerDecasecondSquared);
 				
-				var q1 = Sr.quantity(metersPerSecond, 2);
-				var q2 = Sr.convert(q1, feetPerMinute);
-				
-				equal(q2.unitExpression().toString(), 'ftPerMin');
-				equal(q2.value, 393.7008);
+				equal(q2.unitExpression().toString(), 'ft^2/hs^2');
+				equal(q2.value, 21527822.211199996);
 			});
 
 			test('can convert from one complex derived unit to another complex derived unit', function () {
