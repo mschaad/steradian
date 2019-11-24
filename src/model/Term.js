@@ -1,7 +1,7 @@
 define(['Guard'], function(Guard) {
 
 	function Term(unit, power) {
-		Guard(unit, "unit").isTruthy();
+		Guard(unit, "unit").isValue();
 		this._unit = unit;
 		Guard(power, "power").isNumber();
 		this._power = power;

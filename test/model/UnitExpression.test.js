@@ -18,15 +18,7 @@ function (
 	suite("UnitExpression", function () {
         var Sr = StandardStrontiumFn();
 
-        var Newton = Sr.derivedUnit({
-            name: "Newton",
-            symbol: "N",
-            units: [
-                { unit: "kilogram", power: 1 },
-                { unit: "meter", power: 1 },
-                { unit: "second", power: -2 }
-            ]
-        });
+        var Newton = Sr.unit('Newton');
 
         function term(name, power) {
             return new Term(

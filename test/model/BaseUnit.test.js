@@ -1,5 +1,5 @@
-define(['mocha', 'chai', 'Strontium', 'Unit', 'BaseUnit', 'test/StandardUnitDefinitions'], 
-function (mocha, chai, Strontium, Unit, BaseUnit, StandardUnitDefinitions) {
+define(['mocha', 'chai', 'Strontium', 'test/StandardUnitDefinitions'], 
+function (mocha, chai, Strontium, StandardUnitDefinitions) {
     var assert = chai.assert;
 
     var suite = mocha.suite, test = mocha.test;

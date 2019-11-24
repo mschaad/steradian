@@ -19,6 +19,10 @@ define(
 				registry.register(unit);
 			}
 
+			function getUnit(name) {
+				return registry.get(name);
+			}
+
 			function createUnit(def) {
 				var unit = new BaseUnit(def.name, def.type, def.symbol, def.scale);
 				registerUnit(unit);
@@ -33,14 +37,6 @@ define(
 				registerUnit(unit);
 				return unit;
 			}
-
-			function getUnit(name) {
-				var unit = registry.get(name);
-				if (!unit) {
-					throw new Error("no unit found by the name '" + name + "'");
-				}
-				return unit;
-			}
 			
 			function toUnit(identifierOrUnit) {
 				var unit;
@@ -50,9 +46,6 @@ define(
 				else if (Strings.isString(identifierOrUnit)) {
 					var identifier = identifierOrUnit;
 					unit = getUnit(identifier);
-					if (!unit) {
-						throw new Error("Unit '" + identifier + "' not found");
-					}
 				}
 				else {
 					throw new Error("Expected: unit name or Unit but found object of type '" +
@@ -61,11 +54,8 @@ define(
 				return unit;
 			}
 
-			function toTerm(desc) {
-				return new Term(
-					toUnit(desc.unit), 
-					desc.power
-				);
+			function toTerm(desc) {	
+				return new Term(toUnit(desc.unit), desc.power);
 			}
 
 			function coerceToUnitExpression(Sr, obj) {

@@ -164,15 +164,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				//F = ma
 				//N = kg * m / s^2
 				
-				var Newton = Sr.derivedUnit({
-					name: "Newton",
-					symbol: "N",
-					units: [
-						{ unit: 'kilogram', power: 1 },
-						{ unit: 'meter', power: 1 },
-						{ unit: 'second', power: -2 }
-					]
-				});
+				var Newton = Sr.unit('Newton');
 				
 				var qNewtons = Sr.quantity(Newton, 1);
 				ok(qNewtons);

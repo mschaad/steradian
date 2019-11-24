@@ -29,15 +29,7 @@ function (
             scale: 0.001
         });
 
-        var Newton = Sr.derivedUnit({
-            name: "Newton",
-            symbol: "N",
-            units: [
-                { unit: "kilogram", power: 1 },
-                { unit: "meter", power: 1 },
-                { unit: "second", power: -2 }
-            ]
-        });
+        var Newton = Sr.unit('Newton');
 
         var slug = Sr.unit('slug');
         var foot = Sr.unit('foot');
