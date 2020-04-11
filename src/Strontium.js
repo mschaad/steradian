@@ -58,28 +58,6 @@ define(
 				return new Term(toUnit(desc.unit), desc.power);
 			}
 
-			function coerceToUnitExpression(Sr, obj) {
-				if (Test.instanceOf(obj, UnitExpression)) {
-					return obj;
-				}
-				var unit;
-				if (Unit.isUnit(obj)) {
-					unit = obj;
-				}
-				else if (Strings.isString(obj)) {
-					var identifier = obj;
-					unit = Sr.unit(identifier);
-					if (!unit) {
-						throw new Error("Unit '" + identifier + "' not found");
-					}
-				}
-				else {
-					throw new Error("Expected: unit name or Unit or UnitExpression but found object of type '" +
-						typeof(obj) + "'");
-				}
-				return new UnitExpression([new Term(unit, 1)]);
-			}
-
 			var SrInstance = {
 				unit: function(idOrDef) {
 					if (Test.isString(idOrDef)) {
@@ -90,7 +68,7 @@ define(
 				},
 				derivedUnit: createDerivedUnit,
 				quantity: function (unitExpression, value) {
-					unitExpression = coerceToUnitExpression(SrInstance, unitExpression);
+					unitExpression = Convert.toUnitExpression(SrInstance, unitExpression);
 					if (!SrInstance) {
 						throw new Error("SrInstance was not an object");
 					}

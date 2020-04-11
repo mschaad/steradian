@@ -23,6 +23,7 @@ function(Strings, Test, Unit, UnitExpression, Term) {
     }
 
     var Convert = {
+        toUnitExpression: coerceToUnitExpression,
         convert: function (Sr, q, newUnits) {
             var originalDimensions = q.unitExpression().dimensions();
             newUnits = coerceToUnitExpression(Sr, newUnits);
