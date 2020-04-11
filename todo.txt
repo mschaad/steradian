@@ -1,6 +1,5 @@
 Quantity::add/sub/multiply/divide
 fix karma configuration
-extract UnitRegistry
 
 IDEAS
 add support for dimensionless scalar types (e.g. Mol)
