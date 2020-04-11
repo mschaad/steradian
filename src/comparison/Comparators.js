@@ -1,4 +1,11 @@
-define(['comparison/comparators/DefaultComparator', 'comparison/comparators/StringComparator', 'comparison/comparators/ProjectionComparator', 'comparison/comparators/CompositeComparator'], function(DefaultComparator, StringComparator, ProjectionComparator, CompositeComparator) {
+define([
+    'comparison/comparators/DefaultComparator', 
+    'comparison/comparators/StringComparator', 
+    'comparison/comparators/ProjectionComparator', 
+    'comparison/comparators/CompositeComparator',
+    'comparison/comparators/ArrayComparator'
+], 
+function(DefaultComparator, StringComparator, ProjectionComparator, CompositeComparator, ArrayComparator) {
     var Comparators = {
         DEFAULT: DefaultComparator,
         STRING: StringComparator,
@@ -10,6 +17,9 @@ define(['comparison/comparators/DefaultComparator', 'comparison/comparators/Stri
         },
         byProjection: function(projection, comparator) {
             return ProjectionComparator.create(projection, comparator);
+        },
+        array: function(comparator) {
+            return ArrayComparator.create(comparator);
         }
     };
 

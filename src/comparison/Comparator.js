@@ -1,7 +1,12 @@
 define([], function() {
     
     var methods = {
-
+        equal: function(lhs, rhs) {
+            return this(lhs, rhs) === 0;
+        },
+        compare: function(lhs, rhs) {
+            return this(lhs, rhs);
+        }
     };
 
     var Comparator = {
@@ -11,7 +16,11 @@ define([], function() {
             };
 
             for(var name in methods) {
-                fn[name] = methods[name];
+                var value = methods[name];
+                if (typeof value === 'function') {
+                    value = value.bind(fn);    
+                }
+                fn[name] = value;
             }
 
             return fn;

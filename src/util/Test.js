@@ -1,7 +1,13 @@
 define(['Strings'], function(Strings) {
     var Test = {
+        isUndefined: function(value) {
+            return typeof(value) === 'undefined';
+        },
+        isNull: function(value) {
+            return value === null;
+        },
         isValue: function(value) {
-            if (value === null || typeof(value) === 'undefined') {
+            if (Test.isNull(value) || Test.isUndefined(value)) {
                 return false;
             }
             return true;
