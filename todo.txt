@@ -1,4 +1,3 @@
-Quantity::add/sub/multiply/divide
 fix karma configuration
 
 IDEAS
