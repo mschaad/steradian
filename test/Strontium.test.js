@@ -114,7 +114,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 					var q1 = Sr.quantity('meter', 2);
 					var q2 = Sr.convert(q1, 'foot');
 					
-					equal(q2.unitExpression().toString(), 'ft');
+					equal(q2.units().toString(), 'ft');
 					equal(q2.value(), 6.56168);
 				});
 				
@@ -122,7 +122,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 					var q1 = Sr.quantity('foot', 6);
 					var q2 = Sr.convert(q1, 'meter');
 					
-					equal(q2.unitExpression().toString(), 'm');
+					equal(q2.units().toString(), 'm');
 					closeTo(q2.value(), 1.8288, 1e-5);
 				});
 			});
@@ -165,7 +165,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				var q1 = Sr.quantity(metersSquaredPerDecasecondSquared, 2000);
 				var q2 = Sr.convert(q1, feetSquaredPerHectosecondSquared);
 				
-				equal(q2.unitExpression().toString(), 'ft^2/hs^2');
+				equal(q2.units().toString(), 'ft^2/hs^2');
 				closeTo(q2.value(), 215.278, 5e-4);
 			});
 

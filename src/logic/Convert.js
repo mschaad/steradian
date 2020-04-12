@@ -25,14 +25,14 @@ function(Strings, Test, Unit, UnitExpression, Term) {
     var Convert = {
         toUnitExpression: coerceToUnitExpression,
         convert: function (Sr, q, newUnits) {
-            var originalDimensions = q.unitExpression().dimensions();
+            var originalDimensions = q.units().dimensions();
             newUnits = coerceToUnitExpression(Sr, newUnits);
             var newDimensions = newUnits.dimensions();
             if (!originalDimensions.equals(newDimensions)) {
                 throw 'incompatible unit dimensions';
             }
             
-            var oldTerms = q.unitExpression().terms();
+            var oldTerms = q.units().terms();
             var newTerms = newUnits.terms();
             
             var delta = Object.create(null);
