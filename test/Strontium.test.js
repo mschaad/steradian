@@ -113,7 +113,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				var q2 = Sr.convert(q1, 'foot');
 				
 				equal(q2.unitExpression().toString(), 'ft');
-				equal(q2.value, 6.56168);
+				equal(q2.value(), 6.56168);
 			});
 			
 			test('can convert from one derived unit to another derived unit', function () {
@@ -155,7 +155,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				var q2 = Sr.convert(q1, feetSquaredPerDecasecondSquared);
 				
 				equal(q2.unitExpression().toString(), 'ft^2/hs^2');
-				equal(q2.value, 21527822.211199996);
+				equal(q2.value(), 21527822.211199996);
 			});
 
 			test('can convert from one complex derived unit to another complex derived unit', function () {
@@ -185,7 +185,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				
 				//1 slug ft/s^2 = 4.44822162 newtons
 				//1 N = 0.224808942 slug-ft/s^2
-				assert.closeTo(qPounds.value, 0.224809, 1e-7);
+				assert.closeTo(qPounds.value(), 0.224809, 1e-7);
 			});
 		});
 	});

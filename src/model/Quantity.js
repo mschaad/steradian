@@ -1,7 +1,7 @@
 define([], function() {
 	function Quantity(unitExpression, value, Sr) {
 		this._unitExpression = unitExpression;
-		this.value = value;
+		this._value = value;
 		if (!Sr) {
 			throw new Error("Sr was not an object.");
 		}
@@ -16,12 +16,13 @@ define([], function() {
 		unitExpression: function() {
 			return this._unitExpression;
 		},
-		toString: toString
+		value: function() {
+			return this._value;
+		},
+		toString: function toString(options) {
+			return this.value() + this._unitExpression.toString();
+		}
 	};
-
-	function toString(options) {
-		return this.value + this._unitExpression.toString();
-	}
 
 	return Quantity;
 });

@@ -76,7 +76,7 @@ function(Strings, Test, Unit, UnitExpression, Term) {
                 }
             }
             
-            var newValue = q.value * scale;
+            var newValue = q.value() * scale;
             
             return Sr.quantity(newUnits, newValue);
         }
