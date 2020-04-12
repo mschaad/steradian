@@ -4,7 +4,8 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
     
     var ok = assert.ok,
 		deepEqual = assert.deepEqual,
-        equal = assert.equal;
+        equal = assert.equal,
+        closeTo = assert.closeTo;
 
     var suite = mocha.suite, test = mocha.test;
 	
@@ -15,7 +16,8 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
             test('can convert between simple units of the same type', function() {
                 var q = Sr.quantity("foot", 6);
                 var q2 = q.convertTo("meter");
-                ok(q2);
+                equal(q2.unitExpression().toString(), "m");
+                closeTo(q2.value(), 1.8288, 5e-5);
             });
         })
 

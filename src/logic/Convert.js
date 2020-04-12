@@ -35,9 +35,9 @@ function(Strings, Test, Unit, UnitExpression, Term) {
             var oldTerms = q.unitExpression().terms();
             var newTerms = newUnits.terms();
             
-            var delta = {};
+            var delta = Object.create(null);
             
-            var unitTable = {};
+            var unitTable = Object.create(null);
             
             var i, term, unit, currentValue, updatedValue;
             
@@ -61,18 +61,17 @@ function(Strings, Test, Unit, UnitExpression, Term) {
             
             var scale = 1;
             for(var unitName in delta) {
-                if (delta.hasOwnProperty(unitName)) {
-                    power = delta[unitName];
-                    unit = unitTable[unitName];
-                    if (power > 0) {
-                        scale = scale * Math.pow(unit.scale, power);
-                    }
-                    else if (power < 0) {
-                        scale = scale / Math.pow(unit.scale, power);
-                    }
-                    else { //-> power == 0
-                        //that's interesting.  but still, do nothing.
-                    }
+                power = delta[unitName];
+                unit = unitTable[unitName];
+                var absPower = Math.abs(power);
+                if (power > 0) {
+                    scale = scale * Math.pow(unit.scale, absPower);
+                }
+                else if (power < 0) {
+                    scale = scale / Math.pow(unit.scale, absPower);
+                }
+                else { //-> power == 0
+                    //that's interesting.  but still, do nothing.
                 }
             }
             

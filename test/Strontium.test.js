@@ -3,7 +3,8 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 
 	var ok = assert.ok,
 		deepEqual = assert.deepEqual,
-		equal = assert.equal;
+		equal = assert.equal,
+		closeTo = assert.closeTo;
 	
 	var suite = mocha.suite, test = mocha.test;
 	
@@ -106,14 +107,24 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 		});
 
 		suite("convert", function() {
-			test('can convert from one base unit to another base unit', function () {
+			suite('can convert from one base unit to another base unit', function () {
 				var Sr = StandardStrontiumFn();
 				
-				var q1 = Sr.quantity('meter', 2);
-				var q2 = Sr.convert(q1, 'foot');
+				test('can convert meters to feet', function() {
+					var q1 = Sr.quantity('meter', 2);
+					var q2 = Sr.convert(q1, 'foot');
+					
+					equal(q2.unitExpression().toString(), 'ft');
+					equal(q2.value(), 6.56168);
+				});
 				
-				equal(q2.unitExpression().toString(), 'ft');
-				equal(q2.value(), 6.56168);
+				test('can convert feet to meters', function() {
+					var q1 = Sr.quantity('foot', 6);
+					var q2 = Sr.convert(q1, 'meter');
+					
+					equal(q2.unitExpression().toString(), 'm');
+					closeTo(q2.value(), 1.8288, 1e-5);
+				});
 			});
 			
 			test('can convert from one derived unit to another derived unit', function () {
@@ -122,7 +133,7 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				var decaSecond = Sr.unit({
 					name: 'decasecond',
 					symbol: "das",
-					scale: 1/10,
+					scale: 10,
 					type: 'time'
 				});
 
@@ -138,11 +149,11 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				var hectoSecond = Sr.unit({
 					name: 'hectosecond',
 					symbol: "hs",
-					scale: 1/100,
+					scale: 100,
 					type: 'time'
 				});
 				
-				var feetSquaredPerDecasecondSquared = Sr.derivedUnit({
+				var feetSquaredPerHectosecondSquared = Sr.derivedUnit({
 					name: "feetSquaredPerHectosecondSquared",
 					symbol: "ft^2/hs^2",
 					units: [
@@ -151,11 +162,11 @@ define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 					]
 				});
 				
-				var q1 = Sr.quantity(metersSquaredPerDecasecondSquared, 2);
-				var q2 = Sr.convert(q1, feetSquaredPerDecasecondSquared);
+				var q1 = Sr.quantity(metersSquaredPerDecasecondSquared, 2000);
+				var q2 = Sr.convert(q1, feetSquaredPerHectosecondSquared);
 				
 				equal(q2.unitExpression().toString(), 'ft^2/hs^2');
-				equal(q2.value(), 21527822.211199996);
+				closeTo(q2.value(), 215.278, 5e-4);
 			});
 
 			test('can convert from one complex derived unit to another complex derived unit', function () {
