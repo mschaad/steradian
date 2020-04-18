@@ -11,7 +11,8 @@ function(DefaultComparator, Comparator) {
 
     function byItems(comparator) {
         return function (lhs, rhs) {
-            for(var i = 0; i < lhs.length; i++) {
+            var count = Math.max(lhs.length, rhs.length);
+            for(var i = 0; i < count; i++) {
                 var comparison = comparator(lhs[i], rhs[i]);
                 if (comparison !== 0) { 
                     return comparison;
