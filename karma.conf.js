@@ -1,74 +1,78 @@
 // Karma configuration
-// Generated on Tue Jun 30 2015 22:39:03 GMT-0400 (Eastern Daylight Time)
+// Generated on Mon Apr 20 2020 01:46:48 GMT-0400 (Eastern Daylight Time)
 
 module.exports = function(config) {
+  var webpackTestConfig = require('./webpack.config.test.js');
+  
   config.set({
+    // base path that will be used to resolve all patterns (eg. files, exclude)
+    basePath: '',
 
-	// base path that will be used to resolve all patterns (eg. files, exclude)
-	basePath: '',
+    // frameworks to use
+    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
+    frameworks: ['mocha', 'chai'],
 
+    // list of files / patterns to load in the browser
+    files: [
+      'src/**/*.js',
+      'test/**/*.js'
+    ],
 
-	// frameworks to use
-	// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-	frameworks: ['mocha', 'requirejs', 'chai'],
+    // list of files / patterns to exclude
+    exclude: [
+      
+    ],
 
+    // preprocess matching files before serving them to the browser
+    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
+    preprocessors: {
+      'src/**/*.js': ['webpack'],
+      'test/**/*.js': ['webpack']
+    },
 
-	// list of files / patterns to load in the browser
-	files: [
-	  'test-main.js',
-	  {pattern: 'lib/**/*.js', included: false},
-	  {pattern: 'src/**/*.js', included: false},
-		{pattern: 'test/**/*.js', included: false}
-	],
+    webpack: webpackTestConfig,
 
+    client: {
+      mocha: {
+        reporter: 'html',
+        ui: 'tdd'
+      }
+    },
 
-	// list of files to exclude
-	exclude: [
-	],
+    // test results reporter to use
+    // possible values: 'dots', 'progress'
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    reporters: ['progress'],
 
+    // web server port
+    port: 9876,
 
-	// preprocess matching files before serving them to the browser
-	// available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-	preprocessors: {
-	},
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
 
-	client: {
-	  mocha: {
-			reporter: 'html', // change Karma's debug.html to the mocha web reporter
-			ui: 'tdd'
-	  }
-	},
+    // level of logging
+    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+    logLevel: config.LOG_INFO,
 
-	// test results reporter to use
-	// possible values: 'dots', 'progress'
-	// available reporters: https://npmjs.org/browse/keyword/karma-reporter
-	reporters: ['progress'],
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
 
+    // start these browsers
+    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+    browsers: ['Chrome'],
 
-	// web server port
-	port: 9876,
+    // Continuous Integration mode
+    // if true, Karma captures browsers, runs the tests and exits
+    singleRun: true,
 
-
-	// enable / disable colors in the output (reporters and logs)
-	colors: true,
-
-
-	// level of logging
-	// possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-	logLevel: config.LOG_INFO,
-
-
-	// enable / disable watching file and executing tests whenever any file changes
-	autoWatch: true,
-
-
-	// start these browsers
-	// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-	browsers: ['Chrome'],
-
-
-	// Continuous Integration mode
-	// if true, Karma captures browsers, runs the tests and exits
-	singleRun: false
-  });
-};
+    // Concurrency level
+    // how many browser should be started simultaneous
+    concurrency: Infinity,
+    plugins: [
+      require('karma-webpack'),
+      require('karma-mocha'),
+      require('karma-chai'),
+      require('karma-chrome-launcher'),
+    ]
+  })
+}

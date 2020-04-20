@@ -6,6 +6,7 @@ function resolvePath(dir) {
 }
 
 module.exports = {
+    mode: 'production',
     entry: resolvePath('src/Strontium.js'),
     output: {
         path: resolvePath('dist'),
