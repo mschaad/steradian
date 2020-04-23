@@ -1,4 +1,4 @@
-define(['mocha', 'chai', 'UnitType'], 
+define(['Mocha', 'Chai', 'UnitType'], 
 function (mocha, chai, UnitType) {
     var assert = chai.assert;
 

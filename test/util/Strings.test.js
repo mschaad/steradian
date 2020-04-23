@@ -1,4 +1,4 @@
-define(['mocha', 'chai', 'Strings'], function(mocha, chai, Strings) {
+define(['Mocha', 'Chai', 'Strings'], function(mocha, chai, Strings) {
 	var assert = chai.assert;
 	
 	var ok = assert.ok,

@@ -1,4 +1,4 @@
-define(['mocha', 'chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], function (mocha, chai, Strontium, Unit, StandardStrontiumFn) {
+define(['Mocha', 'Chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], function (mocha, chai, Strontium, Unit, StandardStrontiumFn) {
 	var assert = chai.assert;
 
 	var ok = assert.ok,

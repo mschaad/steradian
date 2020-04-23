@@ -1,4 +1,4 @@
-define(['mocha', 'chai', 'comparison/Comparators', 'Arrays'], 
+define(['Mocha', 'Chai', 'comparison/Comparators', 'Arrays'], 
 function (mocha, chai, Comparators, Arrays) {
     var assert = chai.assert;
 

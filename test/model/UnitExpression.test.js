@@ -1,5 +1,5 @@
 define([
-    'mocha', 'chai', 
+    'Mocha', 'Chai', 
     'UnitExpression', 'Term',
     'test/StandardStrontiumFn'], 
 function (
