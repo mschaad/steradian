@@ -1,9 +1,44 @@
+Sr() : Sr
+	the module export.  
+		The Strontium function is a Sr object, but called as a function,
+		it also returns a new Strontium object.
+
+Sr : {
+	unit(string) : Unit
+	unit(def) : BaseUnit
+		def : {
+			name : string,
+			type : string,
+			symbol : string,
+			scale : number
+		}
+	derivedUnit(def) : DerivedUnit
+		def : {
+			name : string,
+			units : array<desc>,
+			symbol : string,
+			scale : number
+		}
+		desc : {
+			unit : string | Unit
+			power : number
+		}
+	quantity(UnitExpression, number) : Quantity
+	convert(Quantity, UnitExpression) : Quantity
+}
+
+--------------------------------
+
 Unit
 	name() : string
-	terms() : Term[]
-	isBase() : bool
-	isDerived() : bool
-	dimensions : Vector
+	symbol() : string
+	scale() : number
+
+	expression() : UnitExpression
+	dimensions() : Dimensions
+	isBaseUnit() : bool
+
+	toString() : string
 
 BaseUnit : Unit
 	type() : string
@@ -23,7 +58,23 @@ UnitExpression:
 	simplify() : UnitExpression
 
 Quantity
-	value : number
-	precision : number
-	units : UnitExpression
+	value() : number
+	//precision() : number
+	units() : UnitExpression
+
+	convertTo(Unit) : Quantity
+
+	plus(Quantity) : Quantity
+	minus(Quantity) : Quantity
+	times(Quantity) : Quantity
+	dividedBy(Quantity) : Quantity
+
+	toString() : string
 	
+Dimensions
+	get(number) : number
+	size() : number
+	equals(Dimensions) : bool
+	
+	add(Dimensions) : Dimensions
+	mult(Dimensions) : Dimensions
