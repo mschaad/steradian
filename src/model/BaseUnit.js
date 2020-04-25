@@ -3,7 +3,7 @@ function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
     function BaseUnit(name, type, symbol, scale) {
         Unit.call(this, name, symbol, scale);
         Guard(type, "type").isString().isTruthy();
-        this.type = type;
+        this.type = function() { return type; };
 
         var that = this;
         var dimensions = null;
@@ -20,7 +20,7 @@ function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
 
     function getDimensions() {
         var dim = [];
-        dim[UnitType[this.type]] = 1;
+        dim[UnitType[this.type()]] = 1;
         return new Dimensions(dim);
     }
 
