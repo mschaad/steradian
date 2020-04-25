@@ -84,7 +84,7 @@ define(['Mocha', 'Chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 
 				ok(actual);
 				assert.equal(actual, Newton);
-				assert.equal("Newton", Newton.name);
+				assert.equal("Newton", Newton.name());
 			});
 		});
 		

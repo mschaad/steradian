@@ -4,7 +4,7 @@ define(['Guard', 'Test', 'Unit'], function(Guard, Test, Unit) {
 
         this.register = function(unit) {
             Guard(unit, 'unit').isValue().instanceOf(Unit);
-            var name = unit.name;
+            var name = unit.name();
             Guard(name, 'unit.name').isString();
             if (this.hasUnit(name)) {
                 throw Error("duplicate unit registered: " + name);

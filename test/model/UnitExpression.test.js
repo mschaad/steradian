@@ -38,10 +38,10 @@ function (
     
                 equal(2, terms.length);
                 
-                equal("meter", terms[0].unit().name);
+                equal("meter", terms[0].unit().name());
                 equal(1, terms[0].power());
 
-                equal("second", terms[1].unit().name);
+                equal("second", terms[1].unit().name());
                 equal(1, terms[1].power());
             });
         });
@@ -62,10 +62,10 @@ function (
     
                 equal(2, terms.length);
                 
-                equal("meter", terms[0].unit().name);
+                equal("meter", terms[0].unit().name());
                 equal(3, terms[0].power());
 
-                equal("second", terms[1].unit().name);
+                equal("second", terms[1].unit().name());
                 equal(2, terms[1].power());
             });
         });

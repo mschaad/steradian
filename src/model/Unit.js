@@ -2,11 +2,15 @@ define(['Guard'],
 	function(Guard) {
 		function Unit(name, symbol, scale) {
 			Guard(name, "name").isString().isTruthy();
-			this.name = name;
+			this.name = asProperty(name);;
 			Guard(symbol, "symbol").isString().isTruthy();
-			this.symbol = symbol;
+			this.symbol = asProperty(symbol);
 			Guard(scale, "scale").isNumber().isNotZero();
-			this.scale = scale;
+			this.scale = asProperty(scale);
+		}
+
+		function asProperty(value) {
+			return function() { return value; };
 		}
 
 		Unit.prototype = {
@@ -20,7 +24,7 @@ define(['Guard'],
 				throw new Error("the isBaseUnit method must be overridden.");
 			},
 			toString: function() {
-				return this.symbol;
+				return this.symbol();
 			}
 		};
 

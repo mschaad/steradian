@@ -29,7 +29,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
                 var q = Sr.quantity("Newton", 6.123);
                 var quantityTerms = q.units().terms();
                 assert.equal(1, quantityTerms.length);
-                assert.equal("Newton", quantityTerms[0].unit().name);
+                assert.equal("Newton", quantityTerms[0].unit().name());
             });
         })
 

@@ -61,7 +61,7 @@ define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, 
 
 			return terms.reduce(
 				function(map, term) {
-					map[term.unit().name] = term.power();
+					map[term.unit().name()] = term.power();
 					return map;
 				}, 
 				Object.create(null)

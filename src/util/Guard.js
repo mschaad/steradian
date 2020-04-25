@@ -23,7 +23,7 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 			},
 			instanceOf: function(objType) {
 				if (!Test.instanceOf(value, objType)) {
-					throw getError("an instance of " + objType.name);
+					throw getError("an instance of " + objType.name());
 				}
 				return that;
 			},
@@ -52,7 +52,7 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 				});
 				if (firstErrorIndex > -1) {
 					var badElement = value[firstErrorIndex];
-					throw new Error(name + " should have been an array of " + objType.name + ", but found '" + badElement + "' at index " + firstErrorIndex);
+					throw new Error(name + " should have been an array of " + objType.name() + ", but found '" + badElement + "' at index " + firstErrorIndex);
 				}
 
 				return that;

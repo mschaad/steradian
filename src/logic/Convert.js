@@ -44,19 +44,19 @@ function(Strings, Test, Unit, UnitExpression, Term) {
             for(i = 0; i < newTerms.length; i++) {
                 term = newTerms[i];
                 unit = term.unit();
-                unitTable[unit.name] = unit;
-                currentValue = delta[unit.name] || 0;
+                unitTable[unit.name()] = unit;
+                currentValue = delta[unit.name()] || 0;
                 updatedValue = currentValue + term.power();
-                delta[unit.name] = updatedValue;
+                delta[unit.name()] = updatedValue;
             }
             
             for(i = 0; i < oldTerms.length; i++) {
                 term = oldTerms[i];
                 unit = term.unit();
-                unitTable[unit.name] = unit;
-                currentValue = delta[unit.name] || 0;
+                unitTable[unit.name()] = unit;
+                currentValue = delta[unit.name()] || 0;
                 updatedValue = currentValue - term.power();
-                delta[unit.name] = updatedValue;
+                delta[unit.name()] = updatedValue;
             }
             
             var scale = 1;
@@ -65,10 +65,10 @@ function(Strings, Test, Unit, UnitExpression, Term) {
                 unit = unitTable[unitName];
                 var absPower = Math.abs(power);
                 if (power > 0) {
-                    scale = scale * Math.pow(unit.scale, absPower);
+                    scale = scale * Math.pow(unit.scale(), absPower);
                 }
                 else if (power < 0) {
-                    scale = scale / Math.pow(unit.scale, absPower);
+                    scale = scale / Math.pow(unit.scale(), absPower);
                 }
                 else { //-> power == 0
                     //that's interesting.  but still, do nothing.

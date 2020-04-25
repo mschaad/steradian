@@ -57,14 +57,14 @@ function (
                     ]
                 });
 
-                var expected = 1.0 * slug.scale * foot.scale / Math.pow(Millisecond.scale, 2);
+                var expected = 1.0 * slug.scale() * foot.scale() / Math.pow(Millisecond.scale(), 2);
 
-                equal(expected, FakeForce2.scale);
+                equal(expected, FakeForce2.scale());
             });
 
             test("scale calculation", function() {
-                var expected = 2.0 * slug.scale * foot.scale / Math.pow(Millisecond.scale, 2);
-                equal(expected, FakeForce.scale);
+                var expected = 2.0 * slug.scale() * foot.scale() / Math.pow(Millisecond.scale(), 2);
+                equal(expected, FakeForce.scale());
             });
         })
 

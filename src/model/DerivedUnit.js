@@ -16,7 +16,7 @@ function(Guard, Arrays, Unit, UnitExpression) {
 	function getScaleOfTerms(terms) {
 		return terms
 		.map(function(term) {
-			return Math.pow(term.unit().scale, term.power());
+			return Math.pow(term.unit().scale(), term.power());
 		})
 		.reduce(
 			function(acc, factor) {
@@ -44,7 +44,7 @@ function(Guard, Arrays, Unit, UnitExpression) {
 			return new UnitExpression(terms);
 		},
 		toString: function() {
-			return this.symbol;
+			return this.symbol();
 		}
 	};
 
