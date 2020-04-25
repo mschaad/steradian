@@ -27,22 +27,3 @@ Quantity
 	precision : number
 	units : UnitExpression
 	
-	
-------------------------
-let rec getEquivalentBaseTerms (term : Term) : Seq<Term> =
-	let sumPowersOf ts = ts |> Seq.sumBy fun t -> t.power
-	let unit = term.unit
-	match unit with
-		| u when u.isBase -> u.terms
-		| u when u.isDerived -> 
-			u.terms
-			|> Seq.bind getEquivalentBaseTerms 
-			|> Seq.map fun innerTerm -> new Term(innerTerm.unit, innerTerm.power * term.power)
-			|> List.groupBy fun t -> t.unit
-			|> List.aggregate fun (u, terms) -> new Term(u, sumPowersOf terms)
-
-	
-
-
-	
-	
