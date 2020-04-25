@@ -1,15 +1,22 @@
-const config = require('./webpack.config.js');
+const primaryConfig = require('./webpack.config.js');
 const nodeExternals = require('webpack-node-externals');
+const merge = require('webpack-merge');
 
+var testConfigOverrides = {
+    mode: 'development',
+    resolve: {
+        modules: [ "test" ],
+        alias: {
+            "test/StandardStrontiumFn": "StandardStrontiumFn",
+            "test/StandardUnitDefinitions": "StandardUnitDefinitions",
+            "Mocha": "shims/mocha",
+            "Chai": "shims/chai"
+        }
+    },
+    target: 'web',
+    externals: [ nodeExternals() ]
+};
 
-config.mode = 'development';
-config.resolve.modules.push("test");
-config.resolve.alias["test/StandardStrontiumFn"] = "StandardStrontiumFn";
-config.resolve.alias["test/StandardUnitDefinitions"] = "StandardUnitDefinitions";
-config.resolve.alias["Mocha"] = "shims/mocha";
-config.resolve.alias["Chai"] = "shims/chai";
-
-config.target = 'web';
-config.externals = [ nodeExternals() ];
-
-module.exports = config;
+module.exports = merge(
+    primaryConfig, testConfigOverrides
+);
