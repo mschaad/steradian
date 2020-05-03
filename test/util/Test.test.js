@@ -71,5 +71,13 @@ function(mocha, chai, Test, Unit, DerivedUnit, StandardStrontiumFn) {
 
     suiteFor('isUndefined', Test.isUndefined, isValueTestCase([true,  false, false, false, false]));
     suiteFor('isNull',      Test.isNull,      isValueTestCase([false, true,  false, false, false]));
-    suiteFor('isValue',     Test.isValue,     isValueTestCase([false, false, true,  true,  true ]));    
+    suiteFor('isValue',     Test.isValue,     isValueTestCase([false, false, true,  true,  true ]));
+
+    suiteFor('isObject',    Test.isObject, [
+        testCase(undefined, false),
+        testCase(null, false),
+        testCase("object literal",  {},                     true),
+        testCase("string",          "a string",             false),
+        testCase("String obj",      new String("a string"), true),
+    ]);
 });
