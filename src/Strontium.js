@@ -1,16 +1,14 @@
 define(
 	[
 	'Guard', 'Test', 'Strings',
-	'Term', 'Unit', 'BaseUnit',
-	'UnitExpression','DerivedUnit', 'Quantity',
-	'UnitRegistry',
+	'Term', 'Unit',
+	'Quantity','UnitRegistry', 'Units',
 	'Convert'
 	], 
 	function(
 		Guard, Test, Strings,
-		Term, Unit, BaseUnit, 
-		UnitExpression,DerivedUnit, Quantity,
-		UnitRegistry,
+		Term, Unit, 
+		Quantity,UnitRegistry, Units,
 		Convert) {
 		function Strontium() {
 			var registry = new UnitRegistry();
@@ -24,38 +22,15 @@ define(
 			}
 
 			function createUnit(def) {
-				var unit = new BaseUnit(def.name, def.type, def.symbol, def.scale);
+				var unit = Units.createBaseUnit(def);
 				registerUnit(unit);
 				return unit;
 			}
 
 			function createDerivedUnit(def) {
-				Guard(def.units, 'def.units').isTruthy().isArray();
-				var terms = def.units.map(toTerm);
-				var scale = def.scale || 1;
-				var unit = new DerivedUnit(def.name, def.symbol, scale, terms);
+				var unit = Units.createDerivedUnit(def, registry);
 				registerUnit(unit);
 				return unit;
-			}
-			
-			function toUnit(identifierOrUnit) {
-				var unit;
-				if (Unit.isUnit(identifierOrUnit)) {
-					unit = identifierOrUnit;
-				}
-				else if (Strings.isString(identifierOrUnit)) {
-					var identifier = identifierOrUnit;
-					unit = getUnit(identifier);
-				}
-				else {
-					throw new Error("Expected: unit name or Unit but found object of type '" +
-						typeof(identifierOrUnit) + "'");
-				}
-				return unit;
-			}
-
-			function toTerm(desc) {	
-				return new Term(toUnit(desc.unit), desc.power);
 			}
 
 			var SrInstance = {
