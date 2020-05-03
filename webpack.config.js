@@ -33,7 +33,9 @@ module.exports = {
             UnitExpression: "model/UnitExpression",
             Units: "model/Units",
             UnitType: "model/UnitType",
-            UnitRegistry: "model/UnitRegistry"
+            DerivedUnitType: "model/DerivedUnitType",
+            UnitRegistry: "model/UnitRegistry",
+            System: "model/System"
         }
     },
     module: {

@@ -56,6 +56,52 @@ define([], function() {
                     { unit: 'second', power: -2 }
                 ]
             });
+
+            //CURRENT
+            var ampere = Sr.unit({
+                name: "ampere",
+                type: 'current',
+                symbol: 'A',
+                scale: 1
+            });
+
+            //ABSOLUTE TEMPERATURE
+            var degreeKelvin = Sr.unit({
+                name: 'degreeKelvin',
+                type: 'temperature',
+                symbol: '°K',
+                scale: 1.0
+            });
+        
+            //TEMPERATURE
+            var degreeCelsius = Sr.unit({
+                name: 'degreeCelsius',
+                type: 'temperature',
+                symbol: '°C',
+                scale: 1.0
+            });
+        
+            //LUMINOUS INTENSITY
+            var candela = Sr.unit({
+                name: 'candela',
+                type: 'luminousIntensity',
+                symbol: 'cd',
+                scale: 1.0
+            });
+
+            //========DERIVED UNITS=========
+
+            //ENERGY
+            var joule = Sr.derivedUnit({
+                name: 'joule',
+                units: [
+                    { unit: 'Newton', power: 1 },
+                    { unit: 'meter', power: 1 }
+                ],
+                symbol: "J",
+                scale: 1.0,
+            });
+            
        }
    };
 });
