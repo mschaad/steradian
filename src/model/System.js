@@ -1,4 +1,4 @@
-define(['Guard', 'UnitType', 'DerivedUnitType'], function(Guard, UnitType, DerivedUnitType) {
+define(['Guard','Unit','UnitType', 'DerivedUnitType'], function(Guard, Unit, UnitType, DerivedUnitType) {
     function System(def) {
         Guard(def.name, "def.name").isTruthy().isString();
         
@@ -8,7 +8,12 @@ define(['Guard', 'UnitType', 'DerivedUnitType'], function(Guard, UnitType, Deriv
         Guard(def.base, "def.base").isObject();
 
         for(var unitTypeName in UnitType) {
+            if (!def.base.hasOwnProperty(unitTypeName)) {
+                throw new Error("System definition for '" + name + "' is missing base unit for " + unitTypeName);
+            }
+            
             var unit = def.base[unitTypeName];
+            Guard(unit, "def.base." + unitTypeName).instanceOf(Unit);
             this[unitTypeName] = (function(v) {
                 return function() { return v; };
             })(unit);

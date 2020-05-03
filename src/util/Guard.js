@@ -23,7 +23,7 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 			},
 			instanceOf: function(objType) {
 				if (!Test.instanceOf(value, objType)) {
-					throw getError("an instance of " + objType.name());
+					throw getError("an instance of " + objType.name);
 				}
 				return that;
 			},
