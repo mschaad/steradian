@@ -1,4 +1,5 @@
-define(['Mocha', 'Chai', 'Test', 'Unit', 'DerivedUnit', 'test/StandardStrontiumFn'], function(mocha, chai, Test, Unit, DerivedUnit, StandardStrontiumFn) {
+define(['Mocha', 'Chai', 'Test', 'Unit', 'DerivedUnit', 'test/StandardStrontiumFn'], 
+function(mocha, chai, Test, Unit, DerivedUnit, StandardStrontiumFn) {
 	var assert = chai.assert;
 	
     var ok = assert.ok,
@@ -19,13 +20,19 @@ define(['Mocha', 'Chai', 'Test', 'Unit', 'DerivedUnit', 'test/StandardStrontiumF
 
     var inputValues = [undefined, null, {}, "string", Unit];
 
-    function suiteFor(name, fn, inputValues, expectedValues) {
+    function suiteFor(name, fn, testCases) {
         suite(name, function() {
-            for(var i = 0; i < inputValues.length; i++) {
-                var input = inputValues[i];
-                var expected = expectedValues[i];
+            var NAME = 0;
+            var INPUT = 1;
+            var EXPECTED_OUTPUT = 2;
+
+            for(var i = 0; i < testCases.length; i++) {
+                var testCase = testCases[i];
+                var name = testCase[NAME];
+                var input = testCase[INPUT];
+                var expected = testCase[EXPECTED_OUTPUT];
                 
-                test(testName(input), function() {
+                test(name, function() {
                     var actual = fn(input);
                     assert.equal(actual, expected);
                 });
@@ -33,7 +40,36 @@ define(['Mocha', 'Chai', 'Test', 'Unit', 'DerivedUnit', 'test/StandardStrontiumF
         });    
     }
 
-    suiteFor('isUndefined', Test.isUndefined, inputValues, [true, false, false, false, false]);
-    suiteFor('isNull', Test.isNull, inputValues, [false, true, false, false, false]);
-    suiteFor('isValue', Test.isValue, inputValues, [false, false, true, true, true]);
+    function testCase(/*arguments*/) {
+        var name, input, expectedOutput;
+        if (arguments.length === 3) {
+            name = arguments[0];
+            input = arguments[1];
+            expectedOutput = arguments[2];
+        }
+        else if (arguments.length === 2) {
+            input = arguments[0];
+            expectedOutput = arguments[1];
+            name = testName(input);
+        } else {
+            throw new Error('invalid number of arguments: ' + arguments.length);
+        }
+        return [name, input, expectedOutput];
+    }
+
+    function zip(lhs, rhs) {
+        return lhs.map(function(value, index) {
+            return [ value, rhs[index] ];
+        });
+    }
+
+    function isValueTestCase(expectedOutputs) {
+        return zip(inputValues, expectedOutputs).map(function(args) {
+            return testCase.apply(null, args);
+        });
+    }
+
+    suiteFor('isUndefined', Test.isUndefined, isValueTestCase([true,  false, false, false, false]));
+    suiteFor('isNull',      Test.isNull,      isValueTestCase([false, true,  false, false, false]));
+    suiteFor('isValue',     Test.isValue,     isValueTestCase([false, false, true,  true,  true ]));    
 });
