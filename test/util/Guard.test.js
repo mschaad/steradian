@@ -1,4 +1,5 @@
-define(['Mocha', 'Chai', 'Guard', 'Unit', 'DerivedUnit', 'test/StandardStrontiumFn'], function(mocha, chai, Guard, Unit, DerivedUnit, StandardStrontiumFn) {
+define(['Mocha', 'Chai', 'Guard', 'Unit', 'DerivedUnit', 'test/StandardStrontiumFn'], 
+function(mocha, chai, Guard, Unit, DerivedUnit, StandardStrontiumFn) {
 	var assert = chai.assert;
 	
 	var ok = assert.ok,
@@ -18,6 +19,17 @@ define(['Mocha', 'Chai', 'Guard', 'Unit', 'DerivedUnit', 'test/StandardStrontium
 
         test('BaseUnit is value', function() {
             Guard(Sr.unit('meter'), 'unit').isValue();
+        });
+    });
+
+    suite('isObject', function() {
+        test('string is not object', function() {
+            assert.throws(function() {
+                Guard('a bogus value', 'value').isObject();
+            });
+        });
+        test('string is not object', function() {
+            Guard({}, 'value').isObject();
         });
     });
 

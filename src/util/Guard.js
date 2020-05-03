@@ -65,6 +65,14 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 					throw new Error(name + " should have been a Number, but found value '" + value + "'");
 				}
 			},
+			isObject: function() {
+				if (Test.isObject(value)) {
+					return that;
+				}
+				else {
+					throw new Error(name + " should have been an object, but found value '" + value + "'");
+				}
+			},
 			isNotZero: function() {
 				if (value === 0) {
 					throw new Error(name + " should have not have been zero, but found value '" + value + "'");
