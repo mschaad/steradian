@@ -1,13 +1,13 @@
 define(
 	[
-	'Guard', 'Test', 'Strings',
-	'Term', 'Unit',
+	'Guard', 'Test', 
+	'System',
 	'Quantity','UnitRegistry', 'Units',
 	'Convert'
 	], 
 	function(
-		Guard, Test, Strings,
-		Term, Unit, 
+		Guard, Test, 
+		System,
 		Quantity,UnitRegistry, Units,
 		Convert) {
 		function Strontium() {
@@ -33,12 +33,40 @@ define(
 				return unit;
 			}
 
+			function getSystem(name) {
+				return registry.getSystem(name);
+			}
+
+			function registerSystem(defOrSystem) {
+				var system;
+				if (Test.instanceOf(defOrSystem, System)) {
+					system = defOrSystem;
+				}
+				else if (Test.isObject(defOrSystem)) {
+					var def = defOrSystem;
+					system = System.create(def);	
+				}
+				registry.registerSystem(system);
+				return system;
+			}
+			
 			var SrInstance = {
 				unit: function(idOrDef) {
 					if (Test.isString(idOrDef)) {
 						return getUnit(idOrDef);
 					} else {
 						return createUnit(idOrDef);	
+					}
+				},
+				system: function(idOrDefOrSystem) {
+					// getter
+					if (Test.isString(idOrDefOrSystem)) {
+						return getSystem(idOrDefOrSystem);
+					} 
+					// setter
+					else {
+						var defOrSystem = idOrDefOrSystem;
+						return registerSystem(defOrSystem);
 					}
 				},
 				derivedUnit: createDerivedUnit,
@@ -50,8 +78,8 @@ define(
 					var q = new Quantity(unitExpression, value, SrInstance);
 					return q;
 				},
-				convert: function(q, newUnits) {
-					return Convert.convert(SrInstance, q, newUnits);
+				convert: function(q, targetUnitsOrSystem) {
+					return Convert.convert(SrInstance, q, targetUnitsOrSystem);
 				}
 			};
 

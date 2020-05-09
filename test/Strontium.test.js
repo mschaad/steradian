@@ -1,4 +1,9 @@
-define(['Mocha', 'Chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], function (mocha, chai, Strontium, Unit, StandardStrontiumFn) {
+define(['Mocha', 'Chai', 'Strontium', 
+	'Unit', 'System', 'test/StandardStrontiumFn'
+], 
+function (mocha, chai, Strontium, 
+	Unit, System, StandardStrontiumFn
+	) {
 	var assert = chai.assert;
 
 	var ok = assert.ok,
@@ -103,6 +108,85 @@ define(['Mocha', 'Chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 
 				ok(metersPerSecond);
 				assert.isTrue(Unit.isUnit(metersPerSecond));
+			});
+		});
+
+		suite('systems', function() {
+			test('can register System', function() {
+				var Sr = StandardStrontiumFn();
+
+				var SI = require('model/systems/SI');
+
+				Sr.system(SI);
+			});
+
+			test('can register System, by definition', function() {
+				var Sr = Strontium();
+
+				var system = Sr.system({
+					name: "FakeSystem",
+					base: {
+						length: Sr.unit({
+							name: 'meter',
+							type: 'length',
+							symbol: 'm',
+							scale: 1.0
+						}),
+						mass: Sr.unit({
+							name: 'kilogram',
+							type: 'mass',
+							symbol: 'kg',
+							scale: 1.0
+						}),
+						time: Sr.unit({
+							name: 'second',
+							type: 'time',
+							symbol: 's',
+							scale: 1.0
+						}),
+						current: Sr.unit({
+							name: 'ampere',
+							type: 'current',
+							symbol: 'A',
+							scale: 1.0
+						}),
+						temperature: Sr.unit({
+							name: 'degree celsius',
+							type: 'temperature',
+							symbol: '°C',
+							scale: 1.0
+						}),
+						absoluteTemperature: Sr.unit({
+							name: 'degree kelvin',
+							type: 'absoluteTemperature',
+							symbol: '°K',
+							scale: 1.0
+						}),
+						//'amount'
+						luminousIntensity: Sr.unit({
+							name: 'candela',
+							type: 'luminousIntensity',
+							symbol: 'cd',
+							scale: 1.0
+						})
+					},
+					derived: {},
+					other: []
+				});
+
+				ok(system);
+				ok(system instanceof System);
+			});
+
+			test('can retrieve system', function() {
+				var Sr = StandardStrontiumFn();
+
+				var SI = require('model/systems/SI');
+
+				Sr.system(SI);
+
+				var retrievedSI = Sr.system('SI');
+				ok(retrievedSI);
 			});
 		});
 
