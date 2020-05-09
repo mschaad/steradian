@@ -169,19 +169,41 @@ define(['Mocha', 'Chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 				closeTo(q2.value(), 215.278, 5e-4);
 			});
 
-			// test('can convert from one complex derived unit to another complex derived unit', function () {
-			// 	var Sr = StandardStrontiumFn();
+			test('can convert from one complex derived unit to another complex derived unit', function () {
+				var Sr = StandardStrontiumFn();
+					
+				// 	//F = ma
+				// 	//N = kg * m / s^2
+					
+				var Newton = Sr.unit('Newton');
+					
+				var qNewtons = Sr.quantity(Newton, 1);
+				ok(qNewtons);
+
+				// 	//F = ma
+				// 	// lb = slug * (feet / s^2)
+				var pound = Sr.derivedUnit({
+					name: "pound",
+					symbol: "lb",
+					units: [
+						{ unit: 'slug', power: 1 },
+						{ unit: 'foot', power: 1 },
+						{ unit: 'second', power: -2 }
+					]
+				});
+
+			 	var qPounds = Sr.convert(qNewtons, pound);
 				
+				//1 slug ft/s^2 = 4.44822162 newtons
+				//1 N = 0.224808942 slug-ft/s^2
+				assert.closeTo(qPounds.value(), 0.224809, 1e-7);
+			});
+
+			// test('can convert units to a standard system', function() {
+			// 	var Sr = StandardStrontiumFn();
 			// 	//F = ma
 			// 	//N = kg * m / s^2
-				
-			// 	var Newton = Sr.unit('Newton');
-				
-			// 	var qNewtons = Sr.quantity(Newton, 1);
-			// 	ok(qNewtons);
-
-			// 	//F = ma
-			// 	// lb = slug * (feet / s^2)
+			// 	//lb = slug * (feet / s^2)
 			// 	var pound = Sr.derivedUnit({
 			// 		name: "pound",
 			// 		symbol: "lb",
@@ -192,11 +214,15 @@ define(['Mocha', 'Chai', 'Strontium', 'Unit', 'test/StandardStrontiumFn'], funct
 			// 		]
 			// 	});
 
-			// 	var qPounds = Sr.convert(qNewtons, pound);
+			// 	var qPounds = Sr.quantity(1, pound);
+
+			// 	var SI = Sr.system('SI');
+
+			// 	var qNewtons = Sr.convert(qPounds, SI);
 				
 			// 	//1 slug ft/s^2 = 4.44822162 newtons
-			// 	//1 N = 0.224808942 slug-ft/s^2
-			// 	assert.closeTo(qPounds.value(), 0.224809, 1e-7);
+			// 	assert.closeTo(qNewtons.value(), 4.44822162, 1e-7);
+			// 	equal(qNewtons.units().toString(), "N");
 			// });
 		});
 	});
