@@ -78,6 +78,13 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 					throw new Error(name + " should have not have been zero, but found value '" + value + "'");
 				}
 				return that;
+			},
+			isFunction: function() {
+				if (Test.isFunction(value)) {
+					return that;
+				} else {
+					throw new Error(name + "should have been a function, but found value '" + value + "'");
+				}
 			}
 		};
 

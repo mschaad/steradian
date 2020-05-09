@@ -80,4 +80,17 @@ function(mocha, chai, Test, Unit, DerivedUnit, StandardStrontiumFn) {
         testCase("string",          "a string",             false),
         testCase("String obj",      new String("a string"), true),
     ]);
+
+
+    function testFunction() {}
+    suiteFor('isFunction',    Test.isFunction, [
+        testCase(undefined, false),
+        testCase(null,      false),
+        testCase({},        false),
+        
+        testCase(testFunction,                              true),
+        testCase(function functionExpression(){},           true),
+        testCase(new Function(),                            true),
+        testCase({ aFunction: function() {} }.aFunction,    true),
+    ]);
 });

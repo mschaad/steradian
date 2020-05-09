@@ -23,6 +23,9 @@ define(['Strings'], function(Strings) {
                 return false;
             }
             return value instanceof objType;
+        },
+        isFunction: function(value) {
+            return value instanceof Function;
         }
     };
     return Test;

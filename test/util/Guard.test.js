@@ -50,4 +50,20 @@ function(mocha, chai, Guard, Unit, DerivedUnit, StandardStrontiumFn) {
             Guard(Sr.unit('meter'), 'unit').instanceOf(Unit);
         });
     });
+
+    suite('isFunction', function() {
+        test('object is not function', function() {
+            assert.throws(function() {
+                Guard({}, 'object').isFunction();
+            });
+        });
+
+        test('function is function', function() {
+            Guard(function() {}, 'fn').isFunction();
+        });
+
+        test('new Function is function', function() {
+            Guard(new Function(), 'fn').isFunction();
+        });
+    })
 })
