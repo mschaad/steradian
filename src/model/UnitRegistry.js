@@ -1,39 +1,76 @@
-define(['Guard', 'Test', 'Unit'], function(Guard, Test, Unit) {
-    function UnitRegistry() {
+define(['Guard', 'Test', 'Unit', 'System'], function(Guard, Test, Unit, System) {
+    
+    function Registry(registryItemType) {
+        Guard(registryItemType, 'registryItemType').isValue().isFunction();
+        this.registryItemType = registryItemType;
         var table = Object.create(null);
 
-        this.register = function(unit) {
-            Guard(unit, 'unit').isValue().instanceOf(Unit);
-            var name = unit.name();
-            Guard(name, 'unit.name').isString();
-            if (this.hasUnit(name)) {
-                throw Error("duplicate unit registered: " + name);
+        this.register = function register(item) {
+            Guard(item, this.getItemTypeName()).isValue().instanceOf(registryItemType);
+            var name = item.name();
+            Guard(name, this.getItemTypeName() + '.name').isString();
+            if (this.hasItem(name)) {
+                throw new Error("duplicate " + this.getItemTypeName() + " registered: " + name);
             }
-            table[name] = unit;
+            table[name] = item;
             if (!this.tryGet(name)) {
                 throw new Error('self-test failed registering ' + name);
             }
         };
 
-        this.tryGet = function(name) {
+        this.tryGet = function tryGet(name) {
             Guard(name, 'name').isString();
-            var unit = table[name];
-            return unit;
+            var item = table[name];
+            return item;
         };
     }
 
-    UnitRegistry.prototype = {
-        get: function(name) {
-            var unit = this.tryGet(name);
-            if (!Test.isValue(unit)) {
-                throw new Error("no unit found by the name '" + name + "'");
+    Registry.prototype = {
+        get: function get(name) {
+            var item = this.tryGet(name);
+            if (!Test.isValue(item)) {
+                throw new Error("no " + this.getItemTypeName() + " found by the name '" + name + "'");
             }
-            return unit;
+            return item;
         },
-        hasUnit: function(name) {
+        getItemTypeName: function getItemTypeName() {
+            return this.registryItemType.name;
+        },
+        hasItem: function hasItem(name) {
             return !!this.tryGet(name);
         }
     };
+
+    function UnitRegistry() {
+        var unitRegistry = new Registry(Unit);
+        var systemRegistry = new Registry(System);
+
+        this.get = function get(unitName) {
+            return unitRegistry.get(unitName);
+        };
+        this.hasUnit = function hasUnit(unitName) {
+            return unitRegistry.hasItem(unitName);
+        };
+        this.register = function register(unit) {
+            unitRegistry.register(unit);
+        };
+        this.tryGet = function tryGet(unitName) {
+            return unitRegistry.tryGet(unitName);
+        };
+
+        this.getSystem = function getSystem(systemName) {
+            return systemRegistry.get(systemName);
+        };
+        this.hasSystem = function hasSystem(systemName) {
+            return systemRegistry.hasItem(systemName);
+        };
+        this.registerSystem = function registerSystem(system) {
+            systemRegistry.register(system);
+        };
+        this.tryGetSystem = function tryGetSystem(systemName) {
+            return systemRegistry.tryGet(systemName);
+        };
+    }
 
     return UnitRegistry;
 })
