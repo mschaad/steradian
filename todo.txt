@@ -1,5 +1,4 @@
 add concept of unit systems, such as SI vs imperial
-    * move all unit registration to UnitRegistry
     * update `convert` function to accept a system as a target
     * support forward references in System definition/registration
 

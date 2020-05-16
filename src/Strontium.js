@@ -13,12 +13,6 @@ define(
 		function Strontium() {
 			var registry = new UnitRegistry();
 			
-			function createDerivedUnit(def) {
-				var unit = Units.createDerivedUnit(def, registry);
-				registry.register(unit);
-				return unit;
-			}
-
 			var SrInstance = {
 				unit: function(idOrDef) {
 					// getter
@@ -43,7 +37,9 @@ define(
 						return registry.registerSystem(defOrSystem);
 					}
 				},
-				derivedUnit: createDerivedUnit,
+				derivedUnit: function (def) {
+					return registry.register(def);
+				},
 				quantity: function (unitExpression, value) {
 					unitExpression = Convert.toUnitExpression(SrInstance, unitExpression);
 					if (!SrInstance) {

@@ -11,13 +11,29 @@ define(
 
         var COMPARATOR = Comparators.byProperty("name");
 
+        function expect(value, pattern) {
+            //TODO: enforce
+        }
+
         return {
             createBaseUnit: function(def) {
+                expect(def, {
+                    name: String,
+                    type: String,
+                    symbol: String,
+                    scale: Number
+                });
                 var unit = new BaseUnit(def.name, def.type, def.symbol, def.scale);
                 return unit;
             },
             createDerivedUnit: function(def, registry) {
                 Guard(def.units, 'def.units').isTruthy().isArray();
+                expect(def, {
+                    name: String,
+                    units: Object /* List<TermDef> */,
+                    symbol: String,
+                    scale: Number
+                });
 				var terms = def.units.map(function(desc) {
                     return toTerm(desc, registry);
                 });

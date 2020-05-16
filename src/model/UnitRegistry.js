@@ -46,6 +46,10 @@ define(
         }
     };
 
+    function isBaseUnitDef(def) {
+        return !def.units;
+    }
+
     function UnitRegistry() {
         var unitRegistry = new Registry(Unit);
         var systemRegistry = new Registry(System);
@@ -63,9 +67,15 @@ define(
             }
             else if (Test.isObject(defOrUnit)) {
                 var def = defOrUnit;
-                unit = Units.createBaseUnit(def);(def);
+                if (isBaseUnitDef(def)) {
+                    unit = Units.createBaseUnit(def);
+                }
+                else {
+                    unit = Units.createDerivedUnit(def, this);
+                }
             }
             unitRegistry.register(unit);
+            
             return unit;
         };
 

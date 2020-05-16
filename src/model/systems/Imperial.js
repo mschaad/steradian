@@ -1,8 +1,7 @@
 define(['Units', 'System'], function(Units,System) {
 
-    var unit = Units.createBaseUnit,
-        derivedUnit = Units.createDerivedUnit;
-
+    var unit = Units.createBaseUnit;
+    
     var foot = unit({
         name: 'meter',
         type: 'length',
