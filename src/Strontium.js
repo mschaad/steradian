@@ -12,61 +12,35 @@ define(
 		Convert) {
 		function Strontium() {
 			var registry = new UnitRegistry();
-
-			function registerUnit(unit) {
-				registry.register(unit);
-			}
-
-			function getUnit(name) {
-				return registry.get(name);
-			}
-
-			function createUnit(def) {
-				var unit = Units.createBaseUnit(def);
-				registerUnit(unit);
-				return unit;
-			}
-
+			
 			function createDerivedUnit(def) {
 				var unit = Units.createDerivedUnit(def, registry);
-				registerUnit(unit);
+				registry.register(unit);
 				return unit;
 			}
 
-			function getSystem(name) {
-				return registry.getSystem(name);
-			}
-
-			function registerSystem(defOrSystem) {
-				var system;
-				if (Test.instanceOf(defOrSystem, System)) {
-					system = defOrSystem;
-				}
-				else if (Test.isObject(defOrSystem)) {
-					var def = defOrSystem;
-					system = System.create(def);	
-				}
-				registry.registerSystem(system);
-				return system;
-			}
-			
 			var SrInstance = {
 				unit: function(idOrDef) {
+					// getter
 					if (Test.isString(idOrDef)) {
-						return getUnit(idOrDef);
-					} else {
-						return createUnit(idOrDef);	
+						var id = idOrDef;
+						return registry.get(id);
+					} 
+					// setter
+					else {
+						return registry.register(idOrDef);	
 					}
 				},
 				system: function(idOrDefOrSystem) {
 					// getter
 					if (Test.isString(idOrDefOrSystem)) {
-						return getSystem(idOrDefOrSystem);
+						var id = idOrDefOrSystem;
+						return registry.getSystem(id);
 					} 
 					// setter
 					else {
 						var defOrSystem = idOrDefOrSystem;
-						return registerSystem(defOrSystem);
+						return registry.registerSystem(defOrSystem);
 					}
 				},
 				derivedUnit: createDerivedUnit,

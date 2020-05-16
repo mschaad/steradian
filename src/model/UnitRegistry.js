@@ -1,4 +1,9 @@
-define(['Guard', 'Test', 'Unit', 'System'], function(Guard, Test, Unit, System) {
+define(
+    ['Guard', 'Test',
+    'Unit', 'System',
+    'Units'
+    ], 
+    function(Guard, Test, Unit, System, Units) {
     
     function Registry(registryItemType) {
         Guard(registryItemType, 'registryItemType').isValue().isFunction();
@@ -51,9 +56,19 @@ define(['Guard', 'Test', 'Unit', 'System'], function(Guard, Test, Unit, System) 
         this.hasUnit = function hasUnit(unitName) {
             return unitRegistry.hasItem(unitName);
         };
-        this.register = function register(unit) {
+        this.register = function register(defOrUnit) {
+            var unit;
+            if (Test.instanceOf(defOrUnit, Unit)) {
+                unit = defOrUnit;
+            }
+            else if (Test.isObject(defOrUnit)) {
+                var def = defOrUnit;
+                unit = Units.createBaseUnit(def);(def);
+            }
             unitRegistry.register(unit);
+            return unit;
         };
+
         this.tryGet = function tryGet(unitName) {
             return unitRegistry.tryGet(unitName);
         };
@@ -64,9 +79,19 @@ define(['Guard', 'Test', 'Unit', 'System'], function(Guard, Test, Unit, System) 
         this.hasSystem = function hasSystem(systemName) {
             return systemRegistry.hasItem(systemName);
         };
-        this.registerSystem = function registerSystem(system) {
+        this.registerSystem = function registerSystem(defOrSystem) {
+            var system;
+            if (Test.instanceOf(defOrSystem, System)) {
+                system = defOrSystem;
+            }
+            else if (Test.isObject(defOrSystem)) {
+                var def = defOrSystem;
+                system = System.create(def);
+            }
             systemRegistry.register(system);
-        };
+            return system;
+        };        
+
         this.tryGetSystem = function tryGetSystem(systemName) {
             return systemRegistry.tryGet(systemName);
         };
