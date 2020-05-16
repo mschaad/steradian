@@ -1,6 +1,15 @@
-IDEAS
 add concept of unit systems, such as SI vs imperial
+    * move all unit registration to UnitRegistry
+    * update `convert` function to accept a system as a target
+    * support forward references in System definition/registration
+
+IDEAS
+
+simplify/consolidate code with Vector operations
 add support for dimensionless scalar types (e.g. Mol)
+add support for angles
+add support for 
+make it easier to express quantities of complex types (such as "4 m/s")
 unit aliases
 add unit parsing.  i.e. recognize "m/s" as "meters per second"
 add concept of tags for distinguishing semantically different types of the same dimensions, such work (F.d) and torque (r x F)
