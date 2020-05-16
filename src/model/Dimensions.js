@@ -7,6 +7,7 @@ define(['Guard', 'Arrays'], function(Guard, Arrays) {
 
 	Dimensions.prototype = {
 		get: function(i) {
+			Guard(i, 'i').isNumber();
 			return this._values[i];
 		},
 		size: function() {

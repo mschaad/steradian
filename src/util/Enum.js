@@ -1,15 +1,31 @@
-define([], function() {
-	var Enum = {
+define(['Arrays'], function(Arrays) {	
+	function Enum(values) {
+		this._values = Arrays.frozenClone(values);
+
+		var that = this;
+
+		this._values.forEach(function(v, i) {
+			that[v] = i;
+		});
+		
+		Object.freeze(this);
+	}
+
+	Enum.prototype = {
+		values: function() {
+			return this._values;
+		},
+		contains: function(name) {
+			return typeof this[name] !== 'undefined';
+		}
+	}
+	
+	var EnumModule = {
 		create: function (values) {
-			var e = Object.create(null);
-			for(var i = 0; i < values.length; i++) {
-				var name = values[i];
-				e[name] = i;
-			}
-			Object.freeze(e);
+			var e = new Enum(values);
 			return e;
 		}
 	};
 	
-	return Enum;
+	return EnumModule;
 });

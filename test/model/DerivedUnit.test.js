@@ -69,11 +69,13 @@ function (
         })
 
         suite('dimensions', function() {
-            var dim = Newton.dimensions();
-            equal(3, dim.size());
-            equal(1, dim.get(UnitType.mass));
-            equal(1, dim.get(UnitType.length));
-            equal(-2, dim.get(UnitType.time));
+            test('has expected dimensions', function() {
+                var dim = Newton.dimensions();
+                equal(3, dim.size());
+                equal(1, dim.get(UnitType.mass));
+                equal(1, dim.get(UnitType.length));
+                equal(-2, dim.get(UnitType.time));
+            });
         });
 
         suite('toString', function() {

@@ -45,13 +45,15 @@ function(mocha, chai, System, UnitType, StandardStrontiumFn) {
 
             equal(SI.name(), "SI");
 
+            ok(SI.length);
+
             //basic sanity check
             equal(SI.length().name(), "meter");
 
             //assert has all base unit types
-            for(var type in UnitType) {
+            UnitType.values().forEach(function(type) { 
                 ok(SI[type]().name());
-            }
+            });
         });
     });
 });

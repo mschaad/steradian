@@ -7,26 +7,28 @@ define(['Guard','Unit','UnitType', 'DerivedUnitType'], function(Guard, Unit, Uni
 
         Guard(def.base, "def.base").isObject();
 
-        for(var unitTypeName in UnitType) {
+        var that = this;
+
+        UnitType.values().forEach(function(unitTypeName) {
             if (!def.base.hasOwnProperty(unitTypeName)) {
                 throw new Error("System definition for '" + name + "' is missing base unit for " + unitTypeName);
             }
             
             var unit = def.base[unitTypeName];
             Guard(unit, "def.base." + unitTypeName).instanceOf(Unit);
-            this[unitTypeName] = (function(v) {
+            that[unitTypeName] = (function(v) {
                 return function() { return v; };
             })(unit);
-        }
+        });
 
         Guard(def.derived, "def.derived").isObject();
-
-        for(var unitTypeName in DerivedUnitType) {
+        
+        DerivedUnitType.values().forEach(function(unitTypeName) {
             var derivedUnit = def.derived[unitTypeName];
-            this[unitTypeName] = (function(v) {
+            that[unitTypeName] = (function(v) {
                 return function() { return v; };
             })(derivedUnit);
-        }
+        });
         
         //TODO: other units
 
