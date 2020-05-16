@@ -52,7 +52,7 @@ function(mocha, chai, System, UnitType, StandardStrontiumFn) {
 
             //assert has all base unit types
             UnitType.values().forEach(function(type) { 
-                ok(SI[type]().name());
+                ok(SI[type.name()]());
             });
         });
     });

@@ -10,7 +10,8 @@ function (mocha, chai, UnitType) {
 
     suite('UnitType', function() {
         test('has expected members', function() {
-            equal(UnitType.length, 0);
+            ok(UnitType.length, "length");
+            equal(UnitType.length.value(), 0);
             ok(UnitType.mass, "mass");
             ok(UnitType.time, "time");
             ok(UnitType.current, "current");

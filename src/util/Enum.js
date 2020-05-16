@@ -1,13 +1,21 @@
 define(['Arrays'], function(Arrays) {	
-	function Enum(values) {
-		this._values = Arrays.frozenClone(values);
+	function Enum(names) {
+		
+		function Value(name, value) {
+			this.name = function() { return name; };
+			this.value = function() { return value; };
+		}
+
+		this._values = names.map(function(name, idx) {
+			return new Value(name, idx);
+		});
 
 		var that = this;
-
-		this._values.forEach(function(v, i) {
-			that[v] = i;
+		this._values.forEach(function(v) {
+			that[v.name()] = v;
 		});
-		
+
+		Object.freeze(this._values);
 		Object.freeze(this);
 	}
 

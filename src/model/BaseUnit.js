@@ -20,7 +20,7 @@ function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
 
     function getDimensions() {
         var dim = [];
-        dim[UnitType[this.type()]] = 1;
+        dim[UnitType[this.type()].value()] = 1;
         return new Dimensions(dim);
     }
 

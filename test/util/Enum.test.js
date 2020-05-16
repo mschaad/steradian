@@ -12,11 +12,14 @@ define(['Mocha', 'Chai', 'Enum'], function(mocha, chai, Enum) {
         test('constructor', function() {
             var MetasyntacticVariables = Enum.create(['FOO','BAR','BAZ']);
 
-            equal(MetasyntacticVariables.FOO, 0);
-            equal(MetasyntacticVariables.BAR, 1);
-            equal(MetasyntacticVariables.BAZ, 2);
+            ok(MetasyntacticVariables.FOO);
+            equal(MetasyntacticVariables.FOO.value(), 0);
+            ok(MetasyntacticVariables.BAR);
+            equal(MetasyntacticVariables.BAR.value(), 1);
+            ok(MetasyntacticVariables.BAZ);
+            equal(MetasyntacticVariables.BAZ.value(), 2);
 
-            deepEqual(MetasyntacticVariables.values(), ['FOO', 'BAR', 'BAZ']);
+            deepEqual(MetasyntacticVariables.values().map(function(v) { return v.name(); }), ['FOO', 'BAR', 'BAZ']);
         });
         
         test('contains', function() {

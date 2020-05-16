@@ -72,9 +72,9 @@ function (
             test('has expected dimensions', function() {
                 var dim = Newton.dimensions();
                 equal(3, dim.size());
-                equal(1, dim.get(UnitType.mass));
-                equal(1, dim.get(UnitType.length));
-                equal(-2, dim.get(UnitType.time));
+                equal(1, dim.get(UnitType.mass.value()));
+                equal(1, dim.get(UnitType.length.value()));
+                equal(-2, dim.get(UnitType.time.value()));
             });
         });
 
