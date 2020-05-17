@@ -1,4 +1,4 @@
-define(['Mocha', 'Chai', 'Enum'], function(mocha, chai, Enum) {
+define(['Mocha', 'Chai', 'Enum', 'Guard'], function(mocha, chai, Enum, Guard) {
     var suite = mocha.suite,
         test = mocha.test;
 
@@ -9,24 +9,98 @@ define(['Mocha', 'Chai', 'Enum'], function(mocha, chai, Enum) {
 
     suite('Enum', function() {
 
-        test('constructor', function() {
-            var MetasyntacticVariables = Enum.create(['FOO','BAR','BAZ']);
+        function createMetasyntacticVariables() {
+            var MetasyntacticVariables = Enum.create({
+                name: 'MetasyntacticVariables',
+                values: ['FOO','BAR','BAZ']
+            });
+            return MetasyntacticVariables;
+        }
 
-            ok(MetasyntacticVariables.FOO);
-            equal(MetasyntacticVariables.FOO.value(), 0);
-            ok(MetasyntacticVariables.BAR);
-            equal(MetasyntacticVariables.BAR.value(), 1);
-            ok(MetasyntacticVariables.BAZ);
-            equal(MetasyntacticVariables.BAZ.value(), 2);
-
-            deepEqual(MetasyntacticVariables.values().map(function(v) { return v.name(); }), ['FOO', 'BAR', 'BAZ']);
+        suite('Enum.create', function() {
+            test('does not throw', function() {
+                var MetasyntacticVariables = createMetasyntacticVariables();
+                ok(MetasyntacticVariables);
+            });
+            test('Enum has name', function() {
+                var MetasyntacticVariables = createMetasyntacticVariables();
+                equal(MetasyntacticVariables.name, "MetasyntacticVariables");
+            });
+            test('creates instances as properties on Enum class', function() {
+                var MetasyntacticVariables = createMetasyntacticVariables();
+                ok(MetasyntacticVariables.FOO);
+                ok(MetasyntacticVariables.BAR);
+                ok(MetasyntacticVariables.BAZ);
+            });
+            test('starts numbering at 0', function() {
+                var MetasyntacticVariables = createMetasyntacticVariables();
+                equal(MetasyntacticVariables.FOO.value(), 0);
+                equal(MetasyntacticVariables.BAR.value(), 1);
+                equal(MetasyntacticVariables.BAZ.value(), 2);
+            });
+            test('class is frozen', function() {
+                var MetasyntacticVariables = createMetasyntacticVariables();
+                var FOO = MetasyntacticVariables.FOO;
+                MetasyntacticVariables.FOO = 2;
+                equal(MetasyntacticVariables.FOO, FOO);
+            });
         });
-        
-        test('contains', function() {
-            var MetasyntacticVariables = Enum.create(['FOO','BAR','BAZ']);
 
-            ok(MetasyntacticVariables.contains("FOO"));
-            equal(MetasyntacticVariables.contains("FAKE"), false);
+        suite('static methods', function() {
+            test('isInstance', function() {
+                var MetasyntacticVariables = createMetasyntacticVariables();
+                var propertyValues = [
+                    MetasyntacticVariables.FOO,
+                    MetasyntacticVariables.BAR,
+                    MetasyntacticVariables.BAZ
+                ];
+                propertyValues.forEach(function(v) {
+                    MetasyntacticVariables.isInstance(v);
+                });
+            });
+
+            test('Enum class has values() method that returns all values', function() {
+                var MetasyntacticVariables = createMetasyntacticVariables();
+                deepEqual(MetasyntacticVariables.values().map(function(v) { return v.name(); }), ['FOO', 'BAR', 'BAZ']);
+            });
+
+            test('Enum class has contains() method that works with strings', function() {
+                var MetasyntacticVariables = createMetasyntacticVariables();
+    
+                ok(MetasyntacticVariables.contains("FOO"));
+                equal(MetasyntacticVariables.contains("FAKE"), false);
+            });
+
+            function assertIsFoo(value) {
+                ok(value);
+                equal(value.name(), 'FOO');
+            }
+
+            suite('tryGet(name)', function() {
+                test('happy path', function() {
+                    var MetasyntacticVariables = createMetasyntacticVariables();
+                    var FOO = MetasyntacticVariables.tryGet("FOO");
+                    assertIsFoo(FOO);
+                });
+                test('returns false on invalid name', function() {
+                    var MetasyntacticVariables = createMetasyntacticVariables();
+                    var value = MetasyntacticVariables.tryGet("FAKE");
+                    equal(value, false);
+                });
+            });
+            suite('get(name)', function() {
+                test('happy path', function() {
+                    var MetasyntacticVariables = createMetasyntacticVariables();
+                    var FOO = MetasyntacticVariables.get("FOO");
+                    assertIsFoo(FOO);
+                });
+                test('throws on invalid name', function() {
+                    var MetasyntacticVariables = createMetasyntacticVariables();
+                    assert.throws(function() {
+                        MetasyntacticVariables.get("FAKE");
+                    });
+                });
+            });
         });
     });
 });

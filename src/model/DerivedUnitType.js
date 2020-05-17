@@ -30,7 +30,10 @@ define(['Enum'], function(Enum) {
         catalytic activity	    katal	        kat	            	s^-1·mol
     */
 
-    return Enum.create([
-        'ENERGY'
-    ]);
+    return Enum.create({
+        name: 'DerivedUnitType',
+        values: [
+            'ENERGY'
+        ]
+    });
 });

@@ -1,11 +1,14 @@
 define(['Enum'], function(Enum) {
-	return Enum.create([
-		'length',
-		'mass',
-		'time',
-		'current',
-		'temperature',
-		//'amount'
-		'luminousIntensity'
-	]);
+	return Enum.create({
+		name: 'UnitType',
+		values: [
+			'length',
+			'mass',
+			'time',
+			'current',
+			'temperature',
+			//'amount'
+			'luminousIntensity'
+		]
+	});
 });
