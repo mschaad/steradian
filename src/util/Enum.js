@@ -14,6 +14,10 @@ define(['Guard', 'Arrays'], function(Guard, Arrays) {
 			this.type = function() { return that; };
 		}
 
+		this.isInstance = function(enumValue) {
+			return enumValue instanceof Value;
+		};
+
 		this._values = def.values.map(function(name, idx) {
 			return new Value(name, idx);
 		});
@@ -32,9 +36,6 @@ define(['Guard', 'Arrays'], function(Guard, Arrays) {
 		},
 		contains: function(name) {
 			return !!this.tryGet(name);
-		},
-		isInstance: function(enumValue) {
-			return enumValue.type() === this;
 		},
 		get: function(name) {
 			var value = this.tryGet(name);

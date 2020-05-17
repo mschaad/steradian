@@ -47,15 +47,31 @@ define(['Mocha', 'Chai', 'Enum', 'Guard'], function(mocha, chai, Enum, Guard) {
         });
 
         suite('static methods', function() {
-            test('isInstance', function() {
+            suite('isInstance', function() {
                 var MetasyntacticVariables = createMetasyntacticVariables();
                 var propertyValues = [
                     MetasyntacticVariables.FOO,
                     MetasyntacticVariables.BAR,
                     MetasyntacticVariables.BAZ
                 ];
+                
                 propertyValues.forEach(function(v) {
-                    MetasyntacticVariables.isInstance(v);
+                    test('isInstance' + v.name(), function() {
+                        MetasyntacticVariables.isInstance(v);
+                    });                   
+                });
+
+                var nonEnumValues = [
+                    null,
+                    undefined,
+                    {},
+                    4
+                ];
+                
+                nonEnumValues.forEach(function(v) {
+                    test('non-instance ' + v, function() {
+                        equal(MetasyntacticVariables.isInstance(v), false);
+                    });
                 });
             });
 
