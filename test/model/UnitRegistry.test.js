@@ -1,5 +1,13 @@
-define(['Mocha', 'Chai', 'UnitRegistry', 'test/StandardStrontiumFn', 'model/systems/SI'], 
-function (mocha, chai, UnitRegistry, StandardStrontiumFn, SI) {
+define([
+    'Mocha', 'Chai', 
+    'UnitRegistry', 'UnitType', 'DerivedUnitType',
+    'test/StandardStrontiumFn','model/systems/SI', 'model/systems/Imperial'
+], 
+function (
+    mocha, chai, 
+    UnitRegistry, UnitType, DerivedUnitType,
+    StandardStrontiumFn, SI, Imperial
+    ) {
     var assert = chai.assert;
     
     var ok = assert.ok,
@@ -51,6 +59,55 @@ function (mocha, chai, UnitRegistry, StandardStrontiumFn, SI) {
         
                 test('succeeds when known derived unit is requested', function() {
                     ok(reg.get('Newton'));
+                });
+            });
+        });
+        suite('units and systems', function() {    
+            var reg = new UnitRegistry();
+            reg.registerSystem(SI);
+            reg.registerSystem(Imperial);
+
+            suite('tryGetUnitOfType', function() {
+                test('happy path, UnitType', function() {
+                    var maybeUnit = reg.tryGetUnitOfType(UnitType.length, 'SI');
+                    ok(maybeUnit);
+                    equal(maybeUnit.name(), "meter");
+                });
+
+                test('happy path, DerivedUnitType', function() {
+                    var maybeUnit = reg.tryGetUnitOfType(DerivedUnitType.ENERGY, 'SI');
+                    ok(maybeUnit);
+                    equal(maybeUnit.name(), "joule");
+                });
+
+                test('happy path, string', function() {
+                    var maybeUnit = reg.tryGetUnitOfType('length', 'SI');
+                    ok(maybeUnit);
+                    equal(maybeUnit.name(), "meter");
+                });
+
+                test('returns false when unit does not exist', function() {
+                    var maybeUnit = reg.tryGetUnitOfType("FAKE", 'SI');
+                    equal(maybeUnit, false);
+                });
+            });
+            suite('tryGetUnitOfDimensions', function() {
+                test('when unit exists: BaseUnit', function() {
+                    var meter = SI.length();
+                    var foot = reg.tryGetUnitOfDimensions(meter.dimensions(), 'Imperial');
+                    equal(foot.name(), "foot");
+                });
+
+                test('when unit exists: DerivedUnit', function() {
+                    var joule = SI.ENERGY();
+                    var footPound = reg.tryGetUnitOfDimensions(joule.dimensions(), 'Imperial');
+                    equal(footPound.name(), "foot-pound");
+                });
+
+                test('when unit does not exist', function() {
+                    var jouleSquared = SI.ENERGY().expression().pow(2);
+                    var result = reg.tryGetUnitOfDimensions(jouleSquared.dimensions(), 'SI');
+                    equal(result, false);
                 });
             });
         });

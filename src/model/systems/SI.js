@@ -52,7 +52,7 @@ define(['Units', 'System'], function(Units,System) {
         scale: 1.0
     });
 
-    var Newton = derivedUnit({
+    var newton = derivedUnit({
         name: 'newton',
         units: [
             { unit: kilogram, power: 1 },
@@ -66,7 +66,7 @@ define(['Units', 'System'], function(Units,System) {
     var joule = derivedUnit({
         name: 'joule',
         units: [
-            { unit: Newton, power: 1 },
+            { unit: newton, power: 1 },
             { unit: meter, power: 1 }
         ],
         symbol: "J",
@@ -86,9 +86,9 @@ define(['Units', 'System'], function(Units,System) {
             luminousIntensity: candela
         },
         derived: {
-            ENERGY: joule
+            ENERGY: joule,
             //charge: coulomb
-            //force: Newton
+            FORCE: newton
         },
         other: [
 

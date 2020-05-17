@@ -1,9 +1,9 @@
 define(
     ['Guard', 'Test',
-    'Unit', 'System',
-    'Units'
+    'Unit', 'System', 'UnitType',
+    'DerivedUnitType', 'Units'
     ], 
-    function(Guard, Test, Unit, System, Units) {
+    function(Guard, Test, Unit, System, UnitType, DerivedUnitType, Units) {
     
     function Registry(registryItemType) {
         Guard(registryItemType, 'registryItemType').isValue().isFunction();
@@ -54,8 +54,65 @@ define(
         var unitRegistry = new Registry(Unit);
         var systemRegistry = new Registry(System);
 
+        var that = this;
+
+        function coerceToSystem(systemOrId) {
+            Guard(systemOrId, 'systemOrId').isValue();
+            if (Test.instanceOf(systemOrId, System)) {
+                return systemOrId;
+            }
+            else if (Test.isString(systemOrId)) {
+                var id = systemOrId;
+                return that.getSystem(id);
+            }
+            else {
+                throw new Error('systemOrId was neither a System nor a valid System id.');
+            }
+        }
+
+        function allUnitTypes() {
+            return UnitType.values().concat(DerivedUnitType.values());
+        }
+
         this.get = function get(unitName) {
             return unitRegistry.get(unitName);
+        };
+        this.tryGetUnitOfType = function (typeOrName, systemOrId) {
+            var system = coerceToSystem(systemOrId);
+            
+            var prop;
+            if (UnitType.isInstance(typeOrName) || DerivedUnitType.isInstance(typeOrName)) {
+                var type = typeOrName;
+                prop = system[type.name()];
+            }
+            else if (Test.isString(typeOrName)) {
+                var name = typeOrName;
+                prop = system[name];
+            }
+            else {
+                throw new Error('typeOrName must be a UnitType, DerivedUnitType, or type name.');
+            }
+
+            if (!prop) {
+                return false;
+            }
+            return prop();
+        };
+        this.tryGetUnitOfDimensions = function (dimensions, systemOrId) {
+            var system = coerceToSystem(systemOrId);
+            
+            var matchingTypes = allUnitTypes()
+                .map(function(type) { 
+                    return system[type.name()](); 
+                })
+                .filter(function(type) { return type.dimensions().equals(dimensions); });
+
+            if (matchingTypes.length > 0) {
+                return matchingTypes[0];
+            }
+            else {
+                return false;
+            }
         };
         this.hasUnit = function hasUnit(unitName) {
             return unitRegistry.hasItem(unitName);

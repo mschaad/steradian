@@ -1,12 +1,13 @@
 define(['Units', 'System'], function(Units,System) {
 
     var unit = Units.createBaseUnit;
+    var derivedUnit = Units.createDerivedUnit;
     
     var foot = unit({
-        name: 'meter',
+        name: 'foot',
         type: 'length',
-        symbol: 'm',
-        scale: 1.0
+        symbol: 'ft',
+        scale: 3.28084
     });
 
     var slug = unit({
@@ -67,7 +68,25 @@ define(['Units', 'System'], function(Units,System) {
         scale: 1.0
     });
 
-    //TODO: pound of force
+ 	var pound = derivedUnit({
+        name: "pound",
+        symbol: "lb",
+        units: [
+            { unit: slug,   power: 1 },
+            { unit: foot,   power: 1 },
+            { unit: second, power: -2 }
+        ]
+    });
+
+    var footPound = derivedUnit({
+        name: "foot-pound",
+        symbol: "ft⋅lb",
+        units: [
+            { unit: foot,  power: 1 },
+            { unit: pound, power: 1 }
+        ]
+    });
+
     //TODO: yard, furlong, mile, league, fathom
     //TODO: acre, hectare
     //TODO: fl oz, pint, quart, gallon
@@ -86,13 +105,12 @@ define(['Units', 'System'], function(Units,System) {
             luminousIntensity: candela
         },
         derived: {
-            //charge: 
-            //force: pound
+            ENERGY: footPound,
+            FORCE: pound
         },
         other: [
             minute,
-            hour,
-            foot
+            hour
         ]
     });
 });
