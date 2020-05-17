@@ -86,7 +86,7 @@ define(['Units', 'System'], function(Units,System) {
             luminousIntensity: candela
         },
         derived: {
-            energy: joule
+            ENERGY: joule
             //charge: coulomb
             //force: Newton
         },
