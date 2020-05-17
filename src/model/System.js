@@ -9,6 +9,8 @@ define(['Guard','Unit','UnitType', 'DerivedUnitType'], function(Guard, Unit, Uni
 
         var that = this;
 
+        var allUnits = [];
+
         UnitType.values().forEach(function(unitType) {
             var unitTypeName = unitType.name();
             if (!def.base.hasOwnProperty(unitTypeName)) {
@@ -17,6 +19,9 @@ define(['Guard','Unit','UnitType', 'DerivedUnitType'], function(Guard, Unit, Uni
             
             var unit = def.base[unitTypeName];
             Guard(unit, "def.base." + unitTypeName).instanceOf(Unit);
+            
+            allUnits.push(unit);
+            
             that[unitTypeName] = (function(v) {
                 return function() { return v; };
             })(unit);
@@ -27,12 +32,20 @@ define(['Guard','Unit','UnitType', 'DerivedUnitType'], function(Guard, Unit, Uni
         DerivedUnitType.values().forEach(function(unitType) {
             var unitTypeName = unitType.name();
             var derivedUnit = def.derived[unitTypeName];
+
+            allUnits.push(derivedUnit);
+
             that[unitTypeName] = (function(v) {
                 return function() { return v; };
             })(derivedUnit);
         });
         
         //TODO: other units
+
+        Object.freeze(allUnits);
+        this.allUnits = function() {
+            return allUnits;
+        };
 
         Object.freeze(this);
     }

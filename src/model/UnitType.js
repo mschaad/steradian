@@ -7,6 +7,7 @@ define(['Enum'], function(Enum) {
 			'time',
 			'current',
 			'temperature',
+			'absoluteTemperature',
 			//'amount'
 			'luminousIntensity'
 		]
