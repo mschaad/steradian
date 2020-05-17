@@ -42,6 +42,14 @@ define(
                 return unit;
             },
             isUnit: Unit.isUnit,
+            isBaseUnit: function(unit) {
+                Guard(unit, 'unit').instanceOf(Unit);
+                return unit.isBaseUnit();
+            },
+            isDerivedUnit: function(unit) {
+                Guard(unit, 'unit').instanceOf(Unit);
+                return !unit.isBaseUnit();
+            },
             COMPARATOR: COMPARATOR,
             equal: function(lhs, rhs) {
                 return COMPARATOR(lhs, rhs) === 0;
