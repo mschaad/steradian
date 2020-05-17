@@ -41,7 +41,7 @@ define(
 					return registry.register(def);
 				},
 				quantity: function (unitExpression, value) {
-					unitExpression = Convert.toUnitExpression(SrInstance, unitExpression);
+					unitExpression = Convert.toUnitExpression(unitExpression, registry);
 					if (!SrInstance) {
 						throw new Error("SrInstance was not an object");
 					}
@@ -49,7 +49,8 @@ define(
 					return q;
 				},
 				convert: function(q, targetUnitsOrSystem) {
-					return Convert.convert(SrInstance, q, targetUnitsOrSystem);
+					var protoQuantity = Convert.quantity(q, targetUnitsOrSystem, registry);
+					return SrInstance.quantity(protoQuantity.units, protoQuantity.value);
 				}
 			};
 

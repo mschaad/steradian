@@ -1,6 +1,6 @@
 define(['Strings', 'Test', 'Unit', 'UnitExpression', 'Term'], 
 function(Strings, Test, Unit, UnitExpression, Term) {
-    function coerceToUnitExpression(Sr, obj) {
+    function coerceToUnitExpression(obj, registry) {
         if (Test.instanceOf(obj, UnitExpression)) {
             return obj;
         }
@@ -10,7 +10,7 @@ function(Strings, Test, Unit, UnitExpression, Term) {
         }
         else if (Strings.isString(obj)) {
             var identifier = obj;
-            unit = Sr.unit(identifier);
+            unit = registry.get(identifier);
             if (!unit) {
                 throw new Error("Unit '" + identifier + "' not found");
             }
@@ -24,9 +24,9 @@ function(Strings, Test, Unit, UnitExpression, Term) {
 
     var Convert = {
         toUnitExpression: coerceToUnitExpression,
-        convert: function (Sr, q, newUnits) {
+        quantity: function (q, newUnits, registry) {
             var originalDimensions = q.units().dimensions();
-            newUnits = coerceToUnitExpression(Sr, newUnits);
+            newUnits = coerceToUnitExpression(newUnits, registry);
             var newDimensions = newUnits.dimensions();
             if (!originalDimensions.equals(newDimensions)) {
                 throw 'incompatible unit dimensions';
@@ -77,7 +77,7 @@ function(Strings, Test, Unit, UnitExpression, Term) {
             
             var newValue = q.value() * scale;
             
-            return Sr.quantity(newUnits, newValue);
+            return { units: newUnits, value: newValue };
         }
     };
 
