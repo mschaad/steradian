@@ -5,7 +5,16 @@ define(
     ], 
     function(Guard, Test, Unit, System, UnitType, DerivedUnitType, Units) {
     
-    function Registry(registryItemType) {
+    function areUnitsEquivalent(lhs, rhs) {
+        // Units are equivalent if they are structurally equivalent.
+        return lhs === rhs || Units.equal(lhs, rhs);
+    }
+
+    function areSystemsEquivalent(lhs, rhs) {
+        return lhs === rhs;
+    }
+        
+    function Registry(registryItemType, areEquivalent) {
         Guard(registryItemType, 'registryItemType').isValue().isFunction();
         this.registryItemType = registryItemType;
         var table = Object.create(null);
@@ -14,8 +23,12 @@ define(
             Guard(item, this.getItemTypeName()).isValue().instanceOf(registryItemType);
             var name = item.name();
             Guard(name, this.getItemTypeName() + '.name').isString();
-            if (this.hasItem(name)) {
-                throw new Error("duplicate " + this.getItemTypeName() + " registered: " + name);
+
+            var maybeExistingItem = this.tryGet(item.name());
+            if (maybeExistingItem) {
+                if (!areEquivalent(item, maybeExistingItem)) {
+                    throw new Error("duplicate " + this.getItemTypeName() + " registered: " + name);
+                }                
             }
             table[name] = item;
             if (!this.tryGet(name)) {
@@ -51,8 +64,8 @@ define(
     }
 
     function UnitRegistry() {
-        var unitRegistry = new Registry(Unit);
-        var systemRegistry = new Registry(System);
+        var unitRegistry = new Registry(Unit, areUnitsEquivalent);
+        var systemRegistry = new Registry(System, areSystemsEquivalent);
 
         var that = this;
 

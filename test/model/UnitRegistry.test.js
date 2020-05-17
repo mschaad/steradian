@@ -1,11 +1,11 @@
 define([
     'Mocha', 'Chai', 
-    'UnitRegistry', 'UnitType', 'DerivedUnitType',
+    'UnitRegistry', 'UnitType', 'DerivedUnitType', 'Units',
     'test/StandardStrontiumFn','model/systems/SI', 'model/systems/Imperial'
 ], 
 function (
     mocha, chai, 
-    UnitRegistry, UnitType, DerivedUnitType,
+    UnitRegistry, UnitType, DerivedUnitType, Units,
     StandardStrontiumFn, SI, Imperial
     ) {
     var assert = chai.assert;
@@ -39,7 +39,6 @@ function (
         });
         suite('units', function() {
             suite('get', function() {
-
                 var Sr = StandardStrontiumFn();
     
                 var reg = new UnitRegistry();
@@ -59,6 +58,28 @@ function (
         
                 test('succeeds when known derived unit is requested', function() {
                     ok(reg.get('Newton'));
+                });
+            });
+            suite('register (Unit)', function() {
+                var Sr = StandardStrontiumFn();
+    
+                var reg = new UnitRegistry();
+                var meter = Sr.unit('meter');
+
+                reg.register(meter);
+        
+                test('does nothing when known unit is re-registered', function() {
+                    reg.register(meter);
+                });
+
+                test('does nothing when equivalent unit is re-registered', function() {
+                    var duplicateMeter = Units.createBaseUnit({
+                        name: 'meter',
+                        type: 'length',
+                        symbol: 'm',
+                        scale: 1
+                    });
+                    reg.register(duplicateMeter);
                 });
             });
         });
