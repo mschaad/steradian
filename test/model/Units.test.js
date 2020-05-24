@@ -2,9 +2,7 @@ define(['Mocha', 'Chai','Units'],
 function (mocha, chai, Units) {
     var assert = chai.assert;
     
-    var ok = assert.ok,
-		deepEqual = assert.deepEqual,
-        equal = assert.equal;
+    var equal = assert.equal;
     
     var suite = mocha.suite, test = mocha.test;
 

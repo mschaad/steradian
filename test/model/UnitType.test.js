@@ -5,7 +5,6 @@ function (mocha, chai, UnitType) {
     var suite = mocha.suite, test = mocha.test;
 
 	var ok = assert.ok,
-		deepEqual = assert.deepEqual,
         equal = assert.equal;
 
     suite('UnitType', function() {

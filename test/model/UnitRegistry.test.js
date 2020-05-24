@@ -11,17 +11,13 @@ function (
     var assert = chai.assert;
     
     var ok = assert.ok,
-		deepEqual = assert.deepEqual,
         equal = assert.equal;
     
     var suite = mocha.suite, test = mocha.test;
 
     suite('UnitRegistry', function() {
         suite('systems', function() {
-            suite('getSystem', function() {
-
-                var Sr = StandardStrontiumFn();
-    
+            suite('getSystem', function() {    
                 var reg = new UnitRegistry();
     
                 reg.registerSystem(SI);

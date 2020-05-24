@@ -2,9 +2,7 @@ define(['Mocha', 'Chai', 'Strontium', 'test/StandardStrontiumFn', 'UnitExpressio
 function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
     var assert = chai.assert;
     
-    var ok = assert.ok,
-		deepEqual = assert.deepEqual,
-        equal = assert.equal,
+    var equal = assert.equal,
         throws = assert.throws,
         closeTo = assert.closeTo;
 
@@ -55,7 +53,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
                 });
                 test("addition of incompatible types", function() {
                     throws(function() {
-                        var q = quantity(meter, 3).plus(quantity(second, 4));
+                        quantity(meter, 3).plus(quantity(second, 4));
                     });
                 });
             });
@@ -74,7 +72,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
                 });
                 test("subtraction of incompatible types", function() {
                     throws(function() {
-                        var q = quantity(meter, 3).minus(quantity(second, 4));
+                        quantity(meter, 3).minus(quantity(second, 4));
                     });
                 });
             });

@@ -60,6 +60,7 @@ function(Strings, Test, Unit, UnitExpression, Term) {
             }
             
             var scale = 1;
+            var power;
             for(var unitName in delta) {
                 power = delta[unitName];
                 unit = unitTable[unitName];

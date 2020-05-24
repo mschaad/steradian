@@ -8,9 +8,7 @@ function(mocha, chai,
     
     var ok = assert.ok,
 		deepEqual = assert.deepEqual,
-        equal = assert.equal,
-        throws = assert.throws,
-        closeTo = assert.closeTo;
+        equal = assert.equal;
 
     var suite = mocha.suite, test = mocha.test;
 

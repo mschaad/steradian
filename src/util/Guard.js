@@ -47,7 +47,7 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 			},
 			isArrayOf: function(objType) {
 				that.isArray();
-				var firstErrorIndex = value.findIndex(function(element, idx) {
+				var firstErrorIndex = value.findIndex(function(element) {
 					return !(element instanceof objType);
 				});
 				if (firstErrorIndex > -1) {

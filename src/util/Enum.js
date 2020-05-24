@@ -1,4 +1,4 @@
-define(['Guard', 'Arrays'], function(Guard, Arrays) {	
+define(['Guard'], function(Guard) {	
 	function Enum(def) {
 		Guard(def.values, 'def.values').isValue().isArray();
 		Guard(def.name, 'def.name').isValue().isString();
@@ -40,7 +40,7 @@ define(['Guard', 'Arrays'], function(Guard, Arrays) {
 		get: function(name) {
 			var value = this.tryGet(name);
 			if (!value) {
-				throw new Error(name + ' is not a defined member of ' + enumName);
+				throw new Error(name + ' is not a defined member of ' + this.name);
 			}
 			return value;
 		},

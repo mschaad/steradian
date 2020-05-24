@@ -1,6 +1,8 @@
 // Karma configuration
 // Generated on Mon Apr 20 2020 01:46:48 GMT-0400 (Eastern Daylight Time)
 
+/* globals module */
+
 module.exports = function(config) {
   var webpackTestConfig = require('./webpack.config.test.js');
   

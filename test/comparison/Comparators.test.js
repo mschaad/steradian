@@ -10,14 +10,15 @@ function (mocha, chai, Comparators, Arrays) {
         throws = assert.throws;
 
     
-    function spy(name, comparator) {
-        var d = function(lhs, rhs) {
-            var comp = comparator(lhs, rhs);
-            console.log(name + ": " + lhs + " vs " + rhs + " = " + comp);
-            return comp;
-        };
-        return d;
-    }
+    // function spy(name, comparator) {
+    //     /* globals console */
+    //     var d = function(lhs, rhs) {
+    //         var comp = comparator(lhs, rhs);
+    //         console.log(name + ": " + lhs + " vs " + rhs + " = " + comp);
+    //         return comp;
+    //     };
+    //     return d;
+    // }
 
 	suite("Comparators", function () {
         function sort(a, comparator) {
@@ -78,7 +79,6 @@ function (mocha, chai, Comparators, Arrays) {
 
             test('throws on non string', function() {
                 var input = ["b", "a", 1];
-                var expected = ["a", "b", "c"];
                 throws(function() {
                     sort(input, c);
                 });

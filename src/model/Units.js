@@ -10,8 +10,11 @@ define(
         Comparators) {
 
         var COMPARATOR = Comparators.byProperty("name");
-
+        
         function expect(value, pattern) {
+            function use() {}
+            use(value);
+            use(pattern);    
             //TODO: enforce
         }
 

@@ -1,3 +1,4 @@
+/* jshint node: true */
 var primaryConfig = require('./webpack.config.js');
 var nodeExternals = require('webpack-node-externals');
 var merge = require('webpack-merge');

@@ -1,6 +1,8 @@
 define([], function() {
    return {
         install: function(Sr) {
+            /* jshint -W098 */
+            
             //MASS
             var kilogram = Sr.unit({
                 name: 'kilogram',
@@ -101,7 +103,6 @@ define([], function() {
                 symbol: "J",
                 scale: 1.0,
             });
-            
        }
    };
 });

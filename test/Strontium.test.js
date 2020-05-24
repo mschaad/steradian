@@ -7,7 +7,6 @@ function (mocha, chai, Strontium,
 	var assert = chai.assert;
 
 	var ok = assert.ok,
-		deepEqual = assert.deepEqual,
 		equal = assert.equal,
 		closeTo = assert.closeTo;
 	
@@ -52,6 +51,7 @@ function (mocha, chai, Strontium,
 			});
 
 			test('can get registered derived unit', function () {
+				/* jshint -W098 */
 				var Sr = Strontium();
 				
 				var meter = Sr.unit({
@@ -214,7 +214,7 @@ function (mocha, chai, Strontium,
 			test('can convert from one derived unit to another derived unit', function () {
 				var Sr = StandardStrontiumFn();
 
-				var decaSecond = Sr.unit({
+				Sr.unit({
 					name: 'decasecond',
 					symbol: "das",
 					scale: 10,
@@ -230,7 +230,7 @@ function (mocha, chai, Strontium,
 					]
 				});
 
-				var hectoSecond = Sr.unit({
+				Sr.unit({
 					name: 'hectosecond',
 					symbol: "hs",
 					scale: 100,

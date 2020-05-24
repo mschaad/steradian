@@ -4,9 +4,7 @@ function (mocha, chai, Strontium, StandardUnitDefinitions) {
 
     var suite = mocha.suite, test = mocha.test;
 
-	var ok = assert.ok,
-		deepEqual = assert.deepEqual,
-        equal = assert.equal;
+	var equal = assert.equal;
         
     function newStrontium() {
         var Sr = Strontium();

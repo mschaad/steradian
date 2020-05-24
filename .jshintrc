@@ -1,0 +1,17 @@
+{
+    "curly":    true,
+    "eqeqeq":   true,
+    "esversion": 5,
+    "unused":   true,
+    "immed":    true,
+    "latedef":  false,
+    "freeze":   true,
+    "noarg":    true,
+    "nonew":    true,
+    "undef":    true,
+
+    "predef": [
+        "require",
+        "define"
+    ]
+}

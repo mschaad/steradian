@@ -60,7 +60,7 @@ define([], function() {
 		dividedBy: function(rhs) {
 			return ArithmeticOps.divide(this, rhs);
 		},
-		toString: function toString(options) {
+		toString: function toString() {
 			return this.value() + this.units().toString();
 		}
 	};

@@ -1,4 +1,4 @@
-define(['Mocha', 'Chai', 'Enum', 'Guard'], function(mocha, chai, Enum, Guard) {
+define(['Mocha', 'Chai', 'Enum'], function(mocha, chai, Enum) {
     var suite = mocha.suite,
         test = mocha.test;
 

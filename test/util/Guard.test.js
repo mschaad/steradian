@@ -2,10 +2,6 @@ define(['Mocha', 'Chai', 'Guard', 'Unit', 'DerivedUnit', 'test/StandardStrontium
 function(mocha, chai, Guard, Unit, DerivedUnit, StandardStrontiumFn) {
 	var assert = chai.assert;
 	
-	var ok = assert.ok,
-		deepEqual = assert.deepEqual,
-		equal = assert.equal;
-	
 	var suite = mocha.suite, test = mocha.test;
 
     suite('isValue', function() {

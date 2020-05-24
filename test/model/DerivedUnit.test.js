@@ -1,16 +1,15 @@
 define([
     'Mocha', 'Chai', 
-    'Strontium', 'Unit', 'DerivedUnit', 'UnitType',
+    'DerivedUnit', 'UnitType',
     'test/StandardStrontiumFn'], 
 function (
     mocha, chai, 
-    Strontium, Unit, DerivedUnit, UnitType,
+    DerivedUnit, UnitType,
     StandardStrontiumFn
 ) {
     var assert = chai.assert;
     
     var ok = assert.ok,
-		deepEqual = assert.deepEqual,
         equal = assert.equal;
     
     var suite = mocha.suite, test = mocha.test;
@@ -79,8 +78,6 @@ function (
         });
 
         suite('toString', function() {
-            var Sr = StandardStrontiumFn();
-
             test("Newton", function() {
                 equal("N", Newton.toString());
             });

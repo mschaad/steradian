@@ -1,11 +1,6 @@
-define(['Mocha', 'Chai', 'Test', 'Unit', 'DerivedUnit', 'test/StandardStrontiumFn'], 
-function(mocha, chai, Test, Unit, DerivedUnit, StandardStrontiumFn) {
+define(['Mocha', 'Chai', 'Test', 'Unit'], 
+function(mocha, chai, Test, Unit) {
 	var assert = chai.assert;
-	
-    var ok = assert.ok,
-		deepEqual = assert.deepEqual,
-		equal = assert.equal;
-	
     var suite = mocha.suite, test = mocha.test;
     
     function testName(input) {

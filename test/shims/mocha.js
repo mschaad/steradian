@@ -1,4 +1,5 @@
 define([], function() {
+    /* jshint browser: true */
     try {
         var mocha = require('mocha');
         return mocha;   

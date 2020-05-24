@@ -3,10 +3,6 @@ function (mocha, chai, Strontium, Unit, StandardUnitDefinitions) {
     var assert = chai.assert;
 
     var suite = mocha.suite, test = mocha.test;
-
-	var ok = assert.ok,
-		deepEqual = assert.deepEqual,
-        equal = assert.equal;
         
     function newStrontium() {
         var Sr = Strontium();
