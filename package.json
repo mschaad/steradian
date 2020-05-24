@@ -28,6 +28,7 @@
     "test": "mocha-webpack --webpack-config webpack.config.test.js \"test/**/*test.js\"",
     "watch": "mocha-webpack --webpack-config webpack.config.test.js \"test/**/*test.js\" --watch",
     "karma": "karma start karma.conf.js",
+    "lint": "jshint .",
     "webpack": "webpack"
   },
   "repository": {
