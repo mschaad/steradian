@@ -63,7 +63,9 @@ function(mocha, chai, Guard, Unit, DerivedUnit, StandardStrontiumFn) {
         });
 
         test('new Function is function', function() {
+            /* jshint -W054 */
             Guard(new Function(), 'fn').isFunction();
+            /* jshint +W054 */
         });
-    })
-})
+    });
+});

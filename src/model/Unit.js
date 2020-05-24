@@ -2,7 +2,7 @@ define(['Guard'],
 	function(Guard) {
 		function Unit(name, symbol, scale) {
 			Guard(name, "name").isString().isTruthy();
-			this.name = asProperty(name);;
+			this.name = asProperty(name);
 			Guard(symbol, "symbol").isString().isTruthy();
 			this.symbol = asProperty(symbol);
 			Guard(scale, "scale").isNumber().isNotZero();

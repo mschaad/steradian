@@ -20,7 +20,7 @@ define(['comparison/Comparator', 'Arrays'], function(Comparator, Arrays) {
             }
 
             return 0;
-        }
+        };
     }
 
     return CompositeComparator;

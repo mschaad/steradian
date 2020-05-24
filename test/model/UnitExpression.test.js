@@ -218,5 +218,5 @@ function (
                 equal('N', newtonExp.toString());
             });
         });
-    })
+    });
 });

@@ -4,4 +4,4 @@ define([], function() {
             return (value instanceof String) || typeof(value) === "string";
         }
     };
-})
+});

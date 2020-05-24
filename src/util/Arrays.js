@@ -10,4 +10,4 @@ define(['Guard'], function(Guard) {
         },
     };
     return Arrays;
-})
+});

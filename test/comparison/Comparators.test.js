@@ -13,7 +13,7 @@ function (mocha, chai, Comparators, Arrays) {
     function spy(name, comparator) {
         var d = function(lhs, rhs) {
             var comp = comparator(lhs, rhs);
-            console.log(`${name}: ${lhs} vs ${rhs} = ${comp}`);
+            console.log(name + ": " + lhs + " vs " + rhs + " = " + comp);
             return comp;
         };
         return d;
@@ -22,7 +22,7 @@ function (mocha, chai, Comparators, Arrays) {
 	suite("Comparators", function () {
         function sort(a, comparator) {
             if (!comparator) {
-                throw new Error("oops! You forgot to supply a comparator!")
+                throw new Error("oops! You forgot to supply a comparator!");
             }
             var clone = Arrays.clone(a);
             clone.sort(comparator);
@@ -126,7 +126,7 @@ function (mocha, chai, Comparators, Arrays) {
                 var c = Comparators.byProperty("value", Comparators.DEFAULT);
 
                 assertInputGivesExpectedOutput(c, input, expected);
-            })
+            });
         });
 
         suite("byProperty", function() {

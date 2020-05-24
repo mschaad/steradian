@@ -1,11 +1,11 @@
-define(['comparison/comparators/DefaultComparator', 'comparison/Comparator'], function(DefaultComparator, Comparator, Strings) {
+define(['comparison/comparators/DefaultComparator', 'comparison/Comparator'], function(DefaultComparator, Comparator) {
     
     var ProjectionComparator = {
         create: function(projection, comparator) {
             var c = comparator || DefaultComparator;
             return Comparator.create(compareByProjection(projection, c));
         },
-        ofProperties(name, comparator) {
+        ofProperties: function(name, comparator) {
             return ProjectionComparator.create(byProperty(name), comparator);
         }
     };
@@ -23,4 +23,4 @@ define(['comparison/comparators/DefaultComparator', 'comparison/Comparator'], fu
     }
 
     return ProjectionComparator;
-})
+});

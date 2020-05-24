@@ -9,7 +9,7 @@ define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, 
 				dimensions = getDimensions.call(that);
 			}
 			return dimensions;
-		}
+		};
 		Object.freeze(this);
 	}
 
@@ -34,7 +34,7 @@ define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, 
 			return this._dimensions();
 		},
 		mult: function(rhs) {
-			var terms = flatten([this.terms(), rhs.terms()])
+			var terms = flatten([this.terms(), rhs.terms()]);
 			terms = combineLikeTerms(terms);
 			return new UnitExpression(terms);
 		},
@@ -95,7 +95,7 @@ define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, 
 	function termExponent(power) {
 		return function(t) {
 			return new Term(t.unit(), t.power() * power); 	
-		}
+		};
 	}
 	
 	function unitProperty(term) {
@@ -138,7 +138,7 @@ define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, 
 	}
 	
 	function sumPowersOf(terms) {
-		var sum = terms.reduce(function(acc, t) { return acc + t.power() }, 0);
+		var sum = terms.reduce(function(acc, t) { return acc + t.power(); }, 0);
 		return sum;
 	}
 	

@@ -14,4 +14,4 @@ define(['comparison/Comparator', 'Strings'], function(Comparator, Strings) {
             throw new Error("strings were somehow equal, but not equal");
         }
     });
-})
+});

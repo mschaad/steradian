@@ -10,7 +10,7 @@ function(DefaultComparator, StringComparator, ProjectionComparator, CompositeCom
         DEFAULT: DefaultComparator,
         STRING: StringComparator,
         composite: function(comparators) {
-            return CompositeComparator.create(comparators)
+            return CompositeComparator.create(comparators);
         },
         byProperty: function(name, comparator) {
             return ProjectionComparator.ofProperties(name, comparator);

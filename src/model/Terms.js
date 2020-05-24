@@ -14,4 +14,4 @@ define(['Guard', 'comparison/Comparators'], function(Guard, Comparators) {
     };   
 
     return Terms;
-})
+});

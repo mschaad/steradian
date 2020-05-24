@@ -66,7 +66,7 @@ function (
                 var expected = 2.0 * slug.scale() * foot.scale() / Math.pow(Millisecond.scale(), 2);
                 equal(expected, FakeForce.scale());
             });
-        })
+        });
 
         suite('dimensions', function() {
             test('has expected dimensions', function() {
@@ -89,5 +89,5 @@ function (
         test("isBaseUnit", function() {
             equal(false, Newton.isBaseUnit());
         });
-    })
+    });
 });

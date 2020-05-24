@@ -25,7 +25,7 @@ define([], function() {
 
             return fn;
         }
-    }
+    };
 
     return Comparator;
-})
+});

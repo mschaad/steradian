@@ -23,4 +23,4 @@ function(DefaultComparator, Comparator) {
     }
 
     return ArrayComparator;
-})
+});

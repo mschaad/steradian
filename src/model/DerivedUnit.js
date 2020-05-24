@@ -23,7 +23,7 @@ function(Guard, Arrays, Unit, UnitExpression) {
 				return acc * factor;
 			}, 
 			1
-		)
+		);
 	}
 
 	DerivedUnit.prototype = Object.create(Unit.prototype);

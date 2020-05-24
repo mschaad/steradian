@@ -20,4 +20,4 @@ define(['comparison/Comparator', 'Test'], function(Comparator, Test) {
     }
 
     return Comparator.create(defaultComparison);
-})
+});

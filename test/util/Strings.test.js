@@ -14,7 +14,9 @@ define(['Mocha', 'Chai', 'Strings'], function(mocha, chai, Strings) {
 			});
 	
 			test('returns true for new String()', function() {
+				/* jshint -W053 */
 				assert.isTrue(Strings.isString(new String("foo")));
+				/* jshint +W053 */
 			});
 
 			test('returns false for object', function() {
@@ -25,6 +27,6 @@ define(['Mocha', 'Chai', 'Strings'], function(mocha, chai, Strings) {
 					scale: 1.0
 				}));
 			});
-		})
+		});
     });
 });

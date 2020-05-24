@@ -16,6 +16,9 @@ define(['Strings'], function(Strings) {
             return Strings.isString(value);
         },
         isObject: function(value) {
+            if (value === null) {
+                return false;
+            }
             return typeof value === 'object';
         },
         instanceOf: function(value, objType) {

@@ -26,16 +26,20 @@ function(mocha, chai, Test, Unit, DerivedUnit, StandardStrontiumFn) {
             var INPUT = 1;
             var EXPECTED_OUTPUT = 2;
 
+            function createTest(input, expected) {
+                return function() {
+                    var actual = fn(input);
+                    assert.equal(actual, expected);
+                };
+            }
+
             for(var i = 0; i < testCases.length; i++) {
                 var testCase = testCases[i];
                 var name = testCase[NAME];
                 var input = testCase[INPUT];
                 var expected = testCase[EXPECTED_OUTPUT];
                 
-                test(name, function() {
-                    var actual = fn(input);
-                    assert.equal(actual, expected);
-                });
+                test(name, createTest(input, expected));
             }
         });    
     }
@@ -74,11 +78,13 @@ function(mocha, chai, Test, Unit, DerivedUnit, StandardStrontiumFn) {
     suiteFor('isValue',     Test.isValue,     isValueTestCase([false, false, true,  true,  true ]));
 
     suiteFor('isObject',    Test.isObject, [
+        testCase(null,      false),
         testCase(undefined, false),
-        testCase(null, false),
         testCase("object literal",  {},                     true),
         testCase("string",          "a string",             false),
+        /* jshint -W053 */
         testCase("String obj",      new String("a string"), true),
+        /* jshint +W053 */
     ]);
 
 
@@ -90,7 +96,9 @@ function(mocha, chai, Test, Unit, DerivedUnit, StandardStrontiumFn) {
         
         testCase(testFunction,                              true),
         testCase(function functionExpression(){},           true),
+        /* jshint -W054 */
         testCase(new Function(),                            true),
+        /* jshint +W054 */
         testCase({ aFunction: function() {} }.aFunction,    true),
     ]);
 });

@@ -1,5 +1,5 @@
-const path = require('path');
-const CircularDependencyPlugin = require('circular-dependency-plugin');
+var path = require('path');
+var CircularDependencyPlugin = require('circular-dependency-plugin');
 
 function resolvePath(dir) {
     return path.resolve(__dirname, dir);

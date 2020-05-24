@@ -5,4 +5,4 @@ define([], function() {
     } catch (err) {
         return window.chai;
     }
-})
+});

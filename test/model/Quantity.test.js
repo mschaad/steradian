@@ -20,7 +20,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
                 equal(q2.units().toString(), "m");
                 closeTo(q2.value(), 1.8288, 5e-5);
             });
-        })
+        });
 
         suite("constructor", function() {
             var Sr = StandardStrontiumFn();
@@ -31,14 +31,14 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
                 assert.equal(1, quantityTerms.length);
                 assert.equal("Newton", quantityTerms[0].unit().name());
             });
-        })
+        });
 
         suite("arithmetic", function() {
             var Sr = StandardStrontiumFn();
             var quantity = Sr.quantity;
 
             var meter = Sr.unit('meter');
-            var foot = Sr.unit('foot')
+            var foot = Sr.unit('foot');
             var second = Sr.unit('second');
 
             suite("addition", function() {
@@ -56,7 +56,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
                 test("addition of incompatible types", function() {
                     throws(function() {
                         var q = quantity(meter, 3).plus(quantity(second, 4));
-                    })
+                    });
                 });
             });
 
@@ -75,7 +75,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
                 test("subtraction of incompatible types", function() {
                     throws(function() {
                         var q = quantity(meter, 3).minus(quantity(second, 4));
-                    })
+                    });
                 });
             });
 

@@ -74,5 +74,5 @@ module.exports = function(config) {
       require('karma-chai'),
       require('karma-chrome-launcher'),
     ]
-  })
-}
+  });
+};

@@ -82,4 +82,4 @@ function(Strings, Test, Unit, UnitExpression, Term) {
     };
 
     return Convert;
-})
+});

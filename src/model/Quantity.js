@@ -15,14 +15,14 @@ define([], function() {
 			var convertedRhs = rhs.convertTo(lhsUnits);
 			var resultValue = lhs.value() + convertedRhs.value();
 			var resultQuantity = quantity(resultValue, lhsUnits, lhs.Sr); 
-			return resultQuantity
+			return resultQuantity;
 		},
 		subtract: function add(lhs, rhs) {
 			var lhsUnits = lhs.units();
 			var convertedRhs = rhs.convertTo(lhsUnits);
 			var resultValue = lhs.value() - convertedRhs.value();
 			var resultQuantity = quantity(resultValue, lhsUnits, lhs.Sr); 
-			return resultQuantity
+			return resultQuantity;
 		},
 		multiply: function(lhs, rhs) { 
 			var resultUnits = lhs.units().mult(rhs.units());

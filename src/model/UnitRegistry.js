@@ -178,4 +178,4 @@ define(
     }
 
     return UnitRegistry;
-})
+});

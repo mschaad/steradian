@@ -12,7 +12,7 @@ function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
                 dimensions = getDimensions.call(that);
             }
             return dimensions;
-        }
+        };
         Object.freeze(this);
     }
 
@@ -38,7 +38,7 @@ function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
 				return new UnitExpression(terms);
             }
         }
-    )
+    );
 
     return BaseUnit;
 });
