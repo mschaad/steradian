@@ -283,31 +283,32 @@ function (mocha, chai, Strontium,
 				assert.closeTo(qPounds.value(), 0.224809, 1e-7);
 			});
 
-			// test('can convert units to a standard system', function() {
-			// 	var Sr = StandardStrontiumFn();
-			// 	//F = ma
-			// 	//N = kg * m / s^2
-			// 	//lb = slug * (feet / s^2)
-			// 	var pound = Sr.derivedUnit({
-			// 		name: "pound",
-			// 		symbol: "lb",
-			// 		units: [
-			// 			{ unit: 'slug', power: 1 },
-			// 			{ unit: 'foot', power: 1 },
-			// 			{ unit: 'second', power: -2 }
-			// 		]
-			// 	});
+			test('can convert units to a standard system', function() {
+				var Sr = StandardStrontiumFn();
+				//F = ma
+				//N = kg * m / s^2
+				//lb = slug * (feet / s^2)
+				var pound = Sr.derivedUnit({
+					name: "pound",
+					symbol: "lb",
+					units: [
+						{ unit: 'slug', power: 1 },
+						{ unit: 'foot', power: 1 },
+						{ unit: 'second', power: -2 }
+					]
+				});
 
-			// 	var qPounds = Sr.quantity(1, pound);
+				var SI = require('model/systems/SI');
+				SI = Sr.system(SI);
 
-			// 	var SI = Sr.system('SI');
+				var qPounds = Sr.quantity(pound, 1);
 
-			// 	var qNewtons = Sr.convert(qPounds, SI);
+				var qNewtons = Sr.convert(qPounds, SI);
 				
-			// 	//1 slug ft/s^2 = 4.44822162 newtons
-			// 	assert.closeTo(qNewtons.value(), 4.44822162, 1e-7);
-			// 	equal(qNewtons.units().toString(), "N");
-			// });
+				//1 slug ft/s^2 = 4.44822162 newtons
+				assert.closeTo(qNewtons.value(), 4.4482, 5e-5);
+				equal(qNewtons.units().toString(), "N");
+			});
 		});
 	});
 });

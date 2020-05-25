@@ -1,5 +1,11 @@
-define(['Strings', 'Test', 'Unit', 'UnitExpression', 'Term'], 
-function(Strings, Test, Unit, UnitExpression, Term) {
+define([
+    'Strings', 'Test', 'Guard',
+    'Unit', 'UnitExpression', 'Term', 'System',
+    'Units'
+], 
+function(Strings, Test, Guard,
+    Unit, UnitExpression, Term, System,
+    Units) {
     function coerceToUnitExpression(obj, registry) {
         if (Test.instanceOf(obj, UnitExpression)) {
             return obj;
@@ -24,16 +30,26 @@ function(Strings, Test, Unit, UnitExpression, Term) {
 
     var Convert = {
         toUnitExpression: coerceToUnitExpression,
-        quantity: function (q, newUnits, registry) {
+		quantity: function (q, targetUnitsOrSystem, registry) {
+            var targetUnits;
+            if (Test.instanceOf(targetUnitsOrSystem, System)) {
+                var system = targetUnitsOrSystem;
+                targetUnits = Convert.unitsToSystem(q.units(), system, registry);
+            }
+            else {
+                targetUnits = targetUnitsOrSystem;
+                targetUnits = coerceToUnitExpression(targetUnits, registry);
+            }
+
             var originalDimensions = q.units().dimensions();
-            newUnits = coerceToUnitExpression(newUnits, registry);
-            var newDimensions = newUnits.dimensions();
+            targetUnits = coerceToUnitExpression(targetUnits, registry);
+            var newDimensions = targetUnits.dimensions();
             if (!originalDimensions.equals(newDimensions)) {
                 throw 'incompatible unit dimensions';
             }
             
             var oldTerms = q.units().terms();
-            var newTerms = newUnits.terms();
+            var newTerms = targetUnits.terms();
             
             var delta = Object.create(null);
             
@@ -78,7 +94,44 @@ function(Strings, Test, Unit, UnitExpression, Term) {
             
             var newValue = q.value() * scale;
             
-            return { units: newUnits, value: newValue };
+            return { units: targetUnits, value: newValue };
+        },
+        unitsToSystem: function(unitOrExpression, system, registry) {
+            Guard(registry, "registry").isValue();
+            Guard(system, "system").isValue();
+            var unitExpression = Convert.toUnitExpression(unitOrExpression, registry);
+            var mappedTerms = unitExpression.terms().map(mapTerm);
+            
+            return new UnitExpression(mappedTerms);
+    
+            function mapTerm(term) {
+                return new Term(
+                    mapUnit(term.unit()),
+                    term.power()
+                );
+            }
+        
+            function mapUnit(unit) {                
+                if (Units.isDerivedUnit(unit)) {
+                    var targetUnit = registry.tryGetUnitOfDimensions(unit.dimensions(), system);
+
+                    if (!targetUnit) {
+                        throw new Error('indrect mapping of derived units between systems is not yet supported.');
+                    }
+
+                    return targetUnit;
+                }
+                else if (Units.isBaseUnit(unit)) {
+                    var maybeTargetUnit = registry.tryGetUnitOfType(unit.type(), system);
+                    if (!maybeTargetUnit) {
+                        throw new Error('no unit of type ' + unit.type() + ' found for system ' + system.name());
+                    }
+                    return maybeTargetUnit;
+                }
+                else {
+                    throw new Error('unit was neither a BaseUnit nor a DerivedUnit!');
+                }
+            }
         }
     };
 

@@ -24,7 +24,7 @@ Sr : {
 			power : number
 		}
 	quantity(UnitExpression, number) : Quantity
-	convert(Quantity, UnitExpression) : Quantity
+	convert(Quantity, UnitExpression|System) : Quantity
 }
 
 --------------------------------
