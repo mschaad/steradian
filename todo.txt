@@ -4,6 +4,7 @@ add concept of unit systems, such as SI vs imperial
 
 IDEAS
 
+remove BaseUnit.expression() (it is NOT analogous to DerivedUnit.expression())
 simplify/consolidate code with Vector operations
 add support for dimensionless scalar types (e.g. Mol)
 add support for angles
