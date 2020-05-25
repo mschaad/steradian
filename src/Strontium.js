@@ -1,14 +1,14 @@
 define(
 	[
 	'Guard', 'Test', 
-	'System',
-	'Quantity','UnitRegistry', 'Units',
+	'Quantity','UnitRegistry', 
+	'model/systems/StandardSystems',
 	'Convert'
 	], 
 	function(
 		Guard, Test, 
-		System,
-		Quantity,UnitRegistry, Units,
+		Quantity,UnitRegistry, 
+		StandardSystems,
 		Convert) {
 		function Strontium() {
 			var registry = new UnitRegistry();
@@ -65,8 +65,18 @@ define(
 			}
 		}
 		
+		// Decorate the Strontium function (the result of this module def)
+		// with the members of a Strontium object.  This gives
+		// the Strontium module the nice property of being both a
+		// Strontium function (so you CAN manufacture your own Strontium object)
+		// and a Strontium object (so you don't HAVE to manufacture your own 
+		// Strontium object).
 		var Sr = Strontium();
 		copyProperties(Sr, Strontium);
+
+		StandardSystems.systems().forEach(function(system) {
+			Sr.system(system);
+		});
 		
 		return Strontium;
 	}

@@ -16,6 +16,11 @@ function (mocha, chai, Strontium,
 		test('module returns object', function() {
 			ok(Strontium);
 		});
+
+		test('module has standard systems installed', function() {
+			ok(Strontium.system("SI"));
+			ok(Strontium.system("Imperial"));
+		});
 		
 		suite("quantity", function() {
 			test('works with Unit object', function () {
