@@ -11,7 +11,11 @@ module.exports = {
     entry: resolvePath('src/Strontium.js'),
     output: {
         path: resolvePath('dist'),
-        filename: 'Strontium.js'
+        filename: 'Strontium.js',
+        library: "Strontium",
+        libraryTarget: "umd",
+        // this option makes the umd build work in Node environments.
+        globalObject: 'typeof self !== \'undefined\' ? self : this'
     },
     devtool: 'source-map',
     resolve: {
