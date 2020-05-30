@@ -23,3 +23,4 @@
 - upload to github
 - add CI
 - remove npm in favor of yarn
+- add acceptance tests for prod build
