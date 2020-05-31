@@ -100,5 +100,43 @@ function(mocha, chai,
 
             deepEqual(unitNames, expected);
         });
+
+        test('skips DerivedUnits that are not defined', function() {
+            var someSystem = System.create({
+                name: "someSystem",
+                base: {
+                    length: meter,
+                    mass: kilogram,
+                    time: second,
+                    current: ampere,
+                    temperature: degreeCelsius,
+                    absoluteTemperature: degreeKelvin,
+                    //'amount'
+                    luminousIntensity: candela
+                },
+                derived: {
+                    ENERGY: null,
+                    FORCE: newton
+                }
+            });
+
+            var unitNames = someSystem.allUnits()
+                .map(function(unit) { return unit.name(); });
+
+            unitNames.sort();
+
+            var expected = [
+                'Newton',
+                'ampere',
+                'candela',
+                'degreeCelsius',
+                'degreeKelvin',
+                'kilogram',
+                'meter',
+                'second'
+            ];
+
+            deepEqual(unitNames, expected);
+        });
     });
 });

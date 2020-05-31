@@ -33,6 +33,9 @@ define(['Guard','Unit','UnitType', 'DerivedUnitType'], function(Guard, Unit, Uni
             var unitTypeName = unitType.name();
             var derivedUnit = def.derived[unitTypeName];
 
+            if (!derivedUnit) {
+                return;
+            }
             allUnits.push(derivedUnit);
 
             that[unitTypeName] = (function(v) {
