@@ -169,6 +169,14 @@ define(
                 system = System.create(def);
             }
             systemRegistry.register(system);
+
+            system.allUnits().forEach(function(unit) {
+                if (!unit) {
+                    throw new Error("value " + unit + " was not a Unit");
+                }
+                unitRegistry.register(unit);
+            });
+
             return system;
         };        
 

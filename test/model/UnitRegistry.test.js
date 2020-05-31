@@ -84,6 +84,24 @@ function (
             reg.registerSystem(SI);
             reg.registerSystem(Imperial);
 
+            suite('registerSystem', function() {
+                test('registers base units', function() {
+                    var meter = reg.get('meter');
+                    ok(meter);
+                    equal(meter.name(), 'meter');
+                });
+                test('registers derived units', function() {
+                    var newton = reg.get('newton');
+                    ok(newton);
+                    equal(newton.name(), 'newton');
+                });
+                test('registers system', function() {
+                    var SI = reg.getSystem('SI');
+                    ok(SI);
+                    equal(SI.name(), "SI");
+                });
+            });
+
             suite('tryGetUnitOfType', function() {
                 test('happy path, UnitType', function() {
                     var maybeUnit = reg.tryGetUnitOfType(UnitType.length, 'SI');
