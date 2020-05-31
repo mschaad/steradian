@@ -50,5 +50,39 @@ define(
 
             equal(Imperial.FORCE().toString(), converted.toString());
         });
+
+        test('conversion of unparalleled derived unit', function() {
+            var reg = new UnitRegistry();
+            
+            reg.registerSystem(SI);
+
+            var brokenSI = reg.registerSystem({
+                name: "broken SI",
+                base: {
+                    length: SI.length(),
+                    mass: SI.mass(),
+                    time: SI.time(),
+                    current: SI.current(),
+                    temperature: SI.temperature(),
+                    absoluteTemperature: SI.absoluteTemperature(),
+                    //'amount'
+                    luminousIntensity: SI.luminousIntensity()
+                },
+                derived: {
+                    ENERGY: null,
+                    //charge: coulomb
+                    FORCE: SI.FORCE()
+                },
+                other: [
+
+                ]
+            });
+
+            var converted = Convert.unitsToSystem(
+                SI.ENERGY(), brokenSI, reg
+            );
+
+            equal("N m", converted.toString());
+        });
     });
 });

@@ -111,12 +111,12 @@ function(Strings, Test, Guard,
                 );
             }
         
-            function mapUnit(unit) {                
+            function mapUnit(unit /* : Unit */) /* : UnitExpression */ {
                 if (Units.isDerivedUnit(unit)) {
                     var targetUnit = registry.tryGetUnitOfDimensions(unit.dimensions(), system);
-
+                    
                     if (!targetUnit) {
-                        throw new Error('indrect mapping of derived units between systems is not yet supported.');
+                        return Convert.unitsToSystem(unit.expression(), system, registry);
                     }
 
                     return targetUnit;
