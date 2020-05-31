@@ -65,7 +65,7 @@ function(mocha, chai,
         });
 
         UnitType.values().forEach(function(type) { 
-            test('has unit for Base type' + type.name(), function() {
+            test('has unit for Base type ' + type.name(), function() {
                 ok(SI[type.name()]());
             });
         });
