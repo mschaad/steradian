@@ -116,8 +116,14 @@ define(
             
             var matchingTypes = allUnitTypes()
                 .map(function(type) { 
-                    return system[type.name()](); 
+                    var fn = system[type.name()];
+                    if (!fn) {
+                        return null;
+                    } else {
+                        return fn();
+                    }
                 })
+                .filter(function(maybeType) { return !!maybeType; })
                 .filter(function(type) { return type.dimensions().equals(dimensions); });
 
             if (matchingTypes.length > 0) {

@@ -144,6 +144,34 @@ function (
                     var result = reg.tryGetUnitOfDimensions(jouleSquared.dimensions(), 'SI');
                     equal(result, false);
                 });
+
+                test('does not choke on system with missing DerivedUnits', function() {
+                    var incompleteSI = reg.registerSystem({
+                        name: "incomplete SI",
+                        base: {
+                            length: SI.length(),
+                            mass: SI.mass(),
+                            time: SI.time(),
+                            current: SI.current(),
+                            temperature: SI.temperature(),
+                            absoluteTemperature: SI.absoluteTemperature(),
+                            //'amount'
+                            luminousIntensity: SI.luminousIntensity()
+                        },
+                        derived: {
+                            ENERGY: null,
+                            //charge: coulomb
+                            FORCE: SI.FORCE()
+                        },
+                        other: [
+        
+                        ]
+                    });
+
+                    var joule = SI.ENERGY();
+                    var result = reg.tryGetUnitOfDimensions(joule.dimensions(), 'incomplete SI');
+                    equal(result, false);
+                });
             });
         });
     });
