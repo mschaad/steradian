@@ -1,8 +1,9 @@
-define(['Mocha', 'Chai', 'Guard', 'Unit', 'DerivedUnit', 'test/StandardStrontiumFn'], 
-function(mocha, chai, Guard, Unit, DerivedUnit, StandardStrontiumFn) {
+define(['Mocha', 'Chai', 'Guard', 'Unit', 'Strings', 'test/StandardStrontiumFn'], 
+function(mocha, chai, Guard, Unit, Strings, StandardStrontiumFn) {
 	var assert = chai.assert;
 	
-	var suite = mocha.suite, test = mocha.test;
+    var suite = mocha.suite, test = mocha.test,
+        throws = chai.assert.throws;
 
     suite('isValue', function() {
         var Sr = StandardStrontiumFn();
@@ -62,6 +63,31 @@ function(mocha, chai, Guard, Unit, DerivedUnit, StandardStrontiumFn) {
             /* jshint -W054 */
             Guard(new Function(), 'fn').isFunction();
             /* jshint +W054 */
+        });
+    });
+
+    suite('isArray(test)', function() {
+        var ofString = function(s) {
+            if (!Strings.isString(s)) {
+                return {
+                    arrayElementDescription: "of strings",
+                    elementErrorDescription: "is not a string"
+                };
+            }
+        };
+        test('happy path', function() {
+            var input = ['foo','bar', 'baz'];
+            
+            Guard(input, 'input').isArray(ofString);
+        });
+        test('failure case', function() {
+            var input = ['foo','bar',1];
+            
+            var expectedErrorMessage = "input should have been an array of strings, but found that element at index 2 ('1') is not a string";
+            throws(function() {
+                Guard(input, 'input').isArray(ofString);
+            }, expectedErrorMessage);
+            
         });
     });
 });

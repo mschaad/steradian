@@ -1,11 +1,11 @@
 define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 	function Guard(value, name) {
 		function getErrorMessage(args) {
+			var failureString = args.failureString || "value '" + value + "'";
 			return name + 
 				" should have been " + 
 				args.expectedString +
-				", but found value '" + value + 
-				"'";
+				", but found " + failureString;
 		}
 
 		function getError(expectedString) {
@@ -39,10 +39,24 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 				}
 				return that;
 			},
-			isArray: function() {
+			isArray: function(test) {
 				if (!Array.isArray(value)) {
 					throw getError("an array");
 				}
+
+				if (test) {
+					value.forEach(function(e, i) {
+						var elementError = test(e);
+						if (elementError) {
+							var msg = getErrorMessage({
+								expectedString: "an array " + elementError.arrayElementDescription,
+								failureString: "that element at index " + i + " ('" + e + "') " + elementError.elementErrorDescription
+							});
+							throw new Error(msg);
+						}						
+					});
+				}
+
 				return that;
 			},
 			isArrayOf: function(objType) {
