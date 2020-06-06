@@ -1,11 +1,14 @@
 # BACKLOG
 * add concept of unit systems, such as SI vs imperial
     - [x] update `convert` function to accept a system as a target
-    - [ ] support mapping arbitrary units to target system
+    - [x] support mapping arbitrary units to target system
     - [ ] support forward references in System definition/registration
+* add support for additional unit types within a system (e.g. furlong)
+* fix casing inconsistency between BaseUnit and DerivedUnit
+* make SI system properties just properties, not functions
 
 # IDEAS
-
+- add unit type dimensional signature (e.g. "speed" means distance/time)
 - remove BaseUnit.expression() (it is NOT analogous to DerivedUnit.expression())
 - simplify/consolidate code with Vector operations
 - add support for dimensionless scalar types (e.g. Mol)
