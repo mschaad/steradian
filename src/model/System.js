@@ -1,4 +1,5 @@
-define(['Guard','Unit','UnitType', 'DerivedUnitType'], function(Guard, Unit, UnitType, DerivedUnitType) {
+define(['Guard','Unit','UnitType', 'DerivedUnitType','logic/SystemDefinitionFixer'], 
+function(Guard, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) {
     function System(def) {
         Guard(def.name, "def.name").isTruthy().isString();
         
@@ -6,6 +7,8 @@ define(['Guard','Unit','UnitType', 'DerivedUnitType'], function(Guard, Unit, Uni
         this.name = function() { return name; };
 
         Guard(def.base, "def.base").isObject();
+
+        def = SystemDefinitionFixer(def);
 
         var that = this;
 
