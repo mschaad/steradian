@@ -12,9 +12,9 @@ define(['Mocha', 'Chai', 'logic/DependencyAnalyzer'], function(mocha, chai, Depe
             test('happy path', function() {
                 var d = new DependencyAnalyzer();
                 var nodes = [
-                    new Node('foo', [ 'bar', 'baz' ]),
-                    new Node('bar', [ 'baz' ]),
-                    new Node('baz', [])
+                    new Node('foo', 'FOO', [ 'bar', 'baz' ]),
+                    new Node('bar', 'BAR', [ 'baz' ]),
+                    new Node('baz', 'BAZ', [])
                 ];
                 var resolution = d.getResolutionOrder(nodes);
     
@@ -27,9 +27,9 @@ define(['Mocha', 'Chai', 'logic/DependencyAnalyzer'], function(mocha, chai, Depe
             test('contains cycle', function() {
                 var d = new DependencyAnalyzer();
                 var nodes = [
-                    new Node('foo', [ 'bar', 'baz' ]),
-                    new Node('bar', [ 'baz', 'foo' ]),
-                    new Node('baz', [])
+                    new Node('foo', 'FOO', [ 'bar', 'baz' ]),
+                    new Node('bar', 'BAR', [ 'baz', 'foo' ]),
+                    new Node('baz', 'BAZ', [])
                 ];
                 throws(function() {
                     d.getResolutionOrder(nodes);

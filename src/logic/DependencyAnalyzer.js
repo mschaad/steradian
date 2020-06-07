@@ -10,11 +10,13 @@ define(['Guard', 'Test'], function(Guard, Test) {
         return null;
     }
 
-    function Node(name, edges) {
+    function Node(name, data, edges) {
         Guard(name, 'name').isValue().isString();
+        Guard(data, 'data').isValue();
         edges = edges || [];
         Guard(edges, 'edges').isValue().isArray(ofString);
         this.name = name;
+        this.data = data;
         this.edges = Array.prototype.slice.call(edges, 0);
         Object.freeze(this.edges);
         Object.freeze(this);
