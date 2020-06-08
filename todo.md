@@ -1,8 +1,5 @@
 # BACKLOG
-* add concept of unit systems, such as SI vs imperial
-    - [x] update `convert` function to accept a system as a target
-    - [x] support mapping arbitrary units to target system
-    - [ ] support forward references in System definition/registration
+* add rest of "standard" types to DerivedUnitTypes enum
 * add support for additional unit types within a system (e.g. furlong)
 * fix casing inconsistency between BaseUnit and DerivedUnit
 * make SI system properties just properties, not functions
