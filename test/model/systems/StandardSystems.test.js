@@ -20,8 +20,8 @@ define(['Mocha', 'Chai'], function(mocha, chai) {
             })[0];
 
             ok(SI);
-            ok(SI.ENERGY);
-            equal(SI.ENERGY().name(), "joule");
+            ok(SI.energy);
+            equal(SI.energy().name(), "joule");
         });
     });
 });

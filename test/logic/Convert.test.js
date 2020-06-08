@@ -42,13 +42,13 @@ define(
 
         test('derived unit', function() {
             var converted = Convert.unitsToSystem(
-                SI.FORCE(), Imperial, reg
+                SI.force(), Imperial, reg
             );
 
             var Units = require('Units');
-            equal(Units.isDerivedUnit(SI.FORCE()), true);
+            equal(Units.isDerivedUnit(SI.force()), true);
 
-            equal(Imperial.FORCE().toString(), converted.toString());
+            equal(Imperial.force().toString(), converted.toString());
         });
 
         test('conversion of unparalleled derived unit', function() {
@@ -69,9 +69,9 @@ define(
                     luminousIntensity: SI.luminousIntensity()
                 },
                 derived: {
-                    ENERGY: null,
+                    energy: null,
                     //charge: coulomb
-                    FORCE: SI.FORCE()
+                    force: SI.force()
                 },
                 other: [
 
@@ -79,7 +79,7 @@ define(
             });
 
             var converted = Convert.unitsToSystem(
-                SI.ENERGY(), brokenSI, reg
+                SI.energy(), brokenSI, reg
             );
 
             equal("N m", converted.toString());

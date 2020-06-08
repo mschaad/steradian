@@ -15,12 +15,12 @@ function(mocha, chai, SystemDefinitionFixer) {
             var meter = fixedDef.base.length;
             ok(meter);
             
-            var joule = fixedDef.derived.ENERGY;
+            var joule = fixedDef.derived.energy;
             ok(joule);
             equal("joule", joule.name());
             equal("N m", joule.expression().toString());
 
-            var newton = fixedDef.derived.FORCE;
+            var newton = fixedDef.derived.force;
             ok(newton);
             equal('newton', newton.name());
             equal("kg m/s^2", newton.expression().toString());
@@ -28,7 +28,7 @@ function(mocha, chai, SystemDefinitionFixer) {
 
         test('can cope with partial system definition', function() {
             var mangledSIDef = getSIDefinition();
-            mangledSIDef.derived.ENERGY = null;
+            mangledSIDef.derived.energy = null;
             var fixedDef = SystemDefinitionFixer(siDef);
             ok(fixedDef);
         });
@@ -83,7 +83,7 @@ function(mocha, chai, SystemDefinitionFixer) {
                 }
             },
             derived: {
-                ENERGY: {
+                energy: {
                     name: 'joule',
                     units: [
                         { unit: 'newton', power: 1 },
@@ -93,7 +93,7 @@ function(mocha, chai, SystemDefinitionFixer) {
                     scale: 1.0,
                 },
                 //charge: coulomb
-                FORCE: {
+                force: {
                     name: 'newton',
                     units: [
                         { unit: 'kilogram', power: 1 },

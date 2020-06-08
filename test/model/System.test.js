@@ -39,8 +39,8 @@ function(mocha, chai,
                 luminousIntensity: candela
             },
             derived: {
-                ENERGY: joule,
-                FORCE: newton
+                energy: joule,
+                force: newton
             }
         });
         return SI;
@@ -115,8 +115,8 @@ function(mocha, chai,
                     luminousIntensity: candela
                 },
                 derived: {
-                    ENERGY: null,
-                    FORCE: newton
+                    energy: null,
+                    force: newton
                 }
             });
 

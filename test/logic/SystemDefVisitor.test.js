@@ -45,7 +45,7 @@ define(['Mocha', 'Chai', 'logic/SystemDefVisitor'], function(mocha, chai, System
 
         test('skips missing derived units', function() {
             var siDef = getSIDefinition();
-            siDef.derived.ENERGY = null;
+            siDef.derived.energy = null;
             var visitor = new SystemDefVisitor();
             visitor.visit(siDef, {
                 derivedUnit:
@@ -107,7 +107,7 @@ define(['Mocha', 'Chai', 'logic/SystemDefVisitor'], function(mocha, chai, System
                 }
             },
             derived: {
-                ENERGY: {
+                energy: {
                     name: 'joule',
                     units: [
                         { unit: 'newton', power: 1 },
@@ -117,7 +117,7 @@ define(['Mocha', 'Chai', 'logic/SystemDefVisitor'], function(mocha, chai, System
                     scale: 1.0,
                 },
                 //charge: coulomb
-                FORCE: {
+                force: {
                     name: 'newton',
                     units: [
                         { unit: 'kilogram', power: 1 },

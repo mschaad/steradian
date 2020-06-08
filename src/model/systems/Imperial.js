@@ -105,8 +105,8 @@ define(['Units', 'System'], function(Units,System) {
             luminousIntensity: candela
         },
         derived: {
-            ENERGY: footPound,
-            FORCE: pound
+            energy: footPound,
+            force: pound
         },
         other: [
             minute,

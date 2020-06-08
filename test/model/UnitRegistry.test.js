@@ -110,7 +110,7 @@ function (
                 });
 
                 test('happy path, DerivedUnitType', function() {
-                    var maybeUnit = reg.tryGetUnitOfType(DerivedUnitType.ENERGY, 'SI');
+                    var maybeUnit = reg.tryGetUnitOfType(DerivedUnitType.energy, 'SI');
                     ok(maybeUnit);
                     equal(maybeUnit.name(), "joule");
                 });
@@ -134,13 +134,13 @@ function (
                 });
 
                 test('when unit exists: DerivedUnit', function() {
-                    var joule = SI.ENERGY();
+                    var joule = SI.energy();
                     var footPound = reg.tryGetUnitOfDimensions(joule.dimensions(), 'Imperial');
                     equal(footPound.name(), "foot-pound");
                 });
 
                 test('when unit does not exist', function() {
-                    var jouleSquared = SI.ENERGY().expression().pow(2);
+                    var jouleSquared = SI.energy().expression().pow(2);
                     var result = reg.tryGetUnitOfDimensions(jouleSquared.dimensions(), 'SI');
                     equal(result, false);
                 });
@@ -159,16 +159,16 @@ function (
                             luminousIntensity: SI.luminousIntensity()
                         },
                         derived: {
-                            ENERGY: null,
+                            energy: null,
                             //charge: coulomb
-                            FORCE: SI.FORCE()
+                            force: SI.force()
                         },
                         other: [
         
                         ]
                     });
 
-                    var joule = SI.ENERGY();
+                    var joule = SI.energy();
                     var result = reg.tryGetUnitOfDimensions(joule.dimensions(), 'incomplete SI');
                     equal(result, false);
                 });

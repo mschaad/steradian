@@ -47,7 +47,7 @@ define(['System'], function(System) {
             }
         },
         derived: {
-            ENERGY: {
+            energy: {
                 name: 'joule',
                 units: [
                     { unit: 'newton', power: 1 },
@@ -57,7 +57,7 @@ define(['System'], function(System) {
                 scale: 1.0,
             },
             //charge: coulomb
-            FORCE: {
+            force: {
                 name: 'newton',
                 units: [
                     { unit: 'kilogram', power: 1 },
