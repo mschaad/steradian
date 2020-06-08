@@ -69,8 +69,10 @@ function(mocha, chai,
                 ok(SI[type.name()]());
             });
         });
+
+        var derivedUnitsTypes = [DerivedUnitType.energy, DerivedUnitType.force];
         
-        DerivedUnitType.values().forEach(function(type) { 
+        derivedUnitsTypes.forEach(function(type) { 
             test('has unit for Derived type ' + type.name(), function() {
                 ok(SI[type.name()]());    
             });

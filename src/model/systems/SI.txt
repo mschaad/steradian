@@ -3,7 +3,7 @@ from https://physics.nist.gov/cuu/Units/units.html
 
 =Derived Quantity=      =Name=          =Symbol=    =Exp=   =Expression in base units=
 plane angle 	        radian          rad	        -	    m·m⁻¹ = 1
-solid angle 	        steradian 	    sr	        -	    m²·m² = 1
+solid angle 	        steradian 	    sr	        -	    m²·m⁻² = 1
 frequency	            hertz	        Hz	        -	    s⁻¹
 force	                newton	        N	        -	    m·kg·s⁻²
 pressure/stress	        pascal   	    Pa	        N/m²	m⁻¹·kg·s⁻²
