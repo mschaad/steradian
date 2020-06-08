@@ -1,0 +1,29 @@
+ // ⁼ⁱ⁺⁻⁰¹²³⁴⁵⁶⁷⁸⁹
+from https://physics.nist.gov/cuu/Units/units.html
+
+=Derived Quantity=      =Name=          =Symbol=    =Exp=   =Expression in base units=
+plane angle 	        radian          rad	        -	    m·m⁻¹ = 1
+solid angle 	        steradian 	    sr	        -	    m²·m² = 1
+frequency	            hertz	        Hz	        -	    s⁻¹
+force	                newton	        N	        -	    m·kg·s⁻²
+pressure/stress	        pascal   	    Pa	        N/m²	m⁻¹·kg·s⁻²
+energy/work             joule	        J	        N·m	    m²·kg·s⁻²
+power/radiant flux	    watt	        W           J/s	    m²·kg·s⁻³
+electric charge 	    coulomb	        C	        -	    s·A
+electric potential difference,
+electromotive force	    volt	        V	        W/A	    m²·kg·s⁻³·A⁻¹
+capacitance	            farad	        F	        C/V	    m⁻²·kg⁻¹·s⁴·A²
+electric resistance	    ohm	            Ω   	    V/A	    m²·kg·s⁻³·A⁻²
+electric conductance    siemens	        S	        A/V	    m⁻²·kg⁻¹·s³·A²
+magnetic flux	        weber	        Wb	        V·s	    m²·kg·s⁻²·A⁻¹
+magnetic flux density	tesla	        T	        Wb/m²	kg·s⁻²·A⁻¹
+inductance	            henry	        H	        Wb/A	m²·kg·s⁻²·A⁻²
+Celsius temperature	    degree Celsius	°C	        -	    K
+luminous flux	        lumen	        lm	        cd·sr	m²·m⁻²·cd = cd
+illuminance	            lux	            lx	        lm/m²	m²·m⁻⁴·cd = m⁻²·cd
+activity (radionuclide)	becquerel	    Bq	        -	    s⁻¹
+absorbed dose,
+specific energy (imparted),
+kerma	                gray        	Gy	        J/kg	m²·s⁻²
+dose equivalent (d)	    sievert     	Sv	        J/kg	m²·s⁻²
+catalytic activity	    katal	        kat	            	s⁻¹·mol
