@@ -1,5 +1,5 @@
-define(['Guard','Unit','UnitType', 'DerivedUnitType','logic/SystemDefinitionFixer'], 
-function(Guard, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) {
+define(['Guard','Arrays','Unit','UnitType', 'DerivedUnitType','logic/SystemDefinitionFixer'], 
+function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) {
     function System(def) {
         Guard(def.name, "def.name").isTruthy().isString();
         
@@ -45,8 +45,14 @@ function(Guard, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) {
                 return function() { return v; };
             })(derivedUnit);
         });
+
+        var other = def.other || [];
         
-        //TODO: other units
+        other.forEach(function(unit) {
+            allUnits.push(unit);
+        });
+
+        that.other = Arrays.frozenClone(other);
 
         Object.freeze(allUnits);
         this.allUnits = function() {

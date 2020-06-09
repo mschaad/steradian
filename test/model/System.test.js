@@ -24,6 +24,14 @@ function(mocha, chai,
         newton = Sr.unit('Newton');
 
     var joule = Sr.unit('joule');
+    var kilometer = Sr.derivedUnit({
+        name: 'kilometer',
+        units: [
+            { unit: 'meter', power: 1 },
+        ],
+        symbol: 'km',
+        scale: 1000
+    });
 
     function constructSI() {
         var SI = System.create({
@@ -41,7 +49,10 @@ function(mocha, chai,
             derived: {
                 energy: joule,
                 force: newton
-            }
+            },
+            other: [
+                kilometer
+            ]
         });
         return SI;
     }
@@ -62,6 +73,11 @@ function(mocha, chai,
 
             //basic sanity check
             equal(SI.length().name(), "meter");
+        });
+
+        test('has kilometer (other unit)', function() {
+            var kilometer = SI.other[0];
+            equal(kilometer.toString(), "km");
         });
 
         UnitType.values().forEach(function(type) { 
@@ -96,6 +112,7 @@ function(mocha, chai,
                 'degreeKelvin',
                 'joule',
                 'kilogram',
+                'kilometer',
                 'meter',
                 'second'
             ];
