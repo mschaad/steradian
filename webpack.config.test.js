@@ -8,6 +8,7 @@ var testConfigOverrides = {
     resolve: {
         modules: [ "test" ],
         alias: {
+            "strontium": "Strontium",
             "test/StandardStrontiumFn": "StandardStrontiumFn",
             "test/StandardUnitDefinitions": "StandardUnitDefinitions",
             "Mocha": "shims/mocha",
@@ -18,6 +19,11 @@ var testConfigOverrides = {
     externals: [ nodeExternals() ]
 };
 
-module.exports = merge(
+var mergedConfig = merge(
     primaryConfig, testConfigOverrides
 );
+
+module.exports = {
+    default: mergedConfig,
+    overrides: testConfigOverrides
+};

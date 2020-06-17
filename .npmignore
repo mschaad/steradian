@@ -1,0 +1,11 @@
+#anything that starts with '.'
+.*
+src/**/*
+test/**/*
+release/**/*
+scripts/**/*
+webpack*
+karma*
+*.md
+*.tgz
+dist/StrontiumTestSuite.js

@@ -32,7 +32,7 @@ module.exports = function(config) {
       'test/**/*.js': ['webpack']
     },
 
-    webpack: webpackTestConfig,
+    webpack: webpackTestConfig.default,
 
     client: {
       mocha: {

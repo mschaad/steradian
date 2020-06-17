@@ -1,16 +1,17 @@
-define(['Mocha', 'Chai', 'Strontium', 
-	'Unit', 'System', 'test/StandardStrontiumFn'
-], 
-function (mocha, chai, Strontium, 
-	Unit, System, StandardStrontiumFn
-	) {
+define(['Mocha', 'Chai', 'strontium', 'test/StandardStrontiumFn', 'model/systems/SI_def'], 
+function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 	var assert = chai.assert;
 
 	var ok = assert.ok,
 		equal = assert.equal,
 		closeTo = assert.closeTo;
-	
+
 	var suite = mocha.suite, test = mocha.test;
+
+	function requireSI() {
+		var Sr = Strontium();
+		return Sr.system(SI_def);
+	}
 	
 	suite("Strontium", function () {
 		test('module returns object', function() {
@@ -97,6 +98,7 @@ function (mocha, chai, Strontium,
 				assert.equal("Newton", Newton.name());
 			});
 		});
+
 		
 		suite("derivedUnit", function() {
 			test("happy path", function() {
@@ -112,7 +114,9 @@ function (mocha, chai, Strontium,
 				});
 
 				ok(metersPerSecond);
-				assert.isTrue(Unit.isUnit(metersPerSecond));
+				equal(metersPerSecond.name(), "meterPerSecond");
+				equal(metersPerSecond.symbol(), "mps");
+				equal(metersPerSecond.expression().toString(), "m/s");
 			});
 		});
 
@@ -120,7 +124,7 @@ function (mocha, chai, Strontium,
 			test('can register System', function() {
 				var Sr = StandardStrontiumFn();
 
-				var SI = require('model/systems/SI');
+				var SI = requireSI();
 
 				Sr.system(SI);
 			});
@@ -180,13 +184,15 @@ function (mocha, chai, Strontium,
 				});
 
 				ok(system);
-				ok(system instanceof System);
+				ok(system.name(), "FakeSystem");
+				ok(system.length().name, "meter");
+				ok(system.luminousIntensity().name(), "candela");
 			});
 
 			test('can retrieve system', function() {
 				var Sr = StandardStrontiumFn();
 
-				var SI = require('model/systems/SI');
+				var SI = requireSI();
 
 				Sr.system(SI);
 
@@ -303,7 +309,7 @@ function (mocha, chai, Strontium,
 					]
 				});
 
-				var SI = require('model/systems/SI');
+				var SI = requireSI();
 				SI = Sr.system(SI);
 
 				var qPounds = Sr.quantity(pound, 1);
