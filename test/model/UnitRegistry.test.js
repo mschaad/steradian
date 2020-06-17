@@ -168,6 +168,8 @@ function (
                         ]
                     });
 
+                    ok(incompleteSI);
+
                     var joule = SI.energy();
                     var result = reg.tryGetUnitOfDimensions(joule.dimensions(), 'incomplete SI');
                     equal(result, false);
