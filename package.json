@@ -34,9 +34,9 @@
 
     "karma": "karma start karma.conf.js",
     "webpack": "webpack",
-    "buildTestSuite": "webpack --config webpack.config.testSuite.js"
+    "buildTestSuite": "webpack --config webpack.config.testSuite.js",
+    "testRelease": "bash ./scripts/test-release.sh"
   },
-  
   "repository": {
     "type": "git",
     "url": "https://github.com/mschaad/strontium"

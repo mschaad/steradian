@@ -1,2 +1,4 @@
 ﻿test/lib/**
-node_modules/**
+**/node_modules/**
+release/test/**
+**/dist/**
