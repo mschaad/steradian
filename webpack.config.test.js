@@ -8,6 +8,7 @@ var testConfigOverrides = {
     resolve: {
         modules: [ "test" ],
         alias: {
+            "strontium": "Strontium",
             "test/StandardStrontiumFn": "StandardStrontiumFn",
             "test/StandardUnitDefinitions": "StandardUnitDefinitions",
             "Mocha": "shims/mocha",
