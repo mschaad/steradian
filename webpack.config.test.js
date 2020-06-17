@@ -19,6 +19,11 @@ var testConfigOverrides = {
     externals: [ nodeExternals() ]
 };
 
-module.exports = merge(
+var mergedConfig = merge(
     primaryConfig, testConfigOverrides
 );
+
+module.exports = {
+    default: mergedConfig,
+    overrides: testConfigOverrides
+};

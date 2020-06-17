@@ -33,7 +33,8 @@
     "lint": "jshint .",
 
     "karma": "karma start karma.conf.js",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "buildTestSuite": "webpack --config webpack.config.testSuite.js"
   },
   
   "repository": {
