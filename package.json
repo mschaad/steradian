@@ -2,7 +2,7 @@
   "name": "strontium",
   "version": "0.1.0",
   "description": "library for working with units of measure",
-  "main": "src/Strontium.js",
+  "main": "dist/Strontium.js",
   "directories": {
     "test": "test"
   },
@@ -26,11 +26,16 @@
   },
   "scripts": {
     "test": "mocha-webpack --webpack-config webpack.config.test.js \"test/**/*test.js\"",
+    "build": "npm run webpack",
+    "prepack": "npm run build",
+
     "watch": "node --inspect node_modules/mocha-webpack/bin/mocha-webpack --webpack-config webpack.config.test.js \"test/**/*test.js\" --watch",
-    "karma": "karma start karma.conf.js",
     "lint": "jshint .",
+
+    "karma": "karma start karma.conf.js",
     "webpack": "webpack"
   },
+  
   "repository": {
     "type": "git",
     "url": "https://github.com/mschaad/strontium"
