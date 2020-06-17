@@ -8,11 +8,11 @@ function resolvePath(dir) {
 
 module.exports = {
     mode: 'production',
-    entry: resolvePath('src/Strontium.js'),
+    entry: resolvePath('src/Steradian.js'),
     output: {
         path: resolvePath('dist'),
-        filename: 'Strontium.js',
-        library: "Strontium",
+        filename: 'Steradian.js',
+        library: "Steradian",
         libraryTarget: "umd",
         // this option makes the umd build work in Node environments.
         globalObject: 'typeof self !== \'undefined\' ? self : this'

@@ -1,18 +1,18 @@
-define(['Mocha', 'Chai', 'Strontium', 'Unit', 'test/StandardUnitDefinitions'], 
-function (mocha, chai, Strontium, Unit, StandardUnitDefinitions) {
+define(['Mocha', 'Chai', 'Steradian', 'Unit', 'test/StandardUnitDefinitions'], 
+function (mocha, chai, Steradian, Unit, StandardUnitDefinitions) {
     var assert = chai.assert;
 
     var suite = mocha.suite, test = mocha.test;
         
-    function newStrontium() {
-        var Sr = Strontium();
+    function newSteradian() {
+        var Sr = Steradian();
         StandardUnitDefinitions.install(Sr);
         return Sr;
     }
 	
 	suite("Unit", function () {
         suite("isUnit", function() {
-            var Sr = newStrontium();
+            var Sr = newSteradian();
             var foo = Sr.unit({
                 name: "Foo",
                 type: "length",

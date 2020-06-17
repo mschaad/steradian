@@ -27,7 +27,7 @@ SCRIPT_DIR=$(dirname $SCRIPT_PATH)
 pushd $SCRIPT_DIR/../../.. > /dev/null
 PACKAGE_DIR=$(abspath $(pwd))
 
-PACKAGE_NAME=$(ls strontium-*.tgz -1 | tail -n 1)
+PACKAGE_NAME=$(ls steradian-*.tgz -1 | tail -n 1)
 PACKAGE_PATH="${PACKAGE_DIR}/${PACKAGE_NAME}"
 popd > /dev/null
 

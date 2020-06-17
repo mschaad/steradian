@@ -1,12 +1,12 @@
-define(['Mocha', 'Chai', 'Guard', 'Unit', 'Strings', 'test/StandardStrontiumFn'], 
-function(mocha, chai, Guard, Unit, Strings, StandardStrontiumFn) {
+define(['Mocha', 'Chai', 'Guard', 'Unit', 'Strings', 'test/StandardSteradianFn'], 
+function(mocha, chai, Guard, Unit, Strings, StandardSteradianFn) {
 	var assert = chai.assert;
 	
     var suite = mocha.suite, test = mocha.test,
         throws = chai.assert.throws;
 
     suite('isValue', function() {
-        var Sr = StandardStrontiumFn();
+        var Sr = StandardSteradianFn();
         
         test('happy path', function() {
             assert.throws(function() {
@@ -31,7 +31,7 @@ function(mocha, chai, Guard, Unit, Strings, StandardStrontiumFn) {
     });
 
     suite('instanceOf', function() {
-        var Sr = StandardStrontiumFn();
+        var Sr = StandardSteradianFn();
 
         test('string is not Unit', function() {
             assert.throws(function() {

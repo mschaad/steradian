@@ -8,4 +8,4 @@ webpack*
 karma*
 *.md
 *.tgz
-dist/StrontiumTestSuite.js
+dist/SteradianTestSuite.js

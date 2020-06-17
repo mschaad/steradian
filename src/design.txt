@@ -1,7 +1,7 @@
 Sr() : Sr
 	the module export.  
-		The Strontium function is a Sr object, but called as a function,
-		it also returns a new Strontium object.
+		The Steradian function is a Sr object, but called as a function,
+		it also returns a new Steradian object.
 
 Sr : {
 	unit(string) : Unit

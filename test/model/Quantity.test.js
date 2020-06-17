@@ -1,5 +1,5 @@
-define(['Mocha', 'Chai', 'Strontium', 'test/StandardStrontiumFn', 'UnitExpression', 'Term'], 
-function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
+define(['Mocha', 'Chai', 'Steradian', 'test/StandardSteradianFn', 'UnitExpression', 'Term'], 
+function (mocha, chai, Steradian, StandardSteradianFn, UnitExpression, Term) {
     var assert = chai.assert;
     
     var equal = assert.equal,
@@ -10,7 +10,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
 	
 	suite("Quantity", function () {
         suite("convertTo", function() {
-            var Sr = StandardStrontiumFn();
+            var Sr = StandardSteradianFn();
             
             test('can convert between simple units of the same type', function() {
                 var q = Sr.quantity("foot", 6);
@@ -21,7 +21,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
         });
 
         suite("constructor", function() {
-            var Sr = StandardStrontiumFn();
+            var Sr = StandardSteradianFn();
             
             test('can construct quantity of derived unit', function() {
                 var q = Sr.quantity("Newton", 6.123);
@@ -32,7 +32,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
         });
 
         suite("arithmetic", function() {
-            var Sr = StandardStrontiumFn();
+            var Sr = StandardSteradianFn();
             var quantity = Sr.quantity;
 
             var meter = Sr.unit('meter');
@@ -115,7 +115,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, UnitExpression, Term) {
         });
 
 		suite("toString", function() {
-            var Sr = StandardStrontiumFn();
+            var Sr = StandardSteradianFn();
 
             test('format, named base unit', function() {
                 var q = Sr.quantity("foot", 6.123);                    

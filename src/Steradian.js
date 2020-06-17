@@ -10,7 +10,7 @@ define(
 		Quantity,UnitRegistry, 
 		StandardSystems,
 		Convert) {
-		function Strontium() {
+		function Steradian() {
 			var registry = new UnitRegistry();
 			
 			var SrInstance = {
@@ -65,19 +65,19 @@ define(
 			}
 		}
 		
-		// Decorate the Strontium function (the result of this module def)
-		// with the members of a Strontium object.  This gives
-		// the Strontium module the nice property of being both a
-		// Strontium function (so you CAN manufacture your own Strontium object)
-		// and a Strontium object (so you don't HAVE to manufacture your own 
-		// Strontium object).
-		var Sr = Strontium();
-		copyProperties(Sr, Strontium);
+		// Decorate the Steradian function (the result of this module def)
+		// with the members of a Steradian object.  This gives
+		// the Steradian module the nice property of being both a
+		// Steradian function (so you CAN manufacture your own Steradian object)
+		// and a Steradian object (so you don't HAVE to manufacture your own 
+		// Steradian object).
+		var Sr = Steradian();
+		copyProperties(Sr, Steradian);
 
 		StandardSystems.systems().forEach(function(system) {
 			Sr.system(system);
 		});
 		
-		return Strontium;
+		return Steradian;
 	}
 );

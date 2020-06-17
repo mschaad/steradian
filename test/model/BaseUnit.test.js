@@ -1,20 +1,20 @@
-define(['Mocha', 'Chai', 'Strontium', 'test/StandardUnitDefinitions'], 
-function (mocha, chai, Strontium, StandardUnitDefinitions) {
+define(['Mocha', 'Chai', 'Steradian', 'test/StandardUnitDefinitions'], 
+function (mocha, chai, Steradian, StandardUnitDefinitions) {
     var assert = chai.assert;
 
     var suite = mocha.suite, test = mocha.test;
 
 	var equal = assert.equal;
         
-    function newStrontium() {
-        var Sr = Strontium();
+    function newSteradian() {
+        var Sr = Steradian();
         StandardUnitDefinitions.install(Sr);
         return Sr;
     }
 	
 	suite("BaseUnit", function () {
         suite("toString", function() {
-            var Sr = newStrontium();
+            var Sr = newSteradian();
             var meter = Sr.unit("meter");
             
             test("m", function() {
@@ -23,7 +23,7 @@ function (mocha, chai, Strontium, StandardUnitDefinitions) {
         });
 
         test("isBaseUnit", function() {
-            var Sr = newStrontium();
+            var Sr = newSteradian();
             var meter = Sr.unit("meter");
             equal(true, meter.isBaseUnit());
         });

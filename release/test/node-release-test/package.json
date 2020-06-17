@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/StrontiumTestSuite.js"
+    "test": "mocha tests/SteradianTestSuite.js"
   },
   "author": "mschaad",
   "license": "",

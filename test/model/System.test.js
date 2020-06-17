@@ -1,9 +1,9 @@
 define(['Mocha', 'Chai', 
     'System', 'UnitType', 'DerivedUnitType',
-    'StandardStrontiumFn'], 
+    'StandardSteradianFn'], 
 function(mocha, chai, 
     System, UnitType, DerivedUnitType,
-    StandardStrontiumFn) {
+    StandardSteradianFn) {
     var assert = chai.assert;
     
     var ok = assert.ok,
@@ -12,7 +12,7 @@ function(mocha, chai,
 
     var suite = mocha.suite, test = mocha.test;
 
-    var Sr = StandardStrontiumFn();
+    var Sr = StandardSteradianFn();
 
     var meter = Sr.unit('meter'),
         kilogram = Sr.unit('kilogram'),

@@ -1,8 +1,8 @@
 /* jshint node: true */
 
-var strontiumDir = './';
+var steradianDir = './';
 
-var webpackTestConfigModule = require(strontiumDir + 'webpack.config.test.js');
+var webpackTestConfigModule = require(steradianDir + 'webpack.config.test.js');
 
 var nodeExternals = require('webpack-node-externals');
 
@@ -17,16 +17,16 @@ var aliases = Object.assign(
 var config = {
     mode: 'development',
     output: {
-        filename: 'StrontiumTestSuite.js',
-        library: 'StrontiumTestSuite',
+        filename: 'SteradianTestSuite.js',
+        library: 'SteradianTestSuite',
         libraryTarget: 'commonjs',
         globalObject: 'typeof self !== \'undefined\' ? self : this'
     },
-    entry: "Strontium.test.js",
+    entry: "Steradian.test.js",
     resolve: {
         modules: [
-            strontiumDir + "test",
-            strontiumDir + "src/model/systems",
+            steradianDir + "test",
+            steradianDir + "src/model/systems",
             "node_modules"
         ],
         alias: aliases
@@ -34,11 +34,11 @@ var config = {
     externals: [
         nodeExternals(),
         {
-            strontium: {
-                commonjs: 'strontium',
-                commonjs2: 'strontium',
-                amd: 'strontium',
-                root: 'strontium'
+            steradian: {
+                commonjs: 'steradian',
+                commonjs2: 'steradian',
+                amd: 'steradian',
+                root: 'steradian'
             }
         }
     ]

@@ -1,8 +1,8 @@
 {
-  "name": "strontium",
+  "name": "steradian",
   "version": "0.1.0",
   "description": "library for working with units of measure",
-  "main": "dist/Strontium.js",
+  "main": "dist/Steradian.js",
   "directories": {
     "test": "test"
   },
@@ -28,10 +28,8 @@
     "test": "mocha-webpack --webpack-config webpack.config.test.js \"test/**/*test.js\"",
     "build": "npm run webpack",
     "prepack": "npm run build",
-
     "watch": "node --inspect node_modules/mocha-webpack/bin/mocha-webpack --webpack-config webpack.config.test.js \"test/**/*test.js\" --watch",
     "lint": "jshint .",
-
     "karma": "karma start karma.conf.js",
     "webpack": "webpack",
     "buildTestSuite": "webpack --config webpack.config.testSuite.js",
@@ -39,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mschaad/strontium"
+    "url": "https://github.com/mschaad/steradian"
   },
   "keywords": [],
   "author": "mschaad",

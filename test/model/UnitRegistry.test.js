@@ -1,12 +1,12 @@
 define([
     'Mocha', 'Chai', 
     'UnitRegistry', 'UnitType', 'DerivedUnitType', 'Units',
-    'test/StandardStrontiumFn','model/systems/SI', 'model/systems/Imperial'
+    'test/StandardSteradianFn','model/systems/SI', 'model/systems/Imperial'
 ], 
 function (
     mocha, chai, 
     UnitRegistry, UnitType, DerivedUnitType, Units,
-    StandardStrontiumFn, SI, Imperial
+    StandardSteradianFn, SI, Imperial
     ) {
     var assert = chai.assert;
     
@@ -35,7 +35,7 @@ function (
         });
         suite('units', function() {
             suite('get', function() {
-                var Sr = StandardStrontiumFn();
+                var Sr = StandardSteradianFn();
     
                 var reg = new UnitRegistry();
     
@@ -57,7 +57,7 @@ function (
                 });
             });
             suite('register (Unit)', function() {
-                var Sr = StandardStrontiumFn();
+                var Sr = StandardSteradianFn();
     
                 var reg = new UnitRegistry();
                 var meter = Sr.unit('meter');

@@ -1,11 +1,11 @@
 define([
     'Mocha', 'Chai', 
     'DerivedUnit', 'UnitType',
-    'test/StandardStrontiumFn'], 
+    'test/StandardSteradianFn'], 
 function (
     mocha, chai, 
     DerivedUnit, UnitType,
-    StandardStrontiumFn
+    StandardSteradianFn
 ) {
     var assert = chai.assert;
     
@@ -19,7 +19,7 @@ function (
             ok(DerivedUnit);
         });
         
-        var Sr = StandardStrontiumFn();
+        var Sr = StandardSteradianFn();
 
         var Millisecond = Sr.unit({
             name: 'millisecond', 

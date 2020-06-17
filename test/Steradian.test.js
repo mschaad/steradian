@@ -1,5 +1,5 @@
-define(['Mocha', 'Chai', 'strontium', 'test/StandardStrontiumFn', 'model/systems/SI_def'], 
-function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
+define(['Mocha', 'Chai', 'steradian', 'test/StandardSteradianFn', 'model/systems/SI_def'], 
+function (mocha, chai, Steradian, StandardSteradianFn, SI_def) {
 	var assert = chai.assert;
 
 	var ok = assert.ok,
@@ -9,23 +9,23 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 	var suite = mocha.suite, test = mocha.test;
 
 	function requireSI() {
-		var Sr = Strontium();
+		var Sr = Steradian();
 		return Sr.system(SI_def);
 	}
 	
-	suite("Strontium", function () {
+	suite("Steradian", function () {
 		test('module returns object', function() {
-			ok(Strontium);
+			ok(Steradian);
 		});
 
 		test('module has standard systems installed', function() {
-			ok(Strontium.system("SI"));
-			ok(Strontium.system("Imperial"));
+			ok(Steradian.system("SI"));
+			ok(Steradian.system("Imperial"));
 		});
 		
 		suite("quantity", function() {
 			test('works with Unit object', function () {
-				var Sr = Strontium();
+				var Sr = Steradian();
 				
 				var meter = Sr.unit({
 					name: 'meter',
@@ -41,7 +41,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 
 		suite("unit(string)", function() {
 			test('can get registered unit', function () {
-				var Sr = Strontium();
+				var Sr = Steradian();
 				
 				var meter = Sr.unit({
 					name: 'meter',
@@ -58,7 +58,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 
 			test('can get registered derived unit', function () {
 				/* jshint -W098 */
-				var Sr = Strontium();
+				var Sr = Steradian();
 				
 				var meter = Sr.unit({
 					name: 'meter',
@@ -102,7 +102,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 		
 		suite("derivedUnit", function() {
 			test("happy path", function() {
-				var Sr = StandardStrontiumFn();
+				var Sr = StandardSteradianFn();
 
 				var metersPerSecond = Sr.derivedUnit({
 					name: "meterPerSecond",
@@ -122,7 +122,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 
 		suite('systems', function() {
 			test('can register System', function() {
-				var Sr = StandardStrontiumFn();
+				var Sr = StandardSteradianFn();
 
 				var SI = requireSI();
 
@@ -130,7 +130,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 			});
 
 			test('can register System, by definition', function() {
-				var Sr = Strontium();
+				var Sr = Steradian();
 
 				var system = Sr.system({
 					name: "FakeSystem",
@@ -190,7 +190,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 			});
 
 			test('can retrieve system', function() {
-				var Sr = StandardStrontiumFn();
+				var Sr = StandardSteradianFn();
 
 				var SI = requireSI();
 
@@ -203,7 +203,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 
 		suite("convert", function() {
 			suite('can convert from one base unit to another base unit', function () {
-				var Sr = StandardStrontiumFn();
+				var Sr = StandardSteradianFn();
 				
 				test('can convert meters to feet', function() {
 					var q1 = Sr.quantity('meter', 2);
@@ -223,7 +223,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 			});
 			
 			test('can convert from one derived unit to another derived unit', function () {
-				var Sr = StandardStrontiumFn();
+				var Sr = StandardSteradianFn();
 
 				Sr.unit({
 					name: 'decasecond',
@@ -265,7 +265,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 			});
 
 			test('can convert from one complex derived unit to another complex derived unit', function () {
-				var Sr = StandardStrontiumFn();
+				var Sr = StandardSteradianFn();
 					
 				// 	//F = ma
 				// 	//N = kg * m / s^2
@@ -295,7 +295,7 @@ function (mocha, chai, Strontium, StandardStrontiumFn, SI_def) {
 			});
 
 			test('can convert units to a standard system', function() {
-				var Sr = StandardStrontiumFn();
+				var Sr = StandardSteradianFn();
 				//F = ma
 				//N = kg * m / s^2
 				//lb = slug * (feet / s^2)

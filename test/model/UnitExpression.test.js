@@ -1,11 +1,11 @@
 define([
     'Mocha', 'Chai', 
     'UnitExpression', 'Term',
-    'test/StandardStrontiumFn'], 
+    'test/StandardSteradianFn'], 
 function (
     mocha, chai, 
     UnitExpression, Term,
-    StandardStrontiumFn
+    StandardSteradianFn
 ) {
     var assert = chai.assert;
     
@@ -14,7 +14,7 @@ function (
     var suite = mocha.suite, test = mocha.test;
 
 	suite("UnitExpression", function () {
-        var Sr = StandardStrontiumFn();
+        var Sr = StandardSteradianFn();
 
         var Newton = Sr.unit('Newton');
 
@@ -159,7 +159,7 @@ function (
         });
 
         suite('toString', function() {
-            var Sr = StandardStrontiumFn();
+            var Sr = StandardSteradianFn();
 
             var meter = Sr.unit('meter');
             var second = Sr.unit('second');
