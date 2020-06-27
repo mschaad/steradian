@@ -39,7 +39,7 @@
     "type": "git",
     "url": "https://github.com/mschaad/steradian"
   },
-  "keywords": [],
+  "keywords": ["convert", "conversion", "si", "imperial", "unit", "measure"],
   "author": "mschaad",
   "license": "",
   "dependencies": {}
