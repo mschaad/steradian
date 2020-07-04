@@ -62,6 +62,18 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
         Object.freeze(this);
     }
 
+    System.prototype = {
+        toString: function() {
+            return this.name();
+        }
+    };
+
+    Object.defineProperty(System.prototype, 'constructor', {
+        value: System,
+        enumerable: false,
+        writable: true
+    });
+
     System.create = function(def) {
         return new System(def);
     };

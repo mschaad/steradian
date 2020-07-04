@@ -68,6 +68,10 @@ function(mocha, chai,
             ok(SI);
         });
 
+        test('toString returns name', function() {
+            equal(SI.toString(), "SI");
+        })
+
         test('has name()', function() {
             equal(SI.name(), "SI");
         });
