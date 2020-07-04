@@ -91,6 +91,12 @@ define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, 
 			return reduced;
 		}
 	};
+
+	Object.defineProperty(UnitExpression.prototype, 'constructor', {
+		value: UnitExpression,
+		enumerable: false,
+		writable: true
+	});
 	
 	function termExponent(power) {
 		return function(t) {

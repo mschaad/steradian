@@ -25,6 +25,16 @@ function (
             );
         }
 
+        suite('constructor', function() {
+            test('type is UnitExpression', function() {
+                var sut = new UnitExpression([
+                    term('meter', 1),
+                    term('second', 1)
+                ]);
+                equal(sut.constructor.name, "UnitExpression");
+            });
+        });
+
         suite("terms", function() {
             test("simple", function() {
                 var lhs = new UnitExpression([

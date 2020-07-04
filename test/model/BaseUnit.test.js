@@ -13,6 +13,12 @@ function (mocha, chai, Steradian, StandardUnitDefinitions) {
     }
 	
 	suite("BaseUnit", function () {
+        test("type is BaseUnit", function() {
+            var Sr = newSteradian();
+            var meter = Sr.unit("meter");
+            equal(meter.constructor.name, "BaseUnit");
+        });
+
         suite("toString", function() {
             var Sr = newSteradian();
             var meter = Sr.unit("meter");

@@ -23,6 +23,11 @@ function (mocha, chai, Steradian, StandardSteradianFn, UnitExpression, Term) {
         suite("constructor", function() {
             var Sr = StandardSteradianFn();
             
+            test('type is Quantity', function() {
+                var q = Sr.quantity("Newton", 6.123);
+                equal(q.constructor.name, "Quantity");
+            });
+
             test('can construct quantity of derived unit', function() {
                 var q = Sr.quantity("Newton", 6.123);
                 var quantityTerms = q.units().terms();

@@ -18,6 +18,12 @@ function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
 
     BaseUnit.prototype = Object.create(Unit.prototype);
 
+    Object.defineProperty(BaseUnit.prototype, 'constructor', {
+        value: BaseUnit,
+        enumerable: false,
+        writable: true
+    });
+
     function getDimensions() {
         var dim = [];
         dim[UnitType[this.type()].value()] = 1;

@@ -27,6 +27,11 @@ function(Guard, Arrays, Unit, UnitExpression) {
 	}
 
 	DerivedUnit.prototype = Object.create(Unit.prototype);
+	Object.defineProperty(DerivedUnit.prototype, 'constructor', {
+		value: DerivedUnit,
+		enumerable: false,
+		writable: true
+	});
 
 	var functions = {
 		dimensions: function() {

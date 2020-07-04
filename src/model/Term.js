@@ -16,6 +16,12 @@ define(['Guard'], function(Guard) {
 			return this._power;
 		}
 	};
+
+	Object.defineProperty(Term.prototype, 'constructor', {
+		value: Term,
+		enumerable: false,
+		writable: true
+	});
 	
 	return Term;
 });

@@ -55,6 +55,12 @@ define(['Guard', 'Arrays'], function(Guard, Arrays) {
 		}
 	};
 
+	Object.defineProperty(Dimensions.prototype, 'constructor', {
+		value: Dimensions,
+		enumerable: false,
+		writable: true
+	});
+
 	var empty = new Dimensions([]);
 	Dimensions.empty = function() {
 		return empty;

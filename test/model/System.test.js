@@ -60,6 +60,10 @@ function(mocha, chai,
     suite('System constructor', function() {
         var SI = constructSI();
 
+        test('type is System', function() {
+            equal(SI.constructor.name, 'System');
+        });
+
         test('returns on object', function() {
             ok(SI);
         });

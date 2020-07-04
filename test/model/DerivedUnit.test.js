@@ -1,10 +1,10 @@
 define([
     'Mocha', 'Chai', 
-    'DerivedUnit', 'UnitType',
+    'DerivedUnit', 'UnitType', 'Term',
     'test/StandardSteradianFn'], 
 function (
     mocha, chai, 
-    DerivedUnit, UnitType,
+    DerivedUnit, UnitType, Term,
     StandardSteradianFn
 ) {
     var assert = chai.assert;
@@ -43,6 +43,10 @@ function (
                     { unit: "foot", power: 1 },
                     { unit: "millisecond", power: -2 }
                 ]
+            });
+
+            test("type is DerivedUnit", function() {
+                equal(FakeForce.constructor.name, "DerivedUnit");
             });
 
             test("scale has default value of 1.0", function() {

@@ -65,6 +65,12 @@ define([], function() {
 		}
 	};
 
+	Object.defineProperty(Quantity.prototype, 'constructor', {
+		value: Quantity,
+		enumerable: false,
+		writable: true
+	});
+
 	function quantity(value, unitExpression, Sr) {
 		return new Quantity(unitExpression, value, Sr);
 	}
