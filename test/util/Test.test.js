@@ -8,6 +8,8 @@ function(mocha, chai, Test, Unit) {
             return "null";
         } else if (typeof input === 'undefined') {
             return 'undefined';
+        } else if (typeof input === 'function') {
+            return 'function ' + input.name;
         } else {
             return input.toString();
         }
@@ -68,32 +70,34 @@ function(mocha, chai, Test, Unit) {
         });
     }
 
-    suiteFor('isUndefined', Test.isUndefined, isValueTestCase([true,  false, false, false, false]));
-    suiteFor('isNull',      Test.isNull,      isValueTestCase([false, true,  false, false, false]));
-    suiteFor('isValue',     Test.isValue,     isValueTestCase([false, false, true,  true,  true ]));
+    suite("Test class", function() {
+        suiteFor('isUndefined', Test.isUndefined, isValueTestCase([true,  false, false, false, false]));
+        suiteFor('isNull',      Test.isNull,      isValueTestCase([false, true,  false, false, false]));
+        suiteFor('isValue',     Test.isValue,     isValueTestCase([false, false, true,  true,  true ]));
 
-    suiteFor('isObject',    Test.isObject, [
-        testCase(null,      false),
-        testCase(undefined, false),
-        testCase("object literal",  {},                     true),
-        testCase("string",          "a string",             false),
-        /* jshint -W053 */
-        testCase("String obj",      new String("a string"), true),
-        /* jshint +W053 */
-    ]);
+        suiteFor('isObject',    Test.isObject, [
+            testCase(null,      false),
+            testCase(undefined, false),
+            testCase("object literal",  {},                     true),
+            testCase("string",          "a string",             false),
+            /* jshint -W053 */
+            testCase("String obj",      new String("a string"), true),
+            /* jshint +W053 */
+        ]);
 
 
-    function testFunction() {}
-    suiteFor('isFunction',    Test.isFunction, [
-        testCase(undefined, false),
-        testCase(null,      false),
-        testCase({},        false),
-        
-        testCase(testFunction,                              true),
-        testCase(function functionExpression(){},           true),
-        /* jshint -W054 */
-        testCase(new Function(),                            true),
-        /* jshint +W054 */
-        testCase({ aFunction: function() {} }.aFunction,    true),
-    ]);
+        function testFunction() {}
+        suiteFor('isFunction',    Test.isFunction, [
+            testCase(undefined, false),
+            testCase(null,      false),
+            testCase({},        false),
+            
+            testCase(testFunction,                              true),
+            testCase(function functionExpression(){},           true),
+            /* jshint -W054 */
+            testCase(new Function(),                            true),
+            /* jshint +W054 */
+            testCase({ aFunction: function() {} }.aFunction,    true),
+        ]);
+    });
 });
