@@ -1,16 +1,17 @@
 define(
     ['Mocha', 'Chai', 'Test',
     'model/systems/StandardSystems', 'UnitRegistry', 'Unit',
-    'Convert'], 
+    'Quantity', 'Convert'], 
     function(mocha, chai, Test,
         StandardSystems, UnitRegistry, Unit,
-        Convert) {
+        Quantity, Convert) {
 
     var suite = mocha.suite,
-    test = mocha.test;
+        test = mocha.test;
 
     var assert = chai.assert;
-    var equal = assert.equal;
+    var equal = assert.equal,
+        closeTo = assert.closeTo;
 
     function installUnits(system, reg) {
         system.allUnits()
@@ -19,7 +20,7 @@ define(
             });
     }
 
-    suite('unitsToSystem', function() {
+    function testRegistry() {
         var reg = new UnitRegistry();
         StandardSystems.systems()
             .forEach(function(system) {
@@ -31,7 +32,27 @@ define(
 
         installUnits(SI, reg);
         installUnits(Imperial, reg);
+        return reg;
+    }
 
+    var reg = testRegistry(),
+            SI = reg.getSystem('SI'),
+            Imperial = reg.getSystem('Imperial');
+
+    function quantity(unitLike, value) {
+        var unitExp = Convert.toUnitExpression(unitLike, reg);
+        return new Quantity(unitExp, value, reg);
+    }
+
+    suite('quantity', function() {
+        test('quantity(q, <string:system>, registry)', function() {
+            var feet = quantity('foot', 4);
+            var meters = Convert.quantity(feet, 'SI', reg);
+            closeTo(1.2191999, meters.value, 1e-7);
+        });
+    });
+
+    suite('unitsToSystem', function() {
         test('base unit', function() {
             var converted = Convert.unitsToSystem(
                 SI.length().expression(), Imperial, reg

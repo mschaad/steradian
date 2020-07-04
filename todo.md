@@ -1,7 +1,6 @@
 # BACKLOG
-* add rest of "standard" types to DerivedUnitTypes enum
-* add support for additional unit types within a system (e.g. furlong)
-* fix casing inconsistency between BaseUnit and DerivedUnit
+* fix bugs in Convert code that expects Term.unit to be a Unit, when it is actually a UnitExpression
+    (this can easily happen if we're converting from pounds to newtons, but Newton doesn't exist)
 * make SI system properties just properties, not functions
 * support multiplying quantities by scalars (using Quantity.times)
 * support defining DerivedUnits in terms of Quantities.

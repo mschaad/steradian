@@ -1,11 +1,11 @@
 define([
     'Strings', 'Test', 'Guard',
     'Unit', 'UnitExpression', 'Term', 'System',
-    'Units'
+    'Units', 'Terms'
 ], 
 function(Strings, Test, Guard,
     Unit, UnitExpression, Term, System,
-    Units) {
+    Units, Terms) {
     function coerceToUnitExpression(obj, registry) {
         if (Test.instanceOf(obj, UnitExpression)) {
             return obj;
@@ -16,6 +16,9 @@ function(Strings, Test, Guard,
         }
         else if (Strings.isString(obj)) {
             var identifier = obj;
+            if (!registry) {
+                throw new Error("cannot resolve a string to a Unit without supplying a registry.");
+            }
             unit = registry.get(identifier);
             if (!unit) {
                 throw new Error("Unit '" + identifier + "' not found");
@@ -25,24 +28,35 @@ function(Strings, Test, Guard,
             throw new Error("Expected: unit name or Unit or UnitExpression but found object of type '" +
                 typeof(obj) + "'");
         }
-        return new UnitExpression([new Term(unit, 1)]);
+        return new UnitExpression([Terms.create(unit, 1)]);
     }
 
     var Convert = {
         toUnitExpression: coerceToUnitExpression,
 		quantity: function (q, targetUnitsOrSystem, registry) {
             var targetUnits;
-            if (Test.instanceOf(targetUnitsOrSystem, System)) {
+            var targetSystem;
+            // targetUnitsOrSystem : Unit | UnitExpression | System | String<system|unit>
+
+            var isString = Test.isString(targetUnitsOrSystem);
+            
+            if (isString && !registry) {
+                throw new Error("cannot resolve a string to a Unit or System without supplying a registry.");
+            }
+            else if (Test.instanceOf(targetUnitsOrSystem, System)) {
                 var system = targetUnitsOrSystem;
                 targetUnits = Convert.unitsToSystem(q.units(), system, registry);
             }
-            else {
+            else if (isString && !!(targetSystem = registry.tryGetSystem(targetUnitsOrSystem))) {
+                targetUnits = Convert.unitsToSystem(q.units(), targetSystem, registry);
+            }
+            else { // String | Unit | UnitExpression
                 targetUnits = targetUnitsOrSystem;
                 targetUnits = coerceToUnitExpression(targetUnits, registry);
             }
 
             var originalDimensions = q.units().dimensions();
-            targetUnits = coerceToUnitExpression(targetUnits, registry);
+
             var newDimensions = targetUnits.dimensions();
             if (!originalDimensions.equals(newDimensions)) {
                 throw 'incompatible unit dimensions';
@@ -105,7 +119,7 @@ function(Strings, Test, Guard,
             return new UnitExpression(mappedTerms);
     
             function mapTerm(term) {
-                return new Term(
+                return Terms.create(
                     mapUnit(term.unit()),
                     term.power()
                 );

@@ -1,7 +1,15 @@
 define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 	function Guard(value, name) {
+		function valueOfType(value) {
+			var type = typeof value;
+			if (type === 'object') {
+				type = value.constructor.name;
+			}
+			return "value '" + value + "' of type " + type;
+		}
+
 		function getErrorMessage(args) {
-			var failureString = args.failureString || "value '" + value + "'";
+			var failureString = args.failureString ||  valueOfType(value);
 			return name + 
 				" should have been " + 
 				args.expectedString +
@@ -76,7 +84,7 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 					return that;
 				} 
 				else {
-					throw new Error(name + " should have been a Number, but found value '" + value + "'");
+					throw new Error(name + " should have been a Number, but found " + valueOfType(value));
 				}
 			},
 			isObject: function() {
@@ -84,12 +92,12 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 					return that;
 				}
 				else {
-					throw new Error(name + " should have been an object, but found value '" + value + "'");
+					throw new Error(name + " should have been an object, but found " + valueOfType(value));
 				}
 			},
 			isNotZero: function() {
 				if (value === 0) {
-					throw new Error(name + " should have not have been zero, but found value '" + value + "'");
+					throw new Error(name + " should have not have been zero, but found " + valueOfType(value));
 				}
 				return that;
 			},
@@ -97,7 +105,7 @@ define("Guard", ['Strings', 'Test'], function(Strings, Test) {
 				if (Test.isFunction(value)) {
 					return that;
 				} else {
-					throw new Error(name + "should have been a function, but found value '" + value + "'");
+					throw new Error(name + "should have been a function, but found " + valueOfType(value));
 				}
 			}
 		};

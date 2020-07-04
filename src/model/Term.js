@@ -1,7 +1,7 @@
 define(['Guard'], function(Guard) {
 
 	function Term(unit, power) {
-		Guard(unit, "unit").isValue();
+		Guard(unit, "unit").isValue();		
 		this._unit = unit;
 		Guard(power, "power").isNumber();
 		this._power = power;
@@ -14,6 +14,9 @@ define(['Guard'], function(Guard) {
 		},
 		power: function() {
 			return this._power;
+		},
+		toString: function() {
+			return "Term:" + this._unit.toString() + "^" + this._power;
 		}
 	};
 

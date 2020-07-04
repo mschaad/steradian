@@ -12,6 +12,70 @@ function (mocha, chai, Steradian, StandardSteradianFn, SI_def) {
 		var Sr = Steradian();
 		return Sr.system(SI_def);
 	}
+
+	function installSI(Sr) {
+		return Sr.system({
+			name: "SI",
+			base: {
+				length: {
+					name: 'meter',
+					type: 'length',
+					symbol: 'm',
+					scale: 1.0
+				},
+				mass: {
+					name: 'kilogram',
+					type: 'mass',
+					symbol: 'kg',
+					scale: 1.0
+				},
+				time: {
+					name: 'second',
+					type: 'time',
+					symbol: 's',
+					scale: 1.0
+				},
+				current: {
+					name: 'ampere',
+					type: 'current',
+					symbol: 'A',
+					scale: 1.0
+				},
+				temperature: {
+					name: 'degree celsius',
+					type: 'temperature',
+					symbol: '°C',
+					scale: 1.0
+				},
+				absoluteTemperature: {
+					name: 'degree kelvin',
+					type: 'absoluteTemperature',
+					symbol: '°K',
+					scale: 1.0
+				},
+				//'amount'
+				luminousIntensity: {
+					name: 'candela',
+					type: 'luminousIntensity',
+					symbol: 'cd',
+					scale: 1.0
+				}
+			},
+			derived: {
+				force: {
+					name: 'newton',
+					units: [
+						{ unit: 'kilogram', power: 1 },
+						{ unit: 'meter', power: 1 },
+						{ unit: 'second', power: -2 }
+					],
+					symbol: "N",
+					scale: 1.0
+				}
+			},
+			other: []
+		});
+	}
 	
 	suite("Steradian", function () {
 		test('module returns object', function() {
@@ -315,6 +379,36 @@ function (mocha, chai, Steradian, StandardSteradianFn, SI_def) {
 				var qPounds = Sr.quantity(pound, 1);
 
 				var qNewtons = Sr.convert(qPounds, SI);
+				
+				//1 slug ft/s^2 = 4.44822162 newtons
+				assert.closeTo(qNewtons.value(), 4.4482, 5e-5);
+				equal(qNewtons.units().toString(), "N");
+			});
+
+			test('can convert units to a standard system (string)', function() {
+				var Sr = StandardSteradianFn();
+
+				installSI(Sr);
+
+				var SI = Sr.system('SI');
+				ok(SI);
+
+				//F = ma
+				//N = kg * m / s^2
+				//lb = slug * (feet / s^2)
+				var pound = Sr.derivedUnit({
+					name: "pound",
+					symbol: "lb",
+					units: [
+						{ unit: 'slug', power: 1 },
+						{ unit: 'foot', power: 1 },
+						{ unit: 'second', power: -2 }
+					]
+				});
+
+				var qPounds = Sr.quantity(pound, 1);
+
+				var qNewtons = Sr.convert(qPounds, 'SI');
 				
 				//1 slug ft/s^2 = 4.44822162 newtons
 				assert.closeTo(qNewtons.value(), 4.4482, 5e-5);
