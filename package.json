@@ -9,6 +9,8 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "circular-dependency-plugin": "^4.4.0",
+    "documentation": "^13.0.2",
+    "jsdoc": "^3.6.4",
     "jshint": "^2.11.1",
     "karma": "^5.0.2",
     "karma-chai": "^0.1.0",
@@ -33,13 +35,23 @@
     "karma": "karma start karma.conf.js",
     "webpack": "webpack",
     "buildTestSuite": "webpack --config webpack.config.testSuite.js",
-    "testRelease": "bash ./scripts/test-release.sh"
+    "testRelease": "bash ./scripts/test-release.sh",
+    "buildDocs": "documentation build src/** -f html -o docs",
+    "cleanDocs": "node scripts/clean-docs.js",
+    "jsdoc": "npm run cleanDocs && jsdoc src -r -d docs/"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/mschaad/steradian"
   },
-  "keywords": ["convert", "conversion", "si", "imperial", "unit", "measure"],
+  "keywords": [
+    "convert",
+    "conversion",
+    "si",
+    "imperial",
+    "unit",
+    "measure"
+  ],
   "author": "mschaad",
   "license": "",
   "dependencies": {}

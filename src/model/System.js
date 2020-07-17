@@ -1,10 +1,21 @@
 define(['Guard','Arrays','Unit','UnitType', 'DerivedUnitType','logic/SystemDefinitionFixer'], 
 function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) {
+     /**
+      * A System of units of measure.
+      * @class
+      * @alias System
+      * @param {SystemDefinition} def - the system definition.
+      */
     function System(def) {
         Guard(def.name, "def.name").isTruthy().isString();
         
         var name = def.name;
-        this.name = function() { return name; };
+
+        /** 
+         * @method
+         * @type {string}
+         */
+        this.name = function name() { return name; };
 
         Guard(def.base, "def.base").isObject();
 
@@ -48,6 +59,16 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
 
         var other = def.other || [];
         
+        /** 
+         * A list of all "other" (non-defining) Units in the System.
+         * 
+         * An example of this type of Unit would be the kilometer: it is
+         * part of the SI System, but is not defining part of the System
+         * as the meter is.
+         * 
+         * @property other 
+         * @type {array<Unit>}
+         */
         other.forEach(function(unit) {
             allUnits.push(unit);
         });
@@ -55,6 +76,12 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
         that.other = Arrays.frozenClone(other);
 
         Object.freeze(allUnits);
+
+        /** 
+         * returns an array of all Unit types in the system.
+         * @method 
+         * @type {array<Unit>}
+         * */
         this.allUnits = function() {
             return allUnits;
         };
@@ -62,7 +89,13 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
         Object.freeze(this);
     }
 
-    System.prototype = {
+    System.prototype = 
+    /** @lends System# */
+    {
+        /**
+         * returns the name of the System.
+         * @method
+         */
         toString: function() {
             return this.name();
         }
@@ -74,6 +107,10 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
         writable: true
     });
 
+    /**
+     * @param {SystemDefinition} def 
+     * @private
+     */
     System.create = function(def) {
         return new System(def);
     };

@@ -2,6 +2,19 @@ define([
 	'Guard', 'Arrays',
 	'Unit', 'UnitExpression'], 
 function(Guard, Arrays, Unit, UnitExpression) {
+	/**
+	 * DerivedUnits are composed of a {UnitExpression} and a scale factor.
+	 * The UnitExpression encapsulates the combination of other Units
+	 * that composes this DerivedUnit, and the scale represents the
+	 * scale factor.
+	 * @class
+	 * @extends {Unit}
+	 * @alias DerivedUnit
+	 * @param {string} name 
+	 * @param {string} symbol 
+	 * @param {number} scale 
+	 * @param {Array<Term>} terms 
+	 */
 	function DerivedUnit(name, symbol, scale, terms) {
 		Guard(terms, 'terms').isTruthy().isArray();
 		if (terms.length === 0) {
@@ -33,13 +46,26 @@ function(Guard, Arrays, Unit, UnitExpression) {
 		writable: true
 	});
 
-	var functions = {
+	var functions = 
+	/**
+	 * @lends DerivedUnit#
+	 */
+	{
 		dimensions: function() {
 			return this.expression().dimensions();
 		},
+		/**
+		 * Always return true.
+		 * @method
+		 */
 		isBaseUnit: function() {
 			return false;
 		},
+		/**
+		 * The UnitExpression that defines the DerivedUnit.
+		 * For instance, the Joule is defined the Newton-meter per second squared.
+		 * @method
+		 */
 		expression: function() {
 			var terms = [];
 			for(var i = 0; i < this._terms.length; i++) {
@@ -48,6 +74,12 @@ function(Guard, Arrays, Unit, UnitExpression) {
 			}
 			return new UnitExpression(terms);
 		},
+		/**
+		 * Returns a string representation of this DerivedUnit,
+		 * composed of its scale and the string representation of its
+		 * expression().
+		 * @method
+		 */
 		toString: function() {
 			return this.symbol();
 		}

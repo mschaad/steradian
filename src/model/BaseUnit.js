@@ -1,8 +1,25 @@
 define(['Guard', 'Unit', 'UnitType', 'Dimensions', 'Term', 'UnitExpression'], 
 function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
+    /**
+     * Implementation of Unit representing a "base" Unit in a System.
+     * BaseUnits are not composed of other Units.
+     * 
+     * @class
+     * @extends {Unit}
+     * @alias BaseUnit
+     * @hideconstructor
+     * @param {string} name 
+     * @param {UnitType} type 
+     * @param {string} symbol 
+     * @param {number} scale 
+     */
     function BaseUnit(name, type, symbol, scale) {
         Unit.call(this, name, symbol, scale);
         Guard(type, "type").isString().isTruthy();
+        /**
+         * @method
+         * @type {UnitType}
+         */
         this.type = function() { return type; };
 
         var that = this;
@@ -32,6 +49,7 @@ function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
 
     Object.assign(
         BaseUnit.prototype,
+        /** @lends BaseUnit# */
         {
             dimensions: function() {
                 return this._dimensions();

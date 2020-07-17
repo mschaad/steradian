@@ -1,4 +1,19 @@
 define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, Dimensions) {
+	/**
+	 * Represents an expression made of composed Units.
+	 * This structure is the basis of DerivedUnit definitions.
+	 * 
+	 * Logically, a UnitExpression represents a list of Terms multiplied
+	 * together.  Each Term has a base "unit" and a power.
+	 * 
+	 * For instance, a UnitExpression that represents "meter per second squared,"
+	 * would consist of one Term that represents "meter" (to the first power) and another
+	 * Term that represents "second squared."
+	 * @class
+	 * @alias UnitExpression
+	 * @hideconstructor
+	 * @param {array<Term>}} terms 
+	 */
 	function UnitExpression(terms) {
 		Guard(terms, "terms").isArrayOf(Term);
 		this._terms = Arrays.frozenClone(terms);
@@ -26,36 +41,92 @@ define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, 
 		return dim;
 	}
 
-	UnitExpression.prototype = {
+	UnitExpression.prototype = 
+	/** @lends UnitExpression# */
+	{
+		/**
+		 * Returns an immutable array of Terms that make up the UnitExpression.
+		 * @method
+		 * @type {array<Term>}
+		 */
 		terms: function() {
 			return this._terms;
 		},
+		/**
+		 * Returns a Dimensions object that represents the unit dimensions of
+		 * this UnitExpression.
+		 * @method
+		 * @type {Dimensions}
+		 */
 		dimensions: function() {
 			return this._dimensions();
 		},
+		/**
+		 * Multiplies this UnitExpression by another UnitExpression
+		 * and returns the result as another UnitExpression.
+		 * 
+		 * Logically, this operation is implemented by concatenating
+		 * all of the terms together and combining like bases.
+		 * @method
+		 * @param {UnitExpression} rhs
+		 * @type {UnitExpression}
+		 */
 		mult: function(rhs) {
 			var terms = flatten([this.terms(), rhs.terms()]);
 			terms = combineLikeTerms(terms);
 			return new UnitExpression(terms);
 		},
+		/**
+		 * Divides this UnitExpression by another UnitExpression
+		 * and returns the result as another UnitExpression.
+		 * 
+		 * Logically, this operation is implemented by inverting the
+		 * divisor `rhs` and performing a multiplication operation.
+		 * @method
+		 * @param {UnitExpression} rhs 
+		 * @type {UnitExpression}
+		 */
 		div: function(rhs) {
 			var inverseRhs = new UnitExpression(rhs.terms().map(invert));
 			return this.mult(inverseRhs);
 		},
+		/**
+		 * Exponentiates this UnitExpression by the given
+		 * power and returns the result as another UnitExpression.
+		 * @method
+		 * @param {number} power
+		 * @type {UnitExpression}
+		 */
 		pow: function(power) {
 			var exponentiatedTerms = this.terms().map(termExponent(power));
 			return new UnitExpression(exponentiatedTerms);
 		},
+		/**
+		 * Recursively breaks down this UnitExpression into its constituent
+		 * Terms and each Term into its constituent BaseUnits,
+		 * until only BaseUnits are left.
+		 * @method
+		 * @type {UnitExpression}
+		 */
 		toBaseUnits: function() {
 			var baseTerms = getEquivalentBaseTermsForList(this.terms());
 			return new UnitExpression(baseTerms);
 		},
 		/**
 		 * Simplifies the UnitExpression by combining like Terms.
+		 * @method
+		 * @type {UnitExpression}
 		 */
 		simplify: function() {
 			return new UnitExpression(combineLikeTerms(this.terms()));
 		},
+		/**
+		 * Projects this UnitExpression onto an equivalent map,
+		 * where each unit type becomes a key, and the value
+		 * is the sum of all the powers of the Terms of that type.
+		 * @method
+		 * @type {object}
+		 */
 		toMap: function() {
 			var terms = combineLikeTerms(this.terms());
 
@@ -67,6 +138,14 @@ define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, 
 				Object.create(null)
 			);
 		},
+		/**
+		 * Returns a string representation of the given UnitExpression.
+		 * 
+		 * For example, the string representation of a UnitExpression 
+		 * that represents "meters per second squared" will be "m/s^2".
+		 * @method
+		 * @type {string}
+		 */
 		toString: function() {
 			var terms = this._terms;
 			 var reduced = terms
