@@ -5,6 +5,7 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
       * @class
       * @alias System
       * @param {SystemDefinition} def - the system definition.
+      * @hideconstructor
       */
     function System(def) {
         Guard(def.name, "def.name").isTruthy().isString();
@@ -12,6 +13,7 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
         var name = def.name;
 
         /** 
+         * Returns the name of the System.
          * @method
          * @type {string}
          */
@@ -59,20 +61,18 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
 
         var other = def.other || [];
         
-        /** 
-         * A list of all "other" (non-defining) Units in the System.
-         * 
-         * An example of this type of Unit would be the kilometer: it is
-         * part of the SI System, but is not defining part of the System
-         * as the meter is.
-         * 
-         * @property other 
-         * @type {array<Unit>}
-         */
         other.forEach(function(unit) {
             allUnits.push(unit);
         });
 
+        /**
+         * A list of all "other" (non-defining) Units in the System.
+         * An example of this type of Unit would be the kilometer: it is
+         * part of the SI System, but is not defining part of the System
+         * as the meter is.
+         * @member {Unit[]}
+         * @alias System#other
+         */
         that.other = Arrays.frozenClone(other);
 
         Object.freeze(allUnits);
@@ -80,8 +80,8 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
         /** 
          * returns an array of all Unit types in the system.
          * @method 
-         * @type {array<Unit>}
-         * */
+         * @type {Unit[]}
+         */
         this.allUnits = function() {
             return allUnits;
         };
@@ -95,6 +95,7 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
         /**
          * returns the name of the System.
          * @method
+         * @type {string}
          */
         toString: function() {
             return this.name();

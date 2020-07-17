@@ -21,7 +21,9 @@
   -   support source maps
 - add coverage report (Istanbul?)
 - convert to TypeScript
-- upload to github
-- add CI
 - remove npm in favor of yarn
-- add acceptance tests for prod build
+- add more acceptance tests for prod build
+
+# DOCS
+- document dynamic members of System
+- document static/inherited methods of UnitType and DerivedUnitType
