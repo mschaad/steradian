@@ -1,0 +1,251 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: model/Quantity.js | Source: model/Quantity.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Source: model/Quantity.js</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-steradian.html">steradian</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:steradian_sub"><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-steradian.html#~BaseUnitDefinition">BaseUnitDefinition</a></li><li><a href="module-steradian.html#~DerivedUnitDefinition">DerivedUnitDefinition</a></li><li><a href="module-steradian.html#~SystemDefinition">SystemDefinition</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Classes</h3><ul><li><a href="BaseUnit.html">BaseUnit</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="BaseUnit_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="BaseUnit.html#dimensions">dimensions</a></li><li><a href="BaseUnit.html#expression">expression</a></li><li><a href="BaseUnit.html#isBaseUnit">isBaseUnit</a></li><li><a href="BaseUnit.html#name">name</a></li><li><a href="BaseUnit.html#scale">scale</a></li><li><a href="BaseUnit.html#symbol">symbol</a></li><li><a href="BaseUnit.html#toString">toString</a></li><li><a href="BaseUnit.html#type">type</a></li></ul></div></li><li><a href="DerivedUnit.html">DerivedUnit</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="DerivedUnit_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="DerivedUnit.html#dimensions">dimensions</a></li><li><a href="DerivedUnit.html#expression">expression</a></li><li><a href="DerivedUnit.html#isBaseUnit">isBaseUnit</a></li><li><a href="DerivedUnit.html#name">name</a></li><li><a href="DerivedUnit.html#scale">scale</a></li><li><a href="DerivedUnit.html#symbol">symbol</a></li><li><a href="DerivedUnit.html#toString">toString</a></li></ul></div></li><li><a href="Dimensions.html">Dimensions</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Dimensions_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Dimensions.html#.empty">empty</a></li><li><a href="Dimensions.html#add">add</a></li><li><a href="Dimensions.html#equals">equals</a></li><li><a href="Dimensions.html#get">get</a></li><li><a href="Dimensions.html#mult">mult</a></li><li><a href="Dimensions.html#size">size</a></li></ul></div></li><li><a href="Quantity.html">Quantity</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Quantity_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Quantity.html#convertTo">convertTo</a></li><li><a href="Quantity.html#dividedBy">dividedBy</a></li><li><a href="Quantity.html#minus">minus</a></li><li><a href="Quantity.html#plus">plus</a></li><li><a href="Quantity.html#times">times</a></li><li><a href="Quantity.html#toString">toString</a></li><li><a href="Quantity.html#units">units</a></li><li><a href="Quantity.html#value">value</a></li></ul></div></li><li><a href="Steradian.html">Steradian</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Steradian_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Steradian.html#convert">convert</a></li><li><a href="Steradian.html#derivedUnit">derivedUnit</a></li><li><a href="Steradian.html#quantity">quantity</a></li><li><a href="Steradian.html#system">system</a></li><li><a href="Steradian.html#unit">unit</a></li></ul></div></li><li><a href="System.html">System</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="System_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="System.html#other">other</a></li></ul><div class="member-type">Methods</div><ul class="inner"><li><a href="System.html#allUnits">allUnits</a></li><li><a href="System.html#name">name</a></li><li><a href="System.html#toString">toString</a></li></ul></div></li><li><a href="Term.html">Term</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Term_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Term.html#power">power</a></li><li><a href="Term.html#toString">toString</a></li><li><a href="Term.html#unit">unit</a></li></ul></div></li><li><a href="Unit.html">Unit</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="Unit_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="Unit.html#.isUnit">isUnit</a></li><li><a href="Unit.html#dimensions">dimensions</a></li><li><a href="Unit.html#expression">expression</a></li><li><a href="Unit.html#isBaseUnit">isBaseUnit</a></li><li><a href="Unit.html#name">name</a></li><li><a href="Unit.html#scale">scale</a></li><li><a href="Unit.html#symbol">symbol</a></li><li><a href="Unit.html#toString">toString</a></li></ul></div></li><li><a href="UnitExpression.html">UnitExpression</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="UnitExpression_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="UnitExpression.html#dimensions">dimensions</a></li><li><a href="UnitExpression.html#div">div</a></li><li><a href="UnitExpression.html#mult">mult</a></li><li><a href="UnitExpression.html#pow">pow</a></li><li><a href="UnitExpression.html#simplify">simplify</a></li><li><a href="UnitExpression.html#terms">terms</a></li><li><a href="UnitExpression.html#toBaseUnits">toBaseUnits</a></li><li><a href="UnitExpression.html#toMap">toMap</a></li><li><a href="UnitExpression.html#toString">toString</a></li></ul></div></li></ul></div><div class="lnb-api hidden"><h3>Namespaces</h3><ul><li><a href="DerivedUnitType.html">DerivedUnitType</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="DerivedUnitType_sub"></div></li><li><a href="UnitType.html">UnitType</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="UnitType_sub"></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>define([], function() {
+	/**
+	 * @classdesc
+	 * Represents a dimensive quantity.  
+	 * Quantities have two parts:
+	 * 	1. value, or magnitude
+	 *  2. UnitExpression, which indicates the units attached to the value.
+	 * @class
+	 * @alias Quantity
+	 * @hideconstructor
+	 * @param {UnitExpression} unitExpression - the UnitExpression associated with Quantity, such as "m/s".
+	 * @param {number} value - the numeric value of the Quantity, such as `4.0`.
+	 * @param {Steradian} Sr - the instance of Steradian with which this Quantity should be associated.
+	 */
+	function Quantity(unitExpression, value, Sr) {
+		this._unitExpression = unitExpression;
+		this._value = value;
+		if (!Sr) {
+			throw new Error("Sr was not an object.");
+		}
+		this.Sr = Sr;
+		Object.freeze(this);
+	}
+
+	var ArithmeticOps = {
+		add: function add(lhs, rhs) {
+			var lhsUnits = lhs.units();
+			var convertedRhs = rhs.convertTo(lhsUnits);
+			var resultValue = lhs.value() + convertedRhs.value();
+			var resultQuantity = quantity(resultValue, lhsUnits, lhs.Sr); 
+			return resultQuantity;
+		},
+		subtract: function add(lhs, rhs) {
+			var lhsUnits = lhs.units();
+			var convertedRhs = rhs.convertTo(lhsUnits);
+			var resultValue = lhs.value() - convertedRhs.value();
+			var resultQuantity = quantity(resultValue, lhsUnits, lhs.Sr); 
+			return resultQuantity;
+		},
+		multiply: function(lhs, rhs) { 
+			var resultUnits = lhs.units().mult(rhs.units());
+			var resultValue = lhs.value() * rhs.value();
+			var resultQuantity = quantity(resultValue, resultUnits, lhs.Sr);
+			return resultQuantity;
+		},
+		divide: function(lhs, rhs) { 
+			var resultUnits = lhs.units().div(rhs.units());
+			var resultValue = lhs.value() / rhs.value();
+			var resultQuantity = quantity(resultValue, resultUnits, lhs.Sr);
+			return resultQuantity;
+		}
+	};
+
+	Quantity.prototype = 
+	/**
+	 * @lends Quantity#
+	 */
+	{
+		/**
+		 * Converts this Quantity to another Quantity in the given
+		 * units or System.
+		 * 
+		 * `newUnits` may be the name of a defined Unit, the name of 
+		 * a defined System, an instance of Unit, or an instance of
+		 * System.
+		 * 
+		 * This method provides an OO-flavored API that directly 
+		 * corresponds to the Functional-flavored `Sr.convert(quantity, targetUnitsOrSystem)`.
+		 * @method
+		 * @param {string|Unit|UnitExpression|System} newUnits 
+		 * @type {Quantity}
+		 */
+		convertTo: function(newUnits) {
+			return this.Sr.convert(this, newUnits);
+		},
+		/**
+		 * Returns the UnitExpression associated with this Quantity.
+		 * For example, given a Quantity representing "four meters per second",
+		 * this method returns a UnitExpression representing "meters per second."
+		 * @method
+		 * @type {UnitExpression}
+		 */
+		units: function() {
+			return this._unitExpression;
+		},
+		/**
+		 * Returns the scalar value associated with this Quantity.
+		 * For example, given a Quantity representing "four meters per second",
+		 * this method returns the number 4.
+		 * @method
+		 * @type {number}
+		 */
+		value: function() {
+			return this._value;
+		},
+		/**
+		 * Adds another Quantity to this Quantity and returns
+		 * the result as a new Quantity.
+		 * 
+		 * If the addend `rhs` is not expressed in the same units as this Quantity,
+		 * `rhs` will be converted to the same units as this Quantity.
+		 * 
+		 * If `rhs` cannot be converted to the same units as this Quantity,
+		 * (because, say, the Quantities are not dimensionally compatible)
+		 * an Error is thrown.
+		 * @param {Quantity} rhs - a dimensionally-compatible Quantity to add to this Quantity.
+		 * @type {Quantity}
+		 */
+		plus: function(rhs) {
+			return ArithmeticOps.add(this, rhs);
+		},
+		/**
+		 * Subtracts another Quantity from this Quantity and returns
+		 * the result as a new Quantity.
+		 * 
+		 * If the subtractend `rhs` is not expressed in the same units as this Quantity,
+		 * `rhs` will be converted to the same units as this Quantity.
+		 * 
+		 * If `rhs` cannot be converted to the same units as this Quantity,
+		 * (because, say, the Quantities are not dimensionally compatible)
+		 * an Error is thrown.
+		 * @param {Quantity} rhs - a dimensionally-compatible Quantity to subtract from this Quantity.
+		 * @type {Quantity}
+		 */
+		minus: function(rhs) {
+			return ArithmeticOps.subtract(this, rhs);
+		},
+		/**
+		 * Multiplies this Quantity by another Quantity and returns
+		 * the result as a new Quantity.
+		 * 
+		 * No unit conversion is performed on the multiplicand `rhs`.
+		 * @param {Quantity} rhs - the Quantity by which to multiply this Quantity.  
+		 * @type {Quantity}
+		 */
+		times: function(rhs) {
+			return ArithmeticOps.multiply(this, rhs);
+		},
+		/**
+		 * Divides this Quantity by another Quantity and returns
+		 * the result as a new Quantity.
+		 * 
+		 * No unit conversion is performed on the divisor `rhs`.
+		 * @param {Quantity} rhs - the Quantity by which to divide this Quantity.  
+		 * @type {Quantity}
+		 */
+		dividedBy: function(rhs) {
+			return ArithmeticOps.divide(this, rhs);
+		},
+		/**
+		 * Returns a string representation of this Quantity,
+		 * including the `value()` and the symbolic representation 
+		 * of `expression()`.
+		 * 
+		 * For instance, a Quantity representing "four meters"
+		 * will be rendered "4m".
+		 */
+		toString: function toString() {
+			return this.value() + this.units().toString();
+		}
+	};
+
+	Object.defineProperty(Quantity.prototype, 'constructor', {
+		value: Quantity,
+		enumerable: false,
+		writable: true
+	});
+
+	function quantity(value, unitExpression, Sr) {
+		return new Quantity(unitExpression, value, Sr);
+	}
+
+	return Quantity;
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>
