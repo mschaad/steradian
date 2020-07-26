@@ -1,6 +1,7 @@
-# Steradian
-
+# [Steradian](https://mschaad.github.io/steradian/module-steradian.html)
 A JavaScript unit conversion and manipulation library for web (AMD) and node.js (CommonJS).
+
+Check out the [documentation](https://mschaad.github.io/steradian/module-steradian.html)!
 
 # Install
 ```
