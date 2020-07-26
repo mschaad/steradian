@@ -36,7 +36,7 @@
     "webpack": "webpack",
     "buildTestSuite": "webpack --config webpack.config.testSuite.js",
     "testRelease": "bash ./scripts/test-release.sh",
-    "buildDocs": "documentation build src/** -f html -o docs",
+    "buildDocs": "npm run jsdoc",
     "cleanDocs": "node scripts/clean-docs.js",
     "jsdoc": "jsdoc -c docsBuild/conf.js"
   },
