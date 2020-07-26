@@ -1,7 +1,8 @@
 define(['Guard', 'Unit', 'UnitType', 'Dimensions', 'Term', 'UnitExpression'], 
 function(Guard, Unit, UnitType, Dimensions, Term, UnitExpression) {
     /**
-     * Implementation of Unit representing a "base" Unit in a System.
+     * @classdesc
+     * Implementation of Unit representing a "base" [Unit]{@link Unit} in a [System]{@link System}.
      * BaseUnits are not composed of other Units.
      * 
      * @class

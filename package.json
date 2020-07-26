@@ -9,7 +9,6 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "circular-dependency-plugin": "^4.4.0",
-    "documentation": "^13.0.2",
     "jsdoc": "^3.6.4",
     "jshint": "^2.11.1",
     "karma": "^5.0.2",
@@ -21,6 +20,7 @@
     "karma-webpack": "^4.0.2",
     "mocha": "^7.2.0",
     "mocha-webpack": "^2.0.0-beta.0",
+    "tui-jsdoc-template": "^1.2.2",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-merge": "^4.2.2",
@@ -38,7 +38,7 @@
     "testRelease": "bash ./scripts/test-release.sh",
     "buildDocs": "documentation build src/** -f html -o docs",
     "cleanDocs": "node scripts/clean-docs.js",
-    "jsdoc": "npm run cleanDocs && jsdoc src -r -d docs/"
+    "jsdoc": "jsdoc -c docsBuild/conf.js"
   },
   "repository": {
     "type": "git",

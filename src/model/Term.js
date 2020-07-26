@@ -1,6 +1,7 @@
 define(['Guard'], function(Guard) {
 
 	/**
+	 * @classdesc
 	 * Represents a term in a UnitExpression.
 	 * Consists of a reference to a Unit or a UnitExpression and a power.
 	 * 

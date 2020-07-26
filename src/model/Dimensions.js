@@ -1,6 +1,7 @@
 ondefine(['Guard', 'Arrays'], function(Guard, Arrays) {
 
 	/**
+	 * @classdesc
 	 * Represents a dimensional magnitude vector
 	 * related to some Quantity or UnitExpression.
 	 * 

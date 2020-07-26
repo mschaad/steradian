@@ -3,13 +3,15 @@ define([
 	'Unit', 'UnitExpression'], 
 function(Guard, Arrays, Unit, UnitExpression) {
 	/**
-	 * DerivedUnits are composed of a {UnitExpression} and a scale factor.
+	 * @classdesc
+	 * DerivedUnits are composed of a [UnitExpression]{@link UnitExpression} and a scale factor.
 	 * The UnitExpression encapsulates the combination of other Units
 	 * that composes this DerivedUnit, and the scale represents the
 	 * scale factor.
 	 * @class
 	 * @extends {Unit}
 	 * @alias DerivedUnit
+	 * @hideconstructor
 	 * @param {string} name 
 	 * @param {string} symbol 
 	 * @param {number} scale 

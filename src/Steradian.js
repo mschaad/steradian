@@ -9,6 +9,7 @@
  * preloaded with any Units.
  * 
  * @module steradian
+ * @see Steradian
  */
 define(
 	[

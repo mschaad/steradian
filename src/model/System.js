@@ -1,6 +1,7 @@
 define(['Guard','Arrays','Unit','UnitType', 'DerivedUnitType','logic/SystemDefinitionFixer'], 
 function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) {
      /**
+      * @classdesc
       * A System of units of measure.
       * @class
       * @alias System

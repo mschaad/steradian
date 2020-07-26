@@ -1,5 +1,6 @@
 define(['Guard', 'Arrays', 'Term', 'Dimensions'], function(Guard, Arrays, Term, Dimensions) {
 	/**
+	 * @classdesc
 	 * Represents an expression made of composed Units.
 	 * This structure is the basis of DerivedUnit definitions.
 	 * 

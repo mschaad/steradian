@@ -1,8 +1,8 @@
 define(['Enum'], function(Enum) {
     /**
      * Represents all of the standard derived types in the SI system.
-     * All Systems are constructed from base UnitTypes and these
-     * DerivedUnitTypes.
+     * All Systems are constructed from base [UnitTypes]{@link UnitType} and these
+     * [DerivedUnitTypes]{@link DerivedUnitType}.
      * DerivedUnits may also correspond to the types in this list.
      * @namespace DerivedUnitType
      * @property {UnitType} angle

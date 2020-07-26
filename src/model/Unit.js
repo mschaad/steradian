@@ -2,9 +2,12 @@ define(['Guard'],
 	function(Guard) {
 		
 		/**
-		 * Abstract base class of BaseUnit and DerivedUnit.
+		 * @classdesc
+		 * Abstract base class of [BaseUnit]{@link BaseUnit} and [DerivedUnit]{@link DerivedUnit}.
 		 * @class
 		 * @alias Unit
+		 * @see BaseUnit
+		 * @see DerivedUnit
 		 * @hideconstructor
 		 * @param {string} name - full name of the unit, such as 'meter'
 		 * @param {string} symbol - symbolic name of the unit such as "m" for meter, used in toString() representations.

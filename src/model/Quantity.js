@@ -1,5 +1,10 @@
 define([], function() {
 	/**
+	 * @classdesc
+	 * Represents a dimensive quantity.  
+	 * Quantities have two parts:
+	 * 	1. value, or magnitude
+	 *  2. UnitExpression, which indicates the units attached to the value.
 	 * @class
 	 * @alias Quantity
 	 * @hideconstructor
