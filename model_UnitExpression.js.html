@@ -94,7 +94,7 @@
 	/** @lends UnitExpression# */
 	{
 		/**
-		 * Returns an immutable array of Terms that make up the UnitExpression.
+		 * Returns an immutable array of [Terms]{@link Term} that make up the UnitExpression.
 		 * @method
 		 * @type {array&lt;Term>}
 		 */
@@ -152,7 +152,7 @@
 		},
 		/**
 		 * Recursively breaks down this UnitExpression into its constituent
-		 * Terms and each Term into its constituent BaseUnits,
+		 * Terms and each [Term]{@link Term} into its constituent [BaseUnits]{@link BaseUnit},
 		 * until only BaseUnits are left.
 		 * @method
 		 * @type {UnitExpression}
@@ -162,7 +162,7 @@
 			return new UnitExpression(baseTerms);
 		},
 		/**
-		 * Simplifies the UnitExpression by combining like Terms.
+		 * Simplifies the UnitExpression by combining like [Terms]{@link Term}.
 		 * @method
 		 * @type {UnitExpression}
 		 */

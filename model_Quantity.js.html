@@ -151,6 +151,7 @@
 		 * If `rhs` cannot be converted to the same units as this Quantity,
 		 * (because, say, the Quantities are not dimensionally compatible)
 		 * an Error is thrown.
+		 * @method
 		 * @param {Quantity} rhs - a dimensionally-compatible Quantity to add to this Quantity.
 		 * @type {Quantity}
 		 */
@@ -167,6 +168,7 @@
 		 * If `rhs` cannot be converted to the same units as this Quantity,
 		 * (because, say, the Quantities are not dimensionally compatible)
 		 * an Error is thrown.
+		 * @method
 		 * @param {Quantity} rhs - a dimensionally-compatible Quantity to subtract from this Quantity.
 		 * @type {Quantity}
 		 */
@@ -178,6 +180,7 @@
 		 * the result as a new Quantity.
 		 * 
 		 * No unit conversion is performed on the multiplicand `rhs`.
+		 * @method
 		 * @param {Quantity} rhs - the Quantity by which to multiply this Quantity.  
 		 * @type {Quantity}
 		 */
@@ -189,6 +192,7 @@
 		 * the result as a new Quantity.
 		 * 
 		 * No unit conversion is performed on the divisor `rhs`.
+		 * @method
 		 * @param {Quantity} rhs - the Quantity by which to divide this Quantity.  
 		 * @type {Quantity}
 		 */
@@ -202,6 +206,8 @@
 		 * 
 		 * For instance, a Quantity representing "four meters"
 		 * will be rendered "4m".
+		 * @method
+		 * @type {string}
 		 */
 		toString: function toString() {
 			return this.value() + this.units().toString();

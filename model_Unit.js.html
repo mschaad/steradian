@@ -64,6 +64,7 @@
 		function Unit(name, symbol, scale) {
 			Guard(name, "name").isString().isTruthy();
 			/**
+			 * The name of the Unit.
 			 * @method
 			 * @type {string}
 			 */
@@ -71,6 +72,8 @@
 			
 			Guard(symbol, "symbol").isString().isTruthy();
 			/**
+			 * The symbol of the Unit, used in toString() representations.
+			 * For instance, the symbol for "meter" is "m".
 			 * @method
 			 * @type {string}
 			 */
@@ -78,6 +81,7 @@
 			
 			Guard(scale, "scale").isNumber().isNotZero();
 			/**
+			 * The scale of the Unit.
 			 * @method
 			 * @type {number}
 			 */
@@ -94,6 +98,7 @@
 		 */
 		{
 			/** 
+			 * Returns the [Dimensions]{@link Dimensions} of this Unit.
 			 * @method
 			 * @type {Dimensions}
 			 * @abstract
@@ -102,6 +107,8 @@
 				throw new Error("the dimensions method must be overridden.");
 			},
 			/** 
+			 * @todo remove this method from Unit
+			 * @deprecated
 			 * @method 
 			 * @type {UnitExpression}
 			 * @abstract
@@ -110,8 +117,8 @@
 				throw new Error("the expression method must be overridden.");
 			},
 			/** 
-			 * Returns true if this object is an instance of BaseUnit,
-			 * or false if it is an instance of DerivedUnit.
+			 * Returns true if this Unit is an instance of [BaseUnit]{@link BaseUnit},
+			 * or false if it is an instance of [DerivedUnit]{@link DerivedUnit}.
 			 * @method 
 			 * @type {boolean}
 			 * @abstract

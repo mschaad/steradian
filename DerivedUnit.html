@@ -180,12 +180,12 @@
     
         <h4 class="name" id="dimensions">
             
-                <span class="type-signature"><span class="icon green">abstract</span> </span>dimensions<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Dimensions.html">Dimensions</a>}</span>
+                <span class="type-signature"></span>dimensions<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Dimensions.html">Dimensions</a>}</span>
                 
             
             <div class="container-source members">
-                <code><a href="model_Unit.js.html">model/Unit.js</a></code>,
-                <code><a href="model_Unit.js.html#line53">line 53</a></code>
+                <code><a href="model_DerivedUnit.js.html">model/DerivedUnit.js</a></code>,
+                <code><a href="model_DerivedUnit.js.html#line63">line 63</a></code>
             </div>
             
         </h4>
@@ -195,6 +195,10 @@
 </dt>
 <dd>
 
+    
+    <div class="description">
+        Returns the <a href="Dimensions.html">Dimensions</a> of the <a href="UnitExpression.html">expression</a>that defines this DerivedUnit.
+    </div>
     
 
     
@@ -273,6 +277,13 @@
     
 
     
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li>{<a href="DerivedUnit.html#expression">DerivedUnit#expression</a>}</li>
+        </ul>
+    </dd>
+    
 
     
 </dl>
@@ -289,12 +300,12 @@
     
         <h4 class="name" id="expression">
             
-                <span class="type-signature"></span>expression<span class="signature">()</span><span class="type-signature"></span>
+                <span class="type-signature"></span>expression<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="UnitExpression.html">UnitExpression</a>}</span>
                 
             
             <div class="container-source members">
                 <code><a href="model_DerivedUnit.js.html">model/DerivedUnit.js</a></code>,
-                <code><a href="model_DerivedUnit.js.html#line71">line 71</a></code>
+                <code><a href="model_DerivedUnit.js.html#line80">line 80</a></code>
             </div>
             
         </h4>
@@ -329,6 +340,25 @@
     
 
     
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type"><a href="UnitExpression.html">UnitExpression</a></span>
+
+
+
+
+
+
+
+
+            
+    </div>
+    
 
     
 
@@ -355,7 +385,7 @@
     
 
     
-
+        <dt class="important tag-deprecated">Deprecated:</dt><dd class="yes-def tag-deprecated"><ul class="dummy"><li>Yes</li></ul></dd>
     
 
     
@@ -368,6 +398,15 @@
 
     
 
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>remove this method from Unit</li>
+        </ul>
+    </dd>
     
 </dl>
 
@@ -383,12 +422,12 @@
     
         <h4 class="name" id="isBaseUnit">
             
-                <span class="type-signature"></span>isBaseUnit<span class="signature">()</span><span class="type-signature"></span>
+                <span class="type-signature"></span>isBaseUnit<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span>
                 
             
             <div class="container-source members">
                 <code><a href="model_DerivedUnit.js.html">model/DerivedUnit.js</a></code>,
-                <code><a href="model_DerivedUnit.js.html#line63">line 63</a></code>
+                <code><a href="model_DerivedUnit.js.html#line71">line 71</a></code>
             </div>
             
         </h4>
@@ -422,6 +461,25 @@
 
     
 
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">boolean</span>
+
+
+
+
+
+
+
+
+            
+    </div>
     
 
     
@@ -482,7 +540,7 @@
             
             <div class="container-source members">
                 <code><a href="model_Unit.js.html">model/Unit.js</a></code>,
-                <code><a href="model_Unit.js.html#line22">line 22</a></code>
+                <code><a href="model_Unit.js.html#line23">line 23</a></code>
             </div>
             
         </h4>
@@ -492,6 +550,10 @@
 </dt>
 <dd>
 
+    
+    <div class="description">
+        The name of the Unit.
+    </div>
     
 
     
@@ -591,7 +653,7 @@
             
             <div class="container-source members">
                 <code><a href="model_Unit.js.html">model/Unit.js</a></code>,
-                <code><a href="model_Unit.js.html#line36">line 36</a></code>
+                <code><a href="model_Unit.js.html#line40">line 40</a></code>
             </div>
             
         </h4>
@@ -601,6 +663,10 @@
 </dt>
 <dd>
 
+    
+    <div class="description">
+        The scale of the Unit.
+    </div>
     
 
     
@@ -700,7 +766,7 @@
             
             <div class="container-source members">
                 <code><a href="model_Unit.js.html">model/Unit.js</a></code>,
-                <code><a href="model_Unit.js.html#line29">line 29</a></code>
+                <code><a href="model_Unit.js.html#line32">line 32</a></code>
             </div>
             
         </h4>
@@ -710,6 +776,10 @@
 </dt>
 <dd>
 
+    
+    <div class="description">
+        The symbol of the Unit, used in toString() representations.For instance, the symbol for "meter" is "m".
+    </div>
     
 
     
@@ -804,12 +874,12 @@
     
         <h4 class="name" id="toString">
             
-                <span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"></span>
+                <span class="type-signature"></span>toString<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span>
                 
             
             <div class="container-source members">
                 <code><a href="model_DerivedUnit.js.html">model/DerivedUnit.js</a></code>,
-                <code><a href="model_DerivedUnit.js.html#line85">line 85</a></code>
+                <code><a href="model_DerivedUnit.js.html#line95">line 95</a></code>
             </div>
             
         </h4>
@@ -843,6 +913,25 @@
 
     
 
+    
+    <div class="container-returns">
+        <h5>Returns:</h5>
+        
+                
+
+
+
+<span class="param-type">string</span>
+
+
+
+
+
+
+
+
+            
+    </div>
     
 
     

@@ -50,8 +50,8 @@
 
 	/**
 	 * @classdesc
-	 * Represents a term in a UnitExpression.
-	 * Consists of a reference to a Unit or a UnitExpression and a power.
+	 * Represents a term in a [UnitExpression]{@link UnitExpression}.
+	 * Consists of a reference to a [Unit]{@link Unit} or a UnitExpression and a power.
 	 * 
 	 * For instance, in a UnitExpression that represents "meter per second squared,"
 	 * there is one Term that represents "meter" (to the first power) and another
@@ -76,6 +76,7 @@
 	 */
 	Term.prototype = {
 		/**
+		 * The [Unit]{@link Unit} or [UnitExpression]{@link UnitExpression} to be exponentiated.
 		 * @method
 		 * @type {Unit|UnitExpression}
 		 */

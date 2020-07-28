@@ -47,7 +47,7 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * The steradian module can itself be used as a default instance of the Steradian type,
+ * The steradian module can itself be used as a default instance of the [Steradian]{@link Steradian} type,
  * or as a constructor of new instances of Steradian objects.
  * 
  * Use the module as default instance if you want a single, global instance of Steradian that comes
@@ -75,8 +75,8 @@ define(
 		/**
 		 * Creates an empty instance of Steradian.
 		 * 
-		 * Use an instance of Steradian to construct new Quantities, Units, 
-		 * and Systems, and perform conversions between them.
+		 * Use an instance of Steradian to construct new [Quantities]{@link Quantity}, [Units]{@link Unit}, 
+		 * and [Systems]{@link System}, and perform conversions between them.
 		 * @class
 		 * @alias Steradian
 		 * @example
@@ -134,8 +134,8 @@ define(
 			/** @lends Steradian# */
 			{
 				/**
-				 * Gets a Unit (either BaseUnit or DerivedUnit) by the specified name, or creates a new BaseUnit
-				 * according to the given BaseUnitDefinition.
+				 * Gets a [Unit]{@link Unit} (either [BaseUnit]{@link BaseUnit} or [DerivedUnit]{@link DerivedUnit}) by the specified name, or creates a new BaseUnit
+				 * according to the given [BaseUnitDefinition]{@link BaseUnitDefinition}.
 				 * @param {string|BaseUnitDefinition} idOrDef - String representing the id of the Unit to retrieve, or Object containing definition of a new Unit.
 				 * @method
 				 * @type {Unit}
@@ -152,8 +152,8 @@ define(
 					}
 				},
 				/**
-				 * Gets a System by the specified name, or creates a new System
-				 * according to the given SystemDefinition.
+				 * Gets a [System]{@link System} by the specified name, or creates a new [System]{@link System}
+				 * according to the given [SystemDefinition]{@link SystemDefinition}.
 				 * @method
 				 * @param {string|SystemDefinition|System} idOrDefOrSystem 
 				 * @type {System}
@@ -171,7 +171,7 @@ define(
 					}
 				},
 				/**
-				 * Creates a new DerivedUnit from the given DerivedUnitDefinition.
+				 * Creates a new [DerivedUnit]{@link DerivedUnit} from the given [DerivedUnitDefinition]{@link DerivedUnitDefinition}.
 				 * @method
 				 * @param {DerivedUnitDefinition} def 
 				 * @type {DerivedUnit}
@@ -180,9 +180,9 @@ define(
 					return registry.register(def);
 				},
 				/**
-				 * Constructs a Quantity from the given unitExpression and value.
+				 * Constructs a [Quantity]{@link Quantity} from the given unitExpression and value.
 				 * @method
-				 * @param {string|Unit|UnitExpression} unitExpression - A Unit name, Unit instance or UnitExpression from which to construct a Quantity.
+				 * @param {string|Unit|UnitExpression} unitExpression - A Unit name, [Unit]{@link Unit} instance or [UnitExpression]{@link UnitExpression} from which to construct a [Quantity]{@link Quantity}.
 				 * @param {number} value - the numeric value associated with the Quantity.
 				 * @type {Quantity}
 				 */
@@ -195,9 +195,9 @@ define(
 					return q;
 				},
 				/**
-				 * Converts the given quantity to the target units or system.
+				 * Converts the given quantity to the target [Units]{@link Unit} or [System]{@link System}.
 				 * If targetUnitsOrSystem is a string, then it must correspond to
-				 * a defined Unit or System.
+				 * a defined [Unit]{@link Unit} or [System]{@link System}.
 				 * @method
 				 * @param {Quantity} quantity
 				 * @param {string|Unit|UnitExpression|System} targetUnitsOrSystem 

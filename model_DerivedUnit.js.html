@@ -101,12 +101,20 @@ function(Guard, Arrays, Unit, UnitExpression) {
 	 * @lends DerivedUnit#
 	 */
 	{
+		/**
+		 * Returns the [Dimensions]{@link Dimensions} of the [expression]{@link UnitExpression}
+		 * that defines this DerivedUnit.
+		 * @override
+		 * @method
+		 * @see {DerivedUnit#expression}
+		 */
 		dimensions: function() {
 			return this.expression().dimensions();
 		},
 		/**
 		 * Always return true.
 		 * @method
+		 * @override
 		 */
 		isBaseUnit: function() {
 			return false;
@@ -115,6 +123,7 @@ function(Guard, Arrays, Unit, UnitExpression) {
 		 * The UnitExpression that defines the DerivedUnit.
 		 * For instance, the Joule is defined the Newton-meter per second squared.
 		 * @method
+		 * @override
 		 */
 		expression: function() {
 			var terms = [];
@@ -128,6 +137,7 @@ function(Guard, Arrays, Unit, UnitExpression) {
 		 * Returns a string representation of this DerivedUnit,
 		 * composed of its scale and the string representation of its
 		 * expression().
+		 * @override
 		 * @method
 		 */
 		toString: function() {

@@ -48,30 +48,32 @@
         <article>
             <pre class="prettyprint source linenums"><code>define(['Enum'], function(Enum) {
     /**
-     * Represents all of the standard derived types in the SI system.
-     * All Systems are constructed from base [UnitTypes]{@link UnitType} and these
-     * [DerivedUnitTypes]{@link DerivedUnitType}.
-     * DerivedUnits may also correspond to the types in this list.
+     * Represents all of the standard derived types in the SI System.
+     
+     * All [Systems]{@link System} are constructed from a set of base [UnitTypes]{@link UnitType} 
+     * and these foundational [DerivedUnitTypes]{@link DerivedUnitType}.
+     * 
+     * [DerivedUnits]{@link DerivedUnit} may or may not also correspond to the types in this list.
      * @namespace DerivedUnitType
-     * @property {UnitType} angle
-     * @property {UnitType} solidAngle
-     * @property {UnitType} frequency
-     * @property {UnitType} pressure
-     * @property {UnitType} power
-     * @property {UnitType} electricCharge
-     * @property {UnitType} electricPotentialDifference
-     * @property {UnitType} capacitance
-     * @property {UnitType} electricResistance
-     * @property {UnitType} electricConductance
-     * @property {UnitType} magneticFlux
-     * @property {UnitType} magneticFluxDensity
-     * @property {UnitType} inductance
-     * @property {UnitType} luminousFlux
-     * @property {UnitType} illuminance
-     * @property {UnitType} radionuclideActivity
-     * @property {UnitType} absorbedDose
-     * @property {UnitType} doseEquivalent
-     * @property {UnitType} catalyticActivity
+     * @property {DerivedUnitType} angle
+     * @property {DerivedUnitType} solidAngle
+     * @property {DerivedUnitType} frequency
+     * @property {DerivedUnitType} pressure
+     * @property {DerivedUnitType} power
+     * @property {DerivedUnitType} electricCharge
+     * @property {DerivedUnitType} electricPotentialDifference
+     * @property {DerivedUnitType} capacitance
+     * @property {DerivedUnitType} electricResistance
+     * @property {DerivedUnitType} electricConductance
+     * @property {DerivedUnitType} magneticFlux
+     * @property {DerivedUnitType} magneticFluxDensity
+     * @property {DerivedUnitType} inductance
+     * @property {DerivedUnitType} luminousFlux
+     * @property {DerivedUnitType} illuminance
+     * @property {DerivedUnitType} radionuclideActivity
+     * @property {DerivedUnitType} absorbedDose
+     * @property {DerivedUnitType} doseEquivalent
+     * @property {DerivedUnitType} catalyticActivity
      */
     return Enum.create({
         name: 'DerivedUnitType',

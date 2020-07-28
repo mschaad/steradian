@@ -115,7 +115,7 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
         });
 
         /**
-         * A list of all "other" (non-defining) Units in the System.
+         * A list of all "other" (non-defining) [Units]{@link Unit} in the System.
          * An example of this type of Unit would be the kilometer: it is
          * part of the SI System, but is not defining part of the System
          * as the meter is.
@@ -127,7 +127,7 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
         Object.freeze(allUnits);
 
         /** 
-         * returns an array of all Unit types in the system.
+         * Returns an array of all Unit types in the system.
          * @method 
          * @type {Unit[]}
          */
@@ -142,7 +142,7 @@ function(Guard, Arrays, Unit, UnitType, DerivedUnitType, SystemDefinitionFixer) 
     /** @lends System# */
     {
         /**
-         * returns the name of the System.
+         * Returns the name of the System.
          * @method
          * @type {string}
          */
